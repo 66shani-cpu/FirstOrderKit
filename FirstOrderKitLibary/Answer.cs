@@ -36,6 +36,7 @@ namespace FirstOrderKitLibary
         [FirstLetterCapital(ErrorMessage= "The first letter must be capitaliezed")]
         public string AnswerText
         {
+            //njdjjdd
             get { return this.answerText; }
             set { this.answerText = value; }
         }
