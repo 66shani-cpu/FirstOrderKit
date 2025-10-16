@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace FirstOrderKitLibary
+namespace FirstOrderKitModel
 {
     public class Answer
     {
@@ -18,7 +18,7 @@ namespace FirstOrderKitLibary
         public string Answerid
         { 
             get { return this. answerid; }
-         set { this.answerid= value; } 
+            set { this.answerid= value; } 
         }
 
         public string TrueFalse
@@ -33,10 +33,9 @@ namespace FirstOrderKitLibary
         }
         [Required(ErrorMessage = "answer Text cannot be empty")]
         [StringLength(200,MinimumLength =5,ErrorMessage = "answerText")]
-        [FirstLetterCapital(ErrorMessage= "The first letter must be capitaliezed")]
+        [FirstLetterCapitalAttribute(ErrorMessage= "The first letter must be capitaliezed")]
         public string AnswerText
         {
-            //njdjjdd
             get { return this.answerText; }
             set { this.answerText = value; }
         }
