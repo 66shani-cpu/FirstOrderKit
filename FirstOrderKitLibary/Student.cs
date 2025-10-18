@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Student
+    public class Student:Model
     {
         string studentId;
         string unitId;
@@ -35,14 +35,18 @@ namespace FirstOrderKitModel
         public string StudentNickName
         {
             get { return this.studentNickName; }
-            set { this.studentNickName = value; }
+            set { this.studentNickName = value;
+                ValidateProperty(value, "studentNickName");
+            }
         }
         [Required(ErrorMessage = "password Text cannot be empty")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "password")]
         public string Password
         {
             get { return this.password; }
-            set { this.password = value; }
+            set { this.password = value;
+                ValidateProperty(value, "password");
+            }
         }
         [Required(ErrorMessage = "studentFirstName Text cannot be empty")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "studentFirstName")]
@@ -50,7 +54,9 @@ namespace FirstOrderKitModel
         public string StudentFirstName
         {
             get { return this.studentFirstName; }
-            set { this.studentFirstName = value; }
+            set { this.studentFirstName = value;
+                ValidateProperty(value, "StudentFirstName");
+            }
         }
         [Required(ErrorMessage = "studentLastName Text cannot be empty")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "studentLastName")]
@@ -58,7 +64,9 @@ namespace FirstOrderKitModel
         public string StudentLastName
         {
             get { return this.studentLastName; }
-            set { this.studentLastName = value; }
+            set { this.studentLastName = value;
+                ValidateProperty(value, "studentLastName");
+            }
         }
         public string CityId
         {
@@ -70,7 +78,9 @@ namespace FirstOrderKitModel
         public string StudentTelephone
         {
             get { return this.studentTelephone; }
-            set { this.studentTelephone = value; }
+            set { this.studentTelephone = value;
+                ValidateProperty(value, "studentTelephone");
+            }
         }
         [Required(ErrorMessage = "studentAdrres Text cannot be empty")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "studentAdrres")]
@@ -78,14 +88,18 @@ namespace FirstOrderKitModel
         public string StudentAdrres
         {
             get { return this.studentAdrres; }
-            set { this.studentAdrres = value; }
+            set { this.studentAdrres = value;
+                ValidateProperty(value, "StudentAdrres");
+            }
         }
         [Required(ErrorMessage = "studentImage Text cannot be empty")]
         [OnlyImage(ErrorMessage = "The picture must be in image format (jpg, png, gif).")]
         public string StudentImage
         {
             get { return this.studentImage; }
-            set { this.studentImage = value; }
+            set { this.studentImage = value;
+                ValidateProperty(value, "studentImage");
+            }
         }
     }
    

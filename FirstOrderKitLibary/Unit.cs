@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Unit
+    public class Unit:Model
     {
         string unitId;
         string unitName;
@@ -23,14 +23,18 @@ namespace FirstOrderKitModel
         public string UnitName
         {
             get { return this.unitName; }
-            set { this.unitName = value; }
+            set { this.unitName = value;
+                ValidateProperty(value, "unitName");
+            }
         }
         [Required(ErrorMessage = "studentImage Text cannot be empty")]
         [OnlyImage(ErrorMessage = "The picture must be in image format (jpg, png, gif).")]
         public string UnitPicture
         {
             get { return this.unitPicture; }
-            set { this.unitPicture = value; }
+            set { this.unitPicture = value;
+                ValidateProperty(value, "unitPicture");
+            }
         }
     }
 }

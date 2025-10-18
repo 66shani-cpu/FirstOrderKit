@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Subject
+    public class Subject : Model
     {
         string subjectId;
         string subjectName;
@@ -22,7 +22,9 @@ namespace FirstOrderKitModel
         public string SubjectName
         {
             get { return this.subjectName; }
-            set { this.subjectName = value; }
+            set { this.subjectName = value;
+                ValidateProperty(value, "SubjectName");
+            }
         }
     }
 }

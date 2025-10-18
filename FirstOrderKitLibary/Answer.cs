@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstOrderKitModel
 {
-    public class Answer
+    public class Answer:Model
     {
            string answerid;
            string trueFalse;
@@ -37,7 +37,9 @@ namespace FirstOrderKitModel
         public string AnswerText
         {
             get { return this.answerText; }
-            set { this.answerText = value; }
+            set { this.answerText = value;
+                ValidateProperty(value, "AnswerText");
+            }
         }
        
     }

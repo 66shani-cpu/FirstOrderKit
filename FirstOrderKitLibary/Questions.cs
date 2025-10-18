@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Questions
+    public class Questions:Model
     {
         string questionId;
         string levelQuestions;
@@ -21,7 +21,9 @@ namespace FirstOrderKitModel
         public string LevelQuestions
         {
             get { return this.levelQuestions; }
-            set { this.levelQuestions = value; }
+            set { this.levelQuestions = value;
+                ValidateProperty(value, "LevelQuestions");
+            }
         }
         [Required(ErrorMessage = "question cannot be empty")]
         [StringLength(200, MinimumLength = 5, ErrorMessage = "question")]
@@ -29,7 +31,9 @@ namespace FirstOrderKitModel
         public string Question
         {
             get { return this.question; }
-            set { this.question = value; }
+            set { this.question = value;
+                ValidateProperty(value, "question");
+            }
         }
     }
 }

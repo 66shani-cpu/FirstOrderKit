@@ -13,12 +13,26 @@ namespace FirstOrderKitModel
         {
             string word = value.ToString();
             char firstLetter = word[0];
+            char last = ' ';
+
              if (firstLetter < 'A' || firstLetter>'Z') 
                 return false;
              for (int i = 1; i < word.Length; i++)
             {
-                if (word[i] <'a'|| word[i] >'z')
-                    return false;
+                if (last != ' ')
+                {
+                    if (word[i] != ' ')
+                    {
+                        if (word[i] < 'a' || word[i] > 'z')
+                            return false;
+                    }
+                    last = word[i];
+                }
+                else
+                {
+                    if (word[i] < 'a' || word[i] > 'z')
+                        return false;
+                }
             }
              return true;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class City
+    public class City:Model
     {
         string cityId;
         string cityName;
@@ -22,7 +22,9 @@ namespace FirstOrderKitModel
         string CityName
         {
             get { return this.cityName; }
-            set { this.cityName = value; }
+            set { this.cityName = value;
+                ValidateProperty(value, "CityName");
+            }
         }
     }
 }
