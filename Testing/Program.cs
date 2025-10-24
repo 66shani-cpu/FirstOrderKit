@@ -10,6 +10,7 @@ namespace Testing
             //TestSubject();
             //Weather();
             //SeaTemperature();
+            Horskope();
             Console.ReadLine();
         }
 
@@ -115,8 +116,7 @@ namespace Testing
         {
             Console.WriteLine("Enter week start");
             string start = Console.ReadLine();
-            Console.WriteLine("Enter week end");
-            string end = Console.ReadLine();
+            
             Console.WriteLine("Enter sign");
             string sign = Console.ReadLine();
 
@@ -124,7 +124,7 @@ namespace Testing
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri("https://horoscope-api-by-apirobots.p.rapidapi.com/v1/horoscopes/aries/weekly?week_start=2025-01-01"),
+                RequestUri = new Uri($"https://horoscope-api-by-apirobots.p.rapidapi.com/v1/horoscopes/aries/weekly?week_start={start   }"),
                 Headers =
     {
         { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
@@ -135,7 +135,9 @@ namespace Testing
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
+                Horskope horskope = JsonSerializer.Deserialize<Horskope>(body); 
+
+                Console.WriteLine(horskope.overview);
             }
         }
     }
