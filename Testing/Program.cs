@@ -1,4 +1,5 @@
 ﻿using FirstOrderKitModel;
+using FirstOrderKitWS;
 using System.Text.Json;
 
 namespace Testing
@@ -8,10 +9,9 @@ namespace Testing
         static void Main(string[] args)
         {
             //TestSubject();
-            //Weather();
-            //SeaTemperature();
-            Horskope();
-            Console.ReadLine();
+            //Horskope();
+            //Console.ReadLine();
+            CheckInsert();
         }
 
         static void TestSubject() 
@@ -61,57 +61,6 @@ namespace Testing
                 //Console.WriteLine($"{carr.query.amount}{carr.query.from}") ={carr.result}{carr.query.to;
             }
         }
-
-        //    static async Task Weather()
-        //    {
-        //        Console.Write("Insert latitude width ");
-        //        string latitude = Console.ReadLine();
-        //        Console.Write("Insert longitude length ");
-        //        string longitude =Console.ReadLine();
-        //        var client = new HttpClient();
-        //        var request = new HttpRequestMessage
-        //        {
-        //            Method = HttpMethod.Get,
-        //            RequestUri = new Uri("https://easy-weather1.p.rapidapi.com/daily/5?latitude=31.93&longitude=34.87"),
-        //            Headers =
-        //{
-        //    { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
-        //    { "x-rapidapi-host", "easy-weather1.p.rapidapi.com" },
-        //},
-        //        };
-        //        using (var response = await client.SendAsync(request))
-        //        {
-        //            response.EnsureSuccessStatusCode();
-        //            var body = await response.Content.ReadAsStringAsync();
-        //            Weather weather = JsonSerializer.Deserialize<Weather>(body);
-        //            Console.WriteLine(weather.forecastDaily.Days[0].temperatureMin);
-        //            Console.WriteLine(weather.forecastDaily.Days[0].temperatureMax);
-        //            Console.WriteLine(weather.forecastDaily.Days[0].precipitationType);
-        //            Console.WriteLine(body);
-        //        }
-        //    }
-        static async Task SeaTemperature()
-        {
-            Console.WriteLine("Enter day");
-            string date = Console.ReadLine();
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri("https://sea-surface-temperature.p.rapidapi.com/current?latlon=25.80423%2C-80.12441"),
-                Headers =
-    {
-        { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
-        { "x-rapidapi-host", "sea-surface-temperature.p.rapidapi.com" },
-    },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
-            }
-        }
         static async Task Horskope()
         {
             Console.WriteLine("Enter week start");
@@ -139,6 +88,26 @@ namespace Testing
 
                 Console.WriteLine(horskope.overview);
             }
+        }
+        static void CheckInsert()
+        {
+            DBHelperOledb dBHelperOledb = new DBHelperOledb();
+            Console.WriteLine("Insert subject");
+            string Subject = Console.ReadLine();
+            string sql = $"Insert into Subjects(SubjectName) values('{Subject}')";
+            dBHelperOledb.OpenConnection();
+           int count=  dBHelperOledb.Insert(sql);
+            dBHelperOledb.CloseConnection();
+
+            if (count > 0)
+            {
+                Console.WriteLine("ok");
+            }
+            else 
+            {
+                Console.WriteLine("Not ok");
+            }
+            dBHelperOledb.CloseConnection();
         }
     }
 }
