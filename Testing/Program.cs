@@ -1,17 +1,33 @@
 ﻿using FirstOrderKitModel;
 using FirstOrderKitWS;
+using System.Data;
 using System.Text.Json;
 
 namespace Testing
 {
     internal class Program
+
     {
+        static void CheckCreater()
+        {
+            string sql = "Select * from Student where StudentId='2'";
+            DBHelperOledb dBHelperOledb = new DBHelperOledb();
+            dBHelperOledb.OpenConnection();
+            IDataReader dataReader= dBHelperOledb.Select(sql);
+            dataReader.Read();
+            ModelCreaters moodelCreators = new ModelCreaters();
+            Student student = moodelCreators.StudentCreator.CreateModel(dataReader);
+            dBHelperOledb.CloseConnection();
+            Console.WriteLine($"{student.StudentFirstName} {student.StudentLastName}");
+        }
         static void Main(string[] args)
         {
             //TestSubject();
             //Horskope();
             //Console.ReadLine();
-            CheckInsert();
+            //CheckInsert();
+            CheckCreater();
+
         }
 
         static void TestSubject() 
@@ -33,34 +49,7 @@ namespace Testing
             }
             else Console.WriteLine("There was no error");
         }
-        static async Task CurrenctList()
-        {
-            //await Console.Out.WriteLineAsync();
-            Console.WriteLine("insert...");
-            string from = Console.ReadLine();
-            string to = Console.ReadLine();
-            string amount = Console.ReadLine();
 
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://countries59.p.rapidapi.com/list_countries" ),
-                Headers =
-    {
-        { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
-        { "x-rapidapi-host", "countries59.p.rapidapi.com" },
-    },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Currency carr = JsonSerializer.Deserialize<Currency>(body);
-
-                //Console.WriteLine($"{carr.query.amount}{carr.query.from}") ={carr.result}{carr.query.to;
-            }
-        }
         static async Task Horskope()
         {
             Console.WriteLine("Enter week start");
@@ -109,5 +98,6 @@ namespace Testing
             }
             dBHelperOledb.CloseConnection();
         }
+
     }
 }

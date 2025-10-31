@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Student:Model
+    public class Student : Model
     {
         string studentId;
         string unitId;
@@ -36,7 +36,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentNickName; }
             set { this.studentNickName = value;
-                ValidateProperty(value, "studentNickName");
+                ValidateProperty(value, "StudentNickName");
             }
         }
         [Required(ErrorMessage = "password Text cannot be empty")]
@@ -45,7 +45,7 @@ namespace FirstOrderKitModel
         {
             get { return this.password; }
             set { this.password = value;
-                ValidateProperty(value, "password");
+                ValidateProperty(value, "Password");
             }
         }
         [Required(ErrorMessage = "studentFirstName Text cannot be empty")]
@@ -65,7 +65,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentLastName; }
             set { this.studentLastName = value;
-                ValidateProperty(value, "studentLastName");
+                ValidateProperty(value, "StudentLastName");
             }
         }
         public string CityId
@@ -74,12 +74,12 @@ namespace FirstOrderKitModel
             set { this.cityId = value; }
         }
         [Required(ErrorMessage = "studentTelephone Text cannot be empty")]
-        [StringLength(10, MinimumLength = 2, ErrorMessage = "studentTelephone")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "StudentTelephone")]
         public string StudentTelephone
         {
             get { return this.studentTelephone; }
             set { this.studentTelephone = value;
-                ValidateProperty(value, "studentTelephone");
+                ValidateProperty(value, "StudentTelephone");
             }
         }
         [Required(ErrorMessage = "studentAdrres Text cannot be empty")]
@@ -98,7 +98,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentImage; }
             set { this.studentImage = value;
-                ValidateProperty(value, "studentImage");
+                ValidateProperty(value, "StudentImage");
             }
         }
     }

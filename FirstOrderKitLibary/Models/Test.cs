@@ -11,7 +11,7 @@ namespace FirstOrderKitModel
     {
         string testId;
         string testName;
-        string TestId
+        public string TestId
         {
             get { return this.testId; }
             set { this.testId = value; }
@@ -19,7 +19,7 @@ namespace FirstOrderKitModel
         [Required(ErrorMessage = "TestName Text cannot be empty")]
         [StringLength(10, MinimumLength = 3, ErrorMessage = "TestName")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
-        string TestName
+       public  string TestName
         {
             get { return this.testName; }
             set { this.testName = value;

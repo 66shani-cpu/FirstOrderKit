@@ -11,7 +11,7 @@ namespace FirstOrderKitModel
     {
         string cityId;
         string cityName;
-        string CityId
+        public string CityId
         {
             get { return this.cityId; }
             set { this.cityId = value; }
@@ -19,7 +19,7 @@ namespace FirstOrderKitModel
         [Required(ErrorMessage = "City cannot be empty")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "CityName")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
-        string CityName
+         public string CityName
         {
             get { return this.cityName; }
             set { this.cityName = value;

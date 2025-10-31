@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class Questions:Model
+    public class Question:Model
     {
         string questionId;
         string levelQuestions;
@@ -28,7 +28,7 @@ namespace FirstOrderKitModel
         [Required(ErrorMessage = "question cannot be empty")]
         [StringLength(200, MinimumLength = 5, ErrorMessage = "question")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
-        public string Question
+        public string QuestionText
         {
             get { return this.question; }
             set { this.question = value;
