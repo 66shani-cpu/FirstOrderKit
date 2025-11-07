@@ -1,32 +1,60 @@
 ﻿using FirstOrderKitModel;
+using System.Data;
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
     public class CityRepository : Repository, IRepository<City>
     {
-        public bool Create()
+        public bool Create(City model)
         {
-            throw new NotImplementedException();
+            string sql = @$"Insert into Cities
+                   (CityName)
+                   values
+                    (@CityName)";
+            this.helperOledb.AddParameter("@CityName", model.CityName);
+            return this.helperOledb.Insert(sql) > 0;
         }
 
-        public bool Delete()
+        public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            string sql = @"Delete from Cities where CityId=@CityId";
+            this.helperOledb.AddParameter("@CityId", id);
+            return this.helperOledb.Delete(sql) > 0;
         }
-
+        //מעביר את הטבלה למודל
         public List<City> GetAll()
         {
-            throw new NotImplementedException();
+            string sql = " Select * from Cities";
+
+            List<City> cities = new List<City>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    cities.Add(this.modelCreaters.CityCreater.CreateModel(reader));
+                }
+            }
+
+            return cities;
         }
 
         public City GetById(string id)
         {
-            throw new NotImplementedException();
+            string sql = " Select * from City  where CityId=@CityId";
+            this.helperOledb.AddParameter("@CityId", id);
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                reader.Read();
+                return this.modelCreaters.CityCreater.CreateModel(reader);
+            }
         }
 
-        public bool Update()
+        public bool Update(City model)
         {
-            throw new NotImplementedException();
+            string sql = @"Update Student set CityName";
+            this.helperOledb.AddParameter("@CityName", model.CityName);
+            return this.helperOledb.Update(sql) > 0;
         }
     }
 }

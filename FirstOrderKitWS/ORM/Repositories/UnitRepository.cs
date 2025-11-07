@@ -1,32 +1,64 @@
 ﻿using FirstOrderKitModel;
+using System.Data;
+using System.Reactive;
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
     public class UnitRepository : Repository, IRepository<Unit>
     {
-        public bool Create()
+        public bool Create(Unit model)
         {
-            throw new NotImplementedException();
+            string sql = @$"Insert into Unit 
+                           (UnitName,UnitPicture)
+                          values(@UnitName,@UnitPicture)";
+            this.helperOledb.AddParameter("@UnitName", model.UnitName);
+            this.helperOledb.AddParameter("@UnitPicture", model.UnitPicture);
+            return this.helperOledb.Insert(sql) > 0;
         }
 
-        public bool Delete()
+        public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            string sql = @"Delete from Unit where UnitId=@UnitId";
+            this.helperOledb.AddParameter("@UnitId", id);
+            return this.helperOledb.Delete(sql) > 0;
         }
-
+        //מעביר את הטבלה למודל
         public List<Unit> GetAll()
         {
-            throw new NotImplementedException();
+            string sql = " Select * from Unit";
+
+            List<Unit> units = new List<Unit>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    units.Add(this.modelCreaters.UnitCreater.CreateModel(reader));
+                }
+            }
+
+            return units;
         }
 
         public Unit GetById(string id)
         {
-            throw new NotImplementedException();
+            string sql = " Select * from Unit  where UnitId=@UnitId";
+            this.helperOledb.AddParameter("@UnitId", id);
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                reader.Read();
+                return this.modelCreaters.UnitCreater.CreateModel(reader);
+            }
         }
 
-        public bool Update()
+        public bool Update(Unit model)
         {
-            throw new NotImplementedException();
+            string sql = @"Update Unit set UnitName=@UnitName,UnitPicture=@UnitPicture";
+            this.helperOledb.AddParameter("@UnitName", model.UnitName);
+            this.helperOledb.AddParameter("@UnitPicture", model.UnitPicture);
+            return this.helperOledb.Update(sql) > 0;
         }
+        
+        
     }
 }
