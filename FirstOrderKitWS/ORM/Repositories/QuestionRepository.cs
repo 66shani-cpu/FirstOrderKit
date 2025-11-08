@@ -58,6 +58,7 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@QuestionText", model.QuestionText);
             return this.helperOledb.Update(sql) > 0;
         }
+        //סינון לפי קושי של שאלה
         public List<Question> GetLevelQuestion(string questionId)
         {
             string sql = @"SELECT

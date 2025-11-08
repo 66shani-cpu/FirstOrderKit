@@ -17,7 +17,7 @@ namespace FirstOrderKitModel
             set { this.subjectId = value; }
         }
         [Required(ErrorMessage = "subjectName cannot be empty")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "subjectName")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "subjectName")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string SubjectName
         {

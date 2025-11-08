@@ -55,5 +55,26 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@SubjectName", model.SubjectName);
             return this.helperOledb.Update(sql) > 0;
         }
+        //סינון לפי האות הראשונה 
+        public List<Subject> SubjectFilter(string subjectName)
+        {
+           string sql = @"SELECT
+    Subjects.SubjectId,
+    Subjects.SubjectName
+FROM
+    Subjects
+WHERE
+    (((Subjects.SubjectName) LIKE [SubjectName:] & ""*""))";
+            this.helperOledb.AddParameter("@SubjectName", subjectName);
+            List<Subject> subjects= new List<Subject>();
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    subjects.Add(this.modelCreaters.SubjectCreater.CreateModel(reader));
+                }
+            }
+            return subjects;
+        }
     }
 }

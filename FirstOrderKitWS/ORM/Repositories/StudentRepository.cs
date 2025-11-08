@@ -100,6 +100,7 @@ namespace FirstOrderKitWS
             this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
             return this.helperOledb.Update(sql) > 0;
         }
+        //הזדהות במערכת
         public string LogIn (string nickName, string password)
         {
             string sql = @"Select StudentId fron Student 
