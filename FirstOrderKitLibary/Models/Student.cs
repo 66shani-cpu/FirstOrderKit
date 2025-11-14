@@ -10,12 +10,12 @@ namespace FirstOrderKitModel
     public class Student : Model
     {
         string studentId;
-        string unitId;
+        int unitId;
         string studentNickName;
         string password;
         string studentFirstName;
         string studentLastName;
-        string cityId;
+        int cityId;
         string studentTelephone;
         string studentAdrres;
         string studentImage;
@@ -24,7 +24,7 @@ namespace FirstOrderKitModel
             get { return this.studentId; }
             set { this.studentId = value; }
         }
-        public string UnitId
+        public int UnitId
         {
             get { return this.unitId; }
             set { this.unitId = value; }
@@ -68,7 +68,7 @@ namespace FirstOrderKitModel
                 ValidateProperty(value, "StudentLastName");
             }
         }
-        public string CityId
+        public int CityId
         {
             get { return this.cityId; }
             set { this.cityId = value; }

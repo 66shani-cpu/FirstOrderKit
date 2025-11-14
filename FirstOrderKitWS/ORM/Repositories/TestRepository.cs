@@ -5,6 +5,10 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class TestRepository : Repository, IRepository<Test>
     {
+        public TestRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Test model)
         {
             string sql = @$"Insert into Test 

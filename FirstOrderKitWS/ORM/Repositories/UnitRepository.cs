@@ -1,11 +1,15 @@
 ﻿using FirstOrderKitModel;
 using System.Data;
-using System.Reactive;
+
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
     public class UnitRepository : Repository, IRepository<Unit>
     {
+        public UnitRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Unit model)
         {
             string sql = @$"Insert into Unit 

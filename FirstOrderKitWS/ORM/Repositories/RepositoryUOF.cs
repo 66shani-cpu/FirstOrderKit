@@ -10,12 +10,28 @@
         SubjectRepository subjectRepository;
         TestRepository testRepository;
         UnitRepository unitRepository;
+
+        DBHelperOledb helperOledb;
+        ModelCreaters modelCreaters;
+        public RepositoryUOF()
+        {
+            this.helperOledb =new DBHelperOledb();
+            this.modelCreaters = new ModelCreaters();
+        }
+        public DBHelperOledb DBHelperOledb
+        {
+            get
+            {
+                return this.helperOledb;
+            }
+        }
+
         public AnswerRepository AnswerRepository
         {
             get
             {
                 if (this.answerRepository == null)
-                    this.answerRepository = new AnswerRepository();
+                    this.answerRepository = new AnswerRepository(this.helperOledb,this.modelCreaters);
                 return this.answerRepository;
             }
         }
@@ -24,7 +40,7 @@
             get
             {
                 if (this.cityRepository == null)
-                    this.cityRepository = new CityRepository();
+                    this.cityRepository = new CityRepository(this.helperOledb, this.modelCreaters);
                 return this.cityRepository;
             }
         }
@@ -33,7 +49,7 @@
             get
             {
                 if (this.messageRepository == null)
-                    this.messageRepository = new MessageRepository();
+                    this.messageRepository = new MessageRepository(this.helperOledb, this.modelCreaters);
                 return this.messageRepository;
             }
         }
@@ -42,7 +58,7 @@
             get
             {
                 if (this.questionRepository == null)
-                    this.questionRepository = new QuestionRepository();
+                    this.questionRepository = new QuestionRepository(this.helperOledb, this.modelCreaters);
                 return this.questionRepository;
             }
         }
@@ -51,7 +67,7 @@
             get
             {
                 if (this.studentRepository == null)
-                    this.studentRepository = new StudentRepository();
+                    this.studentRepository = new StudentRepository(this.helperOledb, this.modelCreaters);
                 return this.studentRepository;
             }
         }
@@ -60,7 +76,7 @@
             get
             {
                 if (this.subjectRepository == null)
-                    this.subjectRepository = new SubjectRepository();
+                    this.subjectRepository = new SubjectRepository(this.helperOledb, this.modelCreaters);
                 return this.subjectRepository;
             }
         }
@@ -69,7 +85,7 @@
             get
             {
                 if (this.testRepository == null)
-                    this.testRepository = new TestRepository();
+                    this.testRepository = new TestRepository(this.helperOledb, this.modelCreaters);
                 return this.testRepository;
             }
         }
@@ -78,7 +94,7 @@
             get
             {
                 if (this.unitRepository == null)
-                    this.unitRepository = new UnitRepository();
+                    this.unitRepository = new UnitRepository(this.helperOledb, this.modelCreaters);
                 return this.unitRepository;
             }
         }

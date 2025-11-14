@@ -32,7 +32,7 @@ namespace FirstOrderKitModel
         {
             get { return this.question; }
             set { this.question = value;
-                ValidateProperty(value, "question");
+                ValidateProperty(value, "QuestionText");
             }
         }
     }

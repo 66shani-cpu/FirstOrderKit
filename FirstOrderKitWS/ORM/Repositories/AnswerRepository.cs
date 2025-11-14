@@ -5,6 +5,12 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class AnswerRepository : Repository, IRepository<Answer>
     {
+        //שליחה למחלקת בסיס
+        public AnswerRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
+
         public bool Create(Answer model)
         {
             string sql = @$"Insert into Answer  

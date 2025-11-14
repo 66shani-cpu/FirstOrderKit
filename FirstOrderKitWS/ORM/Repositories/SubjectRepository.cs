@@ -5,6 +5,10 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class SubjectRepository : Repository, IRepository<Subject>
     {
+        public SubjectRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Subject model)
         {
             string sql = @$"Insert into Subject 
@@ -58,14 +62,10 @@ namespace FirstOrderKitWS.ORM.Repositories
         //סינון לפי האות הראשונה 
         public List<Subject> SubjectFilter(string subjectName)
         {
-           string sql = @"SELECT
-    Subjects.SubjectId,
-    Subjects.SubjectName
-FROM
-    Subjects
-WHERE
-    (((Subjects.SubjectName) LIKE [SubjectName:] & ""*""))";
-            this.helperOledb.AddParameter("@SubjectName", subjectName);
+           string sql = $@"SELECT Subjects.SubjectId,
+                           Subjects.SubjectName
+                            FROM Subjects
+                            WHERE Subjects.SubjectName LIKE '{subjectName}%'";
             List<Subject> subjects= new List<Subject>();
             using (IDataReader reader = this.helperOledb.Select(sql))
             {

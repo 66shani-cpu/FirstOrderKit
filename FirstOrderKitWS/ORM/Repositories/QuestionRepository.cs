@@ -5,10 +5,14 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class QuestionRepository : Repository, IRepository<Question>
     {
+        public QuestionRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Question model)
         {
             string sql = @$"Insert into Question
-                           (LevelQuestions,QuestionText)
+                           (LevelQuestions,Question)
                           values(@LevelQuestions,@QuestionText)";
             this.helperOledb.AddParameter("@LevelQuestions", model.LevelQuestions);
             this.helperOledb.AddParameter("@QuestionText", model.QuestionText);

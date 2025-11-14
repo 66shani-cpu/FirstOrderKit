@@ -1,5 +1,6 @@
 ﻿using FirstOrderKitModel;
 using FirstOrderKitWS;
+using FirstOrderKitWS.ORM.Repositories;
 using System.Data;
 using System.Text.Json;
 
@@ -22,12 +23,95 @@ namespace Testing
         }
         static void Main(string[] args)
         {
-            //TestSubject();
-            //Horskope();
-            //Console.ReadLine();
-            //CheckInsert();
-            CheckCreater();
+            TestRepositorAdddQuiestion();
+            Console.ReadLine();
 
+        }
+        static void TestRepositorAdddQuiestion()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            Question question = new Question();
+            question.LevelQuestions = "2";
+            question.QuestionText = "Ndwdnek";
+            bool ok = repositoryUOF.QuestionRepository.Create(question);
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            Console.WriteLine($"{ok}");
+
+        }
+        static void TestRepositorAddQuestion()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            List<Question> questions= repositoryUOF.QuestionRepository.GetLevelQuestion("1");
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            foreach (Question Question in questions)
+            {
+                Console.WriteLine($"{Question.QuestionText}");
+            }
+
+        }
+        static void TestRepositorFilterFirst()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            List<Subject> subjects= repositoryUOF.SubjectRepository.SubjectFilter("A");
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            foreach (Subject Subject in subjects)
+            {
+                Console.WriteLine($"{Subject.SubjectName}");
+            }
+
+        }
+        static void TestRepositorDelete()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            bool ok = repositoryUOF.AnswerRepository.Delete("1");
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            Console.WriteLine($"{ok}");
+
+        }
+        static void TestRepositoryUpDate()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            Student student = new Student();
+            student.StudentId = "1";
+            student.StudentTelephone = "1";
+            student.StudentLastName = "Sfs";
+            student.StudentFirstName = "Sdhbj";
+            student.StudentNickName = "Asys";
+            student.StudentImage = "1.jpg";
+            student.Password = "234";
+            student.StudentAdrres = "Dghh";
+            student.CityId = 1;
+            student.UnitId = 1;
+            bool ok = repositoryUOF.StudentRepository.Update(student);
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            Console.WriteLine($"{ok}");
+
+        }
+
+        static void TestRepositoryGetId()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            Answer answers = repositoryUOF.AnswerRepository.GetById("3");
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            Console.WriteLine($"{answers.AnswerText}");
+            
+        }
+        static void TestRepositoryGetAll()
+        {
+            RepositoryUOF repositoryUOF = new RepositoryUOF();
+            repositoryUOF.DBHelperOledb.OpenConnection();
+            List<Answer> answers = repositoryUOF.AnswerRepository.GetAll();
+            repositoryUOF.DBHelperOledb.CloseConnection();
+            foreach (Answer answer in answers)
+            {
+                Console.WriteLine($"{answer.AnswerText}");
+            }
         }
 
         static void TestSubject() 

@@ -6,6 +6,10 @@ namespace FirstOrderKitWS
 {
     public class StudentRepository : Repository, IRepository<Student>
     {
+        public StudentRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Student model)
         {
             //string sql = @$"Insert into Student 
@@ -24,7 +28,7 @@ namespace FirstOrderKitWS
             //                                         ";
             string sql = @$"Insert into Student 
                            (
-                             StudentNickName, Password, StudentLastName, 
+                             StudentNickName, [Password], StudentLastName, 
                              UnitId,StudentFirstName,CityId,StudentTelephone,
                              StudentAdrres,StudentImage
                            )
@@ -38,9 +42,9 @@ namespace FirstOrderKitWS
             this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
             this.helperOledb.AddParameter("@Password", model.Password);
             this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
-            this.helperOledb.AddParameter("@UnitId", model.UnitId.ToString());
+            this.helperOledb.AddParameter("@UnitId", model.UnitId);
             this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
-            this.helperOledb.AddParameter("@CityId", model.CityId.ToString());
+            this.helperOledb.AddParameter("@CityId", model.CityId);
             this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
             this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
             this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
@@ -85,19 +89,22 @@ namespace FirstOrderKitWS
         public bool Update(Student model)
         {
             string sql = @"Update Student set StudentNickName=@StudentNickName,
-                                             Password= @Password,StudentLastName,
+                                             [Password]= @Password,StudentLastName=@StudentLastName,
                                              UnitId=@UnitId,StudentFirstName=@StudentFirstName,
                                              CityId=@CityId,StudentTelephone=@StudentTelephone,
-                                             StudentAdrres=@StudentAdrres,StudentImage=@StudentImage";
+                                             StudentAdrres=@StudentAdrres,StudentImage=@StudentImage
+where StudentId=@StudentId";
             this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
             this.helperOledb.AddParameter("@Password", model.Password);
             this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
-            this.helperOledb.AddParameter("@UnitId", model.UnitId.ToString());
+            this.helperOledb.AddParameter("@UnitId", model.UnitId);
             this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
-            this.helperOledb.AddParameter("@CityId", model.CityId.ToString());
+            this.helperOledb.AddParameter("@CityId", model.CityId);
             this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
             this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
             this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
+            this.helperOledb.AddParameter("@StudentId", model.StudentId);
+
             return this.helperOledb.Update(sql) > 0;
         }
         //הזדהות במערכת
@@ -105,7 +112,7 @@ namespace FirstOrderKitWS
         {
             string sql = @"Select StudentId fron Student 
                  where StudentNickName =@StudentNickName
-                 and password=@password";
+                 and [password]=@password";
             this.helperOledb.AddParameter("@StudentNickName",nickName);
             this.helperOledb.AddParameter("@password", password);
             using (IDataReader reader = this.helperOledb.Select(sql))

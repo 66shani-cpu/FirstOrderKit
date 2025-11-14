@@ -5,6 +5,10 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class CityRepository : Repository, IRepository<City>
     {
+        public CityRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(City model)
         {
             string sql = @$"Insert into Cities

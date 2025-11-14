@@ -5,6 +5,10 @@ namespace FirstOrderKitWS.ORM.Repositories
 {
     public class MessageRepository : Repository, IRepository<Message>
     {
+        public MessageRepository(DBHelperOledb dbhelperOledb, ModelCreaters modelCreaters) : base(dbhelperOledb, modelCreaters)
+        {
+
+        }
         public bool Create(Message model)
         {
             string sql = @$"Insert into Message 

@@ -18,7 +18,7 @@ namespace FirstOrderKitWS
             this.OleDBConnection = new OleDbConnection();
             //הסבר לאיזה מסד נתונים יש ליצור
             //this.OleDBConnection.ConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={Directory.GetCurrentDirectory()}\App_Data\FirstOrderKit.accdb"";Persist Security Info=True";
-            this.OleDBConnection.ConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\Shani\Desktop\פרוייקט הנדסת תוכנה יב\VSProject\FirstOrderKit\FirstOrderKitWS\App_Data\FirstOrderKit.accdb"";Persist Security Info=True";
+            this.OleDBConnection.ConnectionString = $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\Shani\Desktop\Software Engineering School\VSProject\FirstOrderKit\FirstOrderKitWS\App_Data\FirstOrderKit.accdb"";Persist Security Info=True";
 
             this.dbCommand = new OleDbCommand();
             this.dbCommand.Connection = this.OleDBConnection;
@@ -86,7 +86,7 @@ namespace FirstOrderKitWS
             return records;
         }
         //פעולה שמוסיפה פרמטר כדי למנוע התקפות 
-        public void AddParameter(string name, string value)
+        public void AddParameter(string name, object value)
         {
             this.dbCommand.Parameters.Add(new OleDbParameter(name, value));
         }

@@ -5,10 +5,10 @@
         protected DBHelperOledb helperOledb;
         protected ModelCreaters modelCreaters;
 
-        public Repository()
+        public Repository(DBHelperOledb helperOledb,ModelCreaters modelCreaters)
         {
-            this.helperOledb=new DBHelperOledb();
-            this.modelCreaters=new ModelCreaters();
+            this.helperOledb= helperOledb;
+            this.modelCreaters= modelCreaters;
         }
 
     }

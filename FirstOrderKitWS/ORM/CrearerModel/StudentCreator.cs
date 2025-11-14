@@ -14,9 +14,9 @@ namespace FirstOrderKitWS
             student.StudentLastName=Convert.ToString(dataReader["StudentLastName"]);
             student.StudentNickName= Convert.ToString(dataReader["StudentNickName"]);
             student.StudentId= Convert.ToString(dataReader["StudentId"]);
-            student.CityId = Convert.ToString(dataReader["CityId"]);
+            student.CityId = Convert.ToInt16(dataReader["CityId"]);
             student.StudentImage= Convert.ToString(dataReader["StudentImage"]);
-            student.UnitId = Convert.ToString(dataReader["UnitId"]);
+            student.UnitId = Convert.ToInt16(dataReader["UnitId"]);
             student.Password = Convert.ToString(dataReader["Password"]);
             return student;
         }
