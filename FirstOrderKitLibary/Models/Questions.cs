@@ -12,6 +12,10 @@ namespace FirstOrderKitModel
         string questionId;
         string levelQuestions;
         string question;
+        public Question()
+        {
+
+        }
         public string QuestionId
         {
             get { return this.questionId; }

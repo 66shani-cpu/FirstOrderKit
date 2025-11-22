@@ -17,8 +17,4 @@
     <ProjectReference Include="..\FirstOrderKitLibary\FirstOrderKitModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

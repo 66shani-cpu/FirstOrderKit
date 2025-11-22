@@ -86,7 +86,8 @@ namespace FirstOrderKitWS
             return records;
         }
         //פעולה שמוסיפה פרמטר כדי למנוע התקפות 
-        public void AddParameter(string name, object value)
+        public void AddParameter(string name, object
+            value)
         {
             this.dbCommand.Parameters.Add(new OleDbParameter(name, value));
         }

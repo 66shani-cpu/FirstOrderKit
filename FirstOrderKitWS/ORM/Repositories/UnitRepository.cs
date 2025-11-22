@@ -2,6 +2,7 @@
 using System.Data;
 
 
+
 namespace FirstOrderKitWS.ORM.Repositories
 {
     public class UnitRepository : Repository, IRepository<Unit>
@@ -62,7 +63,33 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@UnitPicture", model.UnitPicture);
             return this.helperOledb.Update(sql) > 0;
         }
+        public List<Unit> FilterBySubject(string subjectId)
+        {
+            List<Unit> units = new List<Unit>();
+            string sql = @" SELECT
+            Units.UnitId,
+            Units.UnitName,
+            Units.UnitPicture,
+            SubjectUnit.SubjectId
+        FROM
+            Units
+            INNER JOIN SubjectUnit ON Units.UnitId = SubjectUnit.SubjectId
+        WHERE
+            (((SubjectUnit.SubjectId) = @SubjectId));";
+            this.helperOledb.AddParameter("@SubjectId", subjectId);
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    units.Add(this.modelCreaters.UnitCreater.CreateModel(reader));
+                }
+            }
+
+            return units;
+        }
         
         
     }
-}
+
+
+    }

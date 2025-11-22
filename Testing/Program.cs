@@ -23,10 +23,11 @@ namespace Testing
         }
         static void Main(string[] args)
         {
-            TestRepositorAdddQuiestion();
+            
             Console.ReadLine();
 
         }
+        //static void Test
         static void TestRepositorAdddQuiestion()
         {
             RepositoryUOF repositoryUOF = new RepositoryUOF();

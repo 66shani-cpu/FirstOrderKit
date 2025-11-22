@@ -10,10 +10,8 @@ namespace FirstOrderKitModel
 {
     public class OrderFirstKitViewModel
     {
-        public List<Test> Tests { get; set; }
         public List<Unit> Units { get; set; }
-        public List<Unit> Subject { get; set; }
-        public int? Difficult { get; set; }// לקלוט רמה של קושי
+        public List<Subject> Subject { get; set; }
         public string? SubjectId { get; set; }//לקלוט נושא נבחר
 
 
