@@ -72,5 +72,28 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@AnswerText", model.AnswerText);
             return this.helperOledb.Update(sql) > 0;
         }
+        public List<Answer> GetAnswersByQuestion(string questionId)
+        {
+            string sql = @"SELECT
+    Answer.AnswerId,
+    Answer.TrueFalse,
+    Answer.OuestionId,
+    Answer.AnswerText
+FROM
+    Answer
+WHERE
+    (((Answer.OuestionId) = questionId));";
+            this.helperOledb.AddParameter("@questionId", questionId);
+            List<Answer> answers = new List<Answer>();
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    answers.Add(this.modelCreaters.AnswerCreator.CreateModel(reader));
+                }
+            }
+
+            return answers;
+        }
     }
 }

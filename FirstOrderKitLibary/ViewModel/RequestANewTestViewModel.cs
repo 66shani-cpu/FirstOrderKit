@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class RequestANewTestViewModel
+    public class TestQuestionViewModel
     {
-        public List<Unit> Units { get; set; }
-        public List<Unit> Subject { get; set; }
-        public int? Difficult { get; set; }// לקלוט רמה של קושי
-        public string? SubjectId { get; set; }//לקלוט נושא נבחר
-        public string? UnitId { get; set; }//לקלוט יחידה נבחרת
+       public Question Question {  get; set; }
+        public List<Answer> QuestionAnswer { get; set; }
     }
 }

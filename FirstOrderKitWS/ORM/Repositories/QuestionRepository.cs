@@ -63,7 +63,7 @@ namespace FirstOrderKitWS.ORM.Repositories
             return this.helperOledb.Update(sql) > 0;
         }
         //סינון לפי קושי של שאלה
-        public List<Question> GetLevelQuestion(string questionId)
+        public List<Question> GetLevelQuestion(string levelQuestion)
         {
             string sql = @"SELECT
     Question.QuestionId,
@@ -72,8 +72,8 @@ namespace FirstOrderKitWS.ORM.Repositories
 FROM
     Question
 WHERE
-    (((Question.LevelQuestions) = QuestionId))";
-this.helperOledb.AddParameter("@QuestionId", questionId);
+    (((Question.LevelQuestions) = @levelQuestion))";
+this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
             List<Question> questions = new List<Question>();
             using (IDataReader reader = this.helperOledb.Select(sql))
             {
@@ -87,5 +87,6 @@ this.helperOledb.AddParameter("@QuestionId", questionId);
 
 
         }
+
     }
 }

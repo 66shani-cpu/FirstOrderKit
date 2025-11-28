@@ -59,5 +59,17 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@TestName", model.TestName);
             return this.helperOledb.Update(sql) > 0;
         }
+
+        public double TestsAvg()
+        {
+            string sql = @"SELECT Avg(StudentTest.Grade) AS Avg
+                           FROM  Tests
+                           INNER JOIN StudentTest ON Tests.TestId = StudentTest.TestId;";
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                reader.Read();
+                return Convert.ToDouble(reader["Avg"]);
+            }
+        }
     }
 }

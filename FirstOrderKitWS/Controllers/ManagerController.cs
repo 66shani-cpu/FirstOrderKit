@@ -18,8 +18,6 @@ namespace FirstOrderKitWS.Controllers
         //ברירת מחדל null
         public bool AddQuestion(AddQuestionViewModel addQuestionViewModel)
         {
-
-          
             //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
             try
             {
@@ -34,6 +32,100 @@ namespace FirstOrderKitWS.Controllers
             catch (Exception ex)
             {
                 return false ;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public Message Message(string messageId)
+        {
+            //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                Message message = repositoryUOF.MessageRepository.GetById(messageId);
+                return message;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpPost]
+        public string LogInStusent(string nickName, string password)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return repositoryUOF.StudentRepository.LogIn(nickName, password);
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpPost]
+        public bool UpDate(Student student)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return repositoryUOF.StudentRepository.Update(student);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        public double GetReportsAVG()
+        {
+            try
+            {
+                
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.TestRepository.TestsAvg();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        public int GetReportsPast(int min)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                List<Test> test = repositoryUOF.TestRepository.GetAll();
+                for (int i = 0; i < test.Count; i++)
+                {
+                    int count+= test[i].
+                }
+                return count;
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
             finally
             {

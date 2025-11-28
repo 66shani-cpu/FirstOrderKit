@@ -20,17 +20,17 @@ namespace FirstOrderKitWS.Controllers
 
         [HttpGet]
         //ברירת מחדל null
-        public OrderFirstKitViewModel GetFirstKit(string subjectId=null)
+        public OrderFirstKitViewModel GetFirstKit(string subjectId = null)
         {
             OrderFirstKitViewModel orderFirstKitViewModel = new OrderFirstKitViewModel();
-           //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
-           try
+            //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
+            try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 orderFirstKitViewModel.Subject = this.repositoryUOF.SubjectRepository.GetAll();
                 if (subjectId == null)
                 {
-                    orderFirstKitViewModel.Units= this.repositoryUOF.UnitRepository.GetAll();
+                    orderFirstKitViewModel.Units = this.repositoryUOF.UnitRepository.GetAll();
                 }
                 else if (subjectId != null)
                 {
@@ -42,11 +42,12 @@ namespace FirstOrderKitWS.Controllers
             {
                 return null;
             }
-         finally
+            finally
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
         public Unit GetUnitDetails(string unitId)
         {
 
@@ -54,7 +55,7 @@ namespace FirstOrderKitWS.Controllers
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 return this.repositoryUOF.UnitRepository.GetById(unitId);
-               
+
             }
             catch (Exception ex)
             {
@@ -65,45 +66,26 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-        //public Test GetTests()
-        //{
-        //    List <Test> test = new List<Test>();
-        //    //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
-        //    try
-        //    {
-        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
-        //        test.Test = this.repositoryUOF.TestRepository.GetAll();
-        //        return test;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
-        //    }
+        public Test GetTest(string testId)
+        {
+            
+            //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+              Test  test= this.repositoryUOF.TestRepository.GetById(testId);
+                return test;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
 
-        //}
-        //[HttpPost]
-        //public SighUp()
-        //{
-        //    Student student = new Student();
-        //    //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
-        //    try
-        //    {
-        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
-        //        return student;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
-        //    }
-
-        //}
+        }
+  
     }
 }
