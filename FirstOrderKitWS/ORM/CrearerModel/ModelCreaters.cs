@@ -1,4 +1,7 @@
-﻿namespace FirstOrderKitWS
+﻿using FirstOrderKitModel.ViewModel;
+using FirstOrderKitWS.ORM;
+
+namespace FirstOrderKitWS
 {
     public class ModelCreaters
     {
@@ -10,7 +13,7 @@
         SubjectCreater subjectCreater;
         TestCreater testCreater;
         UnitCreater unitCreater;
-
+        ReportsViewModelCreator reportsViewModelCreator;
         public AnswerCreator AnswerCreator
         {
             get
@@ -81,6 +84,15 @@
                 if (this.unitCreater == null)
                     this.unitCreater = new UnitCreater();
                 return this.unitCreater;
+            }
+        }
+        public ReportsViewModelCreator ReportsViewModelCreator
+        {
+            get
+            {
+                if (this.reportsViewModelCreator == null)
+                    this.reportsViewModelCreator = new ReportsViewModelCreator();
+                return this.reportsViewModelCreator;
             }
         }
 

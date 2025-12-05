@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FirstOrderKitModel;
+using FirstOrderKitModel.ViewModel;
 
 namespace FirstOrderKitWS.Controllers
 {
@@ -93,6 +94,7 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
         public double GetReportsAVG()
         {
             try
@@ -110,22 +112,24 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-        public int GetReportsPast(int min)
+        [HttpGet]
+        public List<ReportsViewModel> GetReportsPast(int min)
         {
             try
             {
-
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                List<Test> test = repositoryUOF.TestRepository.GetAll();
-                for (int i = 0; i < test.Count; i++)
-                {
-                    int count+= test[i].
-                }
-                return count;
+                return this.repositoryUOF.TestRepository.TestPast();
+                //List<Test> tests = repositoryUOF.TestRepository.GetAll();
+                //for (int i = 0; i < tests.Count; i++)
+                //{
+                //    int count+= tests[i].
+                //}
+                //return count;
             }
             catch (Exception ex)
             {
-                return 0;
+                Console.WriteLine(ex.ToString());
+                return null;
             }
             finally
             {

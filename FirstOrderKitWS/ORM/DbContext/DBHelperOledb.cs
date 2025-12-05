@@ -61,6 +61,7 @@ namespace FirstOrderKitWS
         public void OpenTransaction()
         {
             this.dbTransaction = this.OleDBConnection.BeginTransaction();
+            this.dbCommand.Transaction=this.dbTransaction;
         }
 
         public void Rollback()

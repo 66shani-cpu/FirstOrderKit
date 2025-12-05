@@ -18,6 +18,7 @@ namespace FirstOrderKitWS
             student.StudentImage= Convert.ToString(dataReader["StudentImage"]);
             student.UnitId = Convert.ToInt16(dataReader["UnitId"]);
             student.Password = Convert.ToString(dataReader["Password"]);
+            student.StudentSalt = Convert.ToString(dataReader["StudentSalt"]);
             return student;
         }
 

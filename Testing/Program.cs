@@ -2,6 +2,7 @@
 using FirstOrderKitWS;
 using FirstOrderKitWS.ORM.Repositories;
 using System.Data;
+using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace Testing
@@ -23,10 +24,39 @@ namespace Testing
         }
         static void Main(string[] args)
         {
+            for (int i =1; i<=10; i++)
+            {
+                Console.WriteLine("insert password");
+                string password = Console.ReadLine();
+                string salt = GetSalt(8);
+                string hash= GetHash(password, salt);
+                Console.WriteLine(salt);
+                Console.WriteLine( hash);
+            }
+           
+
             
             Console.ReadLine();
 
         }
+        static string GetHash(string passwoed, string salt)
+        {
+            string combine = passwoed + salt;
+            byte[] bytes = System.Text.UTF8Encoding.UTF8.GetBytes(combine);
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hash = sha256.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
+            }
+        }
+        static string GetSalt(int lenght)
+        {
+            byte[] bytes = new byte[lenght];
+            RandomNumberGenerator.Fill(bytes);
+            string s = Convert.ToBase64String(bytes);
+            return s;
+        }
+            
         //static void Test
         static void TestRepositorAdddQuiestion()
         {
@@ -52,18 +82,18 @@ namespace Testing
             }
 
         }
-        static void TestRepositorFilterFirst()
-        {
-            RepositoryUOF repositoryUOF = new RepositoryUOF();
-            repositoryUOF.DBHelperOledb.OpenConnection();
-            List<Subject> subjects= repositoryUOF.SubjectRepository.SubjectFilter("A");
-            repositoryUOF.DBHelperOledb.CloseConnection();
-            foreach (Subject Subject in subjects)
-            {
-                Console.WriteLine($"{Subject.SubjectName}");
-            }
+        //static void TestRepositorFilterFirst()
+        //{
+        //    RepositoryUOF repositoryUOF = new RepositoryUOF();
+        //    repositoryUOF.DBHelperOledb.OpenConnection();
+        //    List<Subject> subjects= repositoryUOF.SubjectRepository.SubjectFilter("A");
+        //    repositoryUOF.DBHelperOledb.CloseConnection();
+        //    foreach (Subject Subject in subjects)
+        //    {
+        //        Console.WriteLine($"{Subject.SubjectName}");
+        //    }
 
-        }
+        //}
         static void TestRepositorDelete()
         {
             RepositoryUOF repositoryUOF = new RepositoryUOF();

@@ -66,6 +66,7 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
         public Test GetTest(string testId)
         {
             
@@ -86,6 +87,24 @@ namespace FirstOrderKitWS.Controllers
             }
 
         }
-  
+        [HttpPost]
+  public bool InsertStudent (Student student)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                 return this.repositoryUOF.StudentRepository.Create(student);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+
+        }
     }
 }

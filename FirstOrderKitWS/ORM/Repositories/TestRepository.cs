@@ -1,5 +1,7 @@
 ﻿using FirstOrderKitModel;
+using FirstOrderKitModel.ViewModel;
 using System.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
@@ -70,6 +72,24 @@ namespace FirstOrderKitWS.ORM.Repositories
                 reader.Read();
                 return Convert.ToDouble(reader["Avg"]);
             }
+        }
+        public List<ReportsViewModel> TestPast()
+        {
+            string sql = @"SELECT Tests.TestId,Count(StudentTest.grade) 
+                                AS StudentCount,Tests.TestName
+                           FROM Tests
+                             INNER JOIN StudentTest ON Tests.TestId = StudentTest.TestId
+                             GROUP BY Tests.TestId,StudentTest.grade,Tests.TestName
+                             HAVING (((StudentTest.grade) > 50));";
+            List<ReportsViewModel> tests = new List<ReportsViewModel>();
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    tests.Add(this.modelCreaters.ReportsViewModelCreator.CreateModel(reader));
+                }
+            }
+            return tests;
         }
     }
 }

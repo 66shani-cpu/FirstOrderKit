@@ -19,6 +19,8 @@ namespace FirstOrderKitModel
         string studentTelephone;
         string studentAdrres;
         string studentImage;
+        string studentSalt;
+        public string StudentSalt { get; set; }
         public string StudentId
         {
             get { return this.studentId; }
