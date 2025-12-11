@@ -11,21 +11,36 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         }
 
+        //public bool Create(Answer model)
+        //{
+        //    string sql = @$"Insert into Answer  
+        //                   (
+        //                      TrueFalse,QuestionId,AnswerText
+        //                   )
+        //                  values
+        //                     (
+        //                        @TrueFalse,@QuestionId,@AnswerText
+        //                      )";
+        //    this.helperOledb.AddParameter("@TrueFalse", model.TrueFalse.ToString());
+        //    this.helperOledb.AddParameter("@QuestionId", model.QuestionId.ToString());
+        //    this.helperOledb.AddParameter("@AnswerText", model.AnswerText);
+        //    return this.helperOledb.Insert(sql) > 0;
+
+        //}
         public bool Create(Answer model)
         {
-            string sql = @$"Insert into Answer  
-                           (
-                              TrueFalse,QuestionId,AnswerText
-                           )
-                          values
-                             (
-                                @TrueFalse,@QuestionId,@AnswerText
-                              )";
+            string sql = @"Insert into Answer
+                (
+                    TrueFalse,AnswerText
+                )
+                values
+                (
+                    @TrueFalse,@AnswerText
+                )";
             this.helperOledb.AddParameter("@TrueFalse", model.TrueFalse.ToString());
-            this.helperOledb.AddParameter("@QuestionId", model.QuestionId.ToString());
-            this.helperOledb.AddParameter("@AnswerText", model.AnswerText);
+            //this.helperOledb.AddParameter("@AnswerText", model.AnswerText);
+            this.helperOledb.AddParameter("@AnswerText", model.AnswerText ?? "");
             return this.helperOledb.Insert(sql) > 0;
-
         }
 
         public bool Delete(string id)

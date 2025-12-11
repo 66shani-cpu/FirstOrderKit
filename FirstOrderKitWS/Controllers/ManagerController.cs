@@ -15,7 +15,7 @@ namespace FirstOrderKitWS.Controllers
         {
             this.repositoryUOF = new RepositoryUOF();
         }
-        [HttpGet]
+        [HttpPost]
         //ברירת מחדל null
         public bool AddQuestion(AddQuestionViewModel addQuestionViewModel)
         {
@@ -23,22 +23,24 @@ namespace FirstOrderKitWS.Controllers
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                bool ok= this.repositoryUOF.QuestionRepository.Create(addQuestionViewModel.Question);
+                bool ok = this.repositoryUOF.QuestionRepository.Create(addQuestionViewModel.Question);
                 foreach (Answer answer in addQuestionViewModel.Answers)
                 {
-                    ok = this.repositoryUOF.AnswerRepository.Create(answer);    
+                    ok = this.repositoryUOF.AnswerRepository.Create(answer);
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                return false ;
+                Console.WriteLine(ex.ToString());
+                return false;
             }
             finally
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+
         [HttpGet]
         public Message Message(string messageId)
         {
@@ -51,6 +53,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -69,6 +72,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -87,6 +91,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
             finally
@@ -99,12 +104,13 @@ namespace FirstOrderKitWS.Controllers
         {
             try
             {
-                
+
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 return this.repositoryUOF.TestRepository.TestsAvg();
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return 0;
             }
             finally
@@ -112,6 +118,7 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+
         [HttpGet]
         public List<ReportsViewModel> GetReportsPast(int min)
         {

@@ -23,7 +23,7 @@ namespace FirstOrderKitModel
         {
             get { return this.testName; }
             set { this.testName = value;
-                ValidateProperty(value, "testName");
+                //ValidateProperty(value, "testName");//להחזיר זה זמני
             }
         }
     }

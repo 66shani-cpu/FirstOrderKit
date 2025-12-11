@@ -118,7 +118,7 @@ namespace FirstOrderKitWS
                                              UnitId=@UnitId,StudentFirstName=@StudentFirstName,
                                              CityId=@CityId,StudentTelephone=@StudentTelephone,
                                              StudentAdrres=@StudentAdrres,StudentImage=@StudentImage
-where StudentId=@StudentId";
+                            where StudentId=@StudentId";
             this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
             this.helperOledb.AddParameter("@Password", model.Password);
             this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
@@ -135,7 +135,7 @@ where StudentId=@StudentId";
         //הזדהות במערכת
         public string LogIn (string nickName, string password)
         {
-            string sql = @"Select StudentSalt,StudentId,password fron Student 
+            string sql = @"Select StudentSalt,StudentId,password from Student 
                  where StudentNickName =@StudentNickName";
                  
             this.helperOledb.AddParameter("@StudentNickName",nickName);

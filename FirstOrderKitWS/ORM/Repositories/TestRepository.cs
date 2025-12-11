@@ -13,7 +13,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         }
         public bool Create(Test model)
         {
-            string sql = @$"Insert into Test 
+            string sql = @$"Insert into Tests 
                            (TestName)
                           values(@TestName)";
             this.helperOledb.AddParameter("@TestName", model.TestName);
@@ -22,14 +22,14 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public bool Delete(string id)
         {
-            string sql = @"Delete from Test where TestId=@TestId";
+            string sql = @"Delete from Tests where TestId=@TestId";
             this.helperOledb.AddParameter("@TestId", id);
             return this.helperOledb.Delete(sql) > 0;
         }
         //מעביר את הטבלה למודל
         public List<Test> GetAll()
         {
-            string sql = " Select * from Test";
+            string sql = " Select * from Tests";
 
             List<Test> tests = new List<Test>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -46,18 +46,24 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public Test GetById(string id)
         {
-            string sql = " Select * from Test  where TestId=@TestId";
+            string sql = " Select * from Tests  where TestId=@TestId";
             this.helperOledb.AddParameter("@TestId", id);
             using (IDataReader reader = this.helperOledb.Select(sql))
             {
                 reader.Read();
                 return this.modelCreaters.TestCreater.CreateModel(reader);
+                //if (!reader.Read())
+                //{
+                //    return null; // לא נמצא
+                //}
+
+                //return this.modelCreaters.TestCreater.CreateModel(reader);
             }
         }
 
         public bool Update(Test model)
         {
-            string sql = @"Update Test set TestName=@TestName";
+            string sql = @"Update Tests set TestName=@TestName";
             this.helperOledb.AddParameter("@TestName", model.TestName);
             return this.helperOledb.Update(sql) > 0;
         }
@@ -73,6 +79,7 @@ namespace FirstOrderKitWS.ORM.Repositories
                 return Convert.ToDouble(reader["Avg"]);
             }
         }
+
         public List<ReportsViewModel> TestPast()
         {
             string sql = @"SELECT Tests.TestId,Count(StudentTest.grade) 

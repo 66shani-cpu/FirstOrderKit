@@ -38,7 +38,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentNickName; }
             set { this.studentNickName = value;
-                ValidateProperty(value, "StudentNickName");
+                //ValidateProperty(value, "StudentNickName");
             }
         }
         [Required(ErrorMessage = "password Text cannot be empty")]
@@ -47,7 +47,7 @@ namespace FirstOrderKitModel
         {
             get { return this.password; }
             set { this.password = value;
-                ValidateProperty(value, "Password");
+                //ValidateProperty(value, "Password");
             }
         }
         [Required(ErrorMessage = "studentFirstName Text cannot be empty")]
@@ -57,7 +57,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentFirstName; }
             set { this.studentFirstName = value;
-                ValidateProperty(value, "StudentFirstName");
+                //ValidateProperty(value, "StudentFirstName");
             }
         }
         [Required(ErrorMessage = "studentLastName Text cannot be empty")]
@@ -67,7 +67,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentLastName; }
             set { this.studentLastName = value;
-                ValidateProperty(value, "StudentLastName");
+                //ValidateProperty(value, "StudentLastName");
             }
         }
         public int CityId
@@ -81,7 +81,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentTelephone; }
             set { this.studentTelephone = value;
-                ValidateProperty(value, "StudentTelephone");
+                //ValidateProperty(value, "StudentTelephone");
             }
         }
         [Required(ErrorMessage = "studentAdrres Text cannot be empty")]
@@ -91,7 +91,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentAdrres; }
             set { this.studentAdrres = value;
-                ValidateProperty(value, "StudentAdrres");
+                //ValidateProperty(value, "StudentAdrres");
             }
         }
         [Required(ErrorMessage = "studentImage Text cannot be empty")]
@@ -100,7 +100,7 @@ namespace FirstOrderKitModel
         {
             get { return this.studentImage; }
             set { this.studentImage = value;
-                ValidateProperty(value, "StudentImage");
+                //ValidateProperty(value, "StudentImage");
             }
         }
     }

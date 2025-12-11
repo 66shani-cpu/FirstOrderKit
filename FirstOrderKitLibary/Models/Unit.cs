@@ -17,23 +17,23 @@ namespace FirstOrderKitModel
             get { return this.unitId; }
             set { this.unitId = value; }
         }
-        [Required(ErrorMessage = "unitName Text cannot be empty")]
+        [Required(ErrorMessage = "UnitName Text cannot be empty")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "unitName")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string UnitName
         {
             get { return this.unitName; }
             set { this.unitName = value;
-                ValidateProperty(value, "unitName");
+                //ValidateProperty(value, "UnitName");שינוי זמני להחזיר את זה
             }
         }
-        [Required(ErrorMessage = "studentImage Text cannot be empty")]
+        [Required(ErrorMessage = "UnitPicture Text cannot be empty")]
         [OnlyImage(ErrorMessage = "The picture must be in image format (jpg, png, gif).")]
         public string UnitPicture
         {
             get { return this.unitPicture; }
             set { this.unitPicture = value;
-                ValidateProperty(value, "unitPicture");
+                //ValidateProperty(value, "UnitPicture");
             }
         }
     }

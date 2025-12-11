@@ -23,14 +23,14 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public bool Delete(string id)
         {
-            string sql = @"Delete from Unit where UnitId=@UnitId";
+            string sql = @"Delete from Units where UnitId=@UnitId";
             this.helperOledb.AddParameter("@UnitId", id);
             return this.helperOledb.Delete(sql) > 0;
         }
         //מעביר את הטבלה למודל
         public List<Unit> GetAll()
         {
-            string sql = " Select * from Unit";
+            string sql = " Select * from Units";
 
             List<Unit> units = new List<Unit>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -47,7 +47,7 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public Unit GetById(string id)
         {
-            string sql = " Select * from Unit  where UnitId=@UnitId";
+            string sql = " Select * from Units where UnitId=@UnitId";
             this.helperOledb.AddParameter("@UnitId", id);
             using (IDataReader reader = this.helperOledb.Select(sql))
             {

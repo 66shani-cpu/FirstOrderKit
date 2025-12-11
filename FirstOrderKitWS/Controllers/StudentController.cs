@@ -42,6 +42,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -70,6 +71,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return null;
             }
             finally
@@ -88,6 +90,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
             finally

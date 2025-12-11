@@ -11,7 +11,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         }
         public bool Create(Subject model)
         {
-            string sql = @$"Insert into Subject 
+            string sql = @$"Insert into Subjectד 
                            (SubjectName)
                           values(@SubjectName)";
             this.helperOledb.AddParameter("@SubjectName", model.SubjectName);
@@ -20,14 +20,14 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public bool Delete(string id)
         {
-            string sql = @"Delete from Subject where SubjectId=@SubjectId";
+            string sql = @"Delete from Subjects where SubjectId=@SubjectId";
             this.helperOledb.AddParameter("@SubjectId", id);
             return this.helperOledb.Delete(sql) > 0;
         }
 
         public List<Subject> GetAll()
         {
-            string sql = " Select * from Subject";
+            string sql = " Select * from Subjects";
 
             List<Subject> subjects = new List<Subject>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -44,7 +44,7 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public Subject GetById(string id)
         {
-            string sql = " Select * from Subject where SubjectId=@SubjectId";
+            string sql = " Select * from Subjects where SubjectId=@SubjectId";
             this.helperOledb.AddParameter("@SubjectId", id);
             using (IDataReader reader = this.helperOledb.Select(sql))
             {
@@ -55,7 +55,7 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public bool Update(Subject model)
         {
-            string sql = @"Update Subject set SubjectName=@SubjectName";
+            string sql = @"Update Subjects set SubjectName=@SubjectName";
             this.helperOledb.AddParameter("@SubjectName", model.SubjectName);
             return this.helperOledb.Update(sql) > 0;
         }
