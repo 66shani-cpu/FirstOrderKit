@@ -14,7 +14,10 @@ namespace FirstOrderKitModel
            string trueFalse;
            string questionId;
            string answerText;
+        public Answer()
+        {
 
+        }
         public string Answerid
         { 
             get { return this. answerid; }

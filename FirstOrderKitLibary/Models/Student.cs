@@ -20,6 +20,10 @@ namespace FirstOrderKitModel
         string studentAdrres;
         string studentImage;
         string studentSalt;
+        public Student()
+        {
+
+        }
         public string StudentSalt { get; set; }
         public string StudentId
         {

@@ -12,6 +12,10 @@ namespace FirstOrderKitModel
         string unitId;
         string unitName;
         string unitPicture;
+        public Unit()
+        {
+
+        }
         public string UnitId
         {
             get { return this.unitId; }

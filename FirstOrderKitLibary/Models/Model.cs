@@ -16,6 +16,10 @@ namespace FirstOrderKitModel
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
         private object threadLock = new object();
         private bool isValid;
+        public Model()
+        {
+
+        }
 
         public bool HasErrors
         {

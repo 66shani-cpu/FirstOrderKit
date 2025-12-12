@@ -11,6 +11,10 @@ namespace FirstOrderKitModel
     {
         string subjectId;
         string subjectName;
+        public Subject()
+        {
+
+        }
         public string SubjectId
         {
             get { return this.subjectId; }

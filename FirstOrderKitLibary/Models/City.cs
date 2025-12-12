@@ -11,6 +11,10 @@ namespace FirstOrderKitModel
     {
         string cityId;
         string cityName;
+        public City()
+        {
+
+        }
         public string CityId
         {
             get { return this.cityId; }

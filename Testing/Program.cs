@@ -1,4 +1,5 @@
-﻿using FirstOrderKitModel;
+﻿using FirstKitWSClient;
+using FirstOrderKitModel;
 using FirstOrderKitWS;
 using FirstOrderKitWS.ORM.Repositories;
 using System.Data;
@@ -24,19 +25,35 @@ namespace Testing
         }
         static void Main(string[] args)
         {
-            for (int i =1; i<=10; i++)
-            {
-                Console.WriteLine("insert password");
-                string password = Console.ReadLine();
-                string salt = GetSalt(8);
-                string hash= GetHash(password, salt);
-                Console.WriteLine(salt);
-                Console.WriteLine( hash);
-            }
+            //for (int i =1; i<=10; i++)
+            //{
+            //    Console.WriteLine("insert password");
+            //    string password = Console.ReadLine();
+            //    string salt = GetSalt(8);
+            //    string hash= GetHash(password, salt);
+            //    Console.WriteLine(salt);
+            //    Console.WriteLine( hash);
+            //}
            
 
             
             Console.ReadLine();
+            TestKitClient();
+            Console.ReadLine();
+
+        }
+        static void TestKitClient()
+        {
+            ApiClient<Unit> apiClient = new ApiClient<Unit>();
+            apiClient.Schema = "http";
+            apiClient.Host= "localhost";
+            apiClient.Port = 5239;
+            apiClient.Path = "api/Guest/GetUnitDetails";
+            apiClient.AddParameter("unitId", "2");
+            Unit unit = apiClient.GetAsync().Result;
+            Console.WriteLine(unit.UnitId);
+            Console.WriteLine(unit.UnitName);
+            Console.WriteLine(unit.UnitPicture);
 
         }
         static string GetHash(string passwoed, string salt)

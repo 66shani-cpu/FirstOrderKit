@@ -11,6 +11,10 @@ namespace FirstOrderKitModel
     {
         string messageId;
         string messageName;
+        public Message()
+        {
+
+        }
         public string MessageId
         {
             get { return this.messageId; }

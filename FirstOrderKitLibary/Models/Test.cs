@@ -11,6 +11,10 @@ namespace FirstOrderKitModel
     {
         string testId;
         string testName;
+        public Test()
+        {
+
+        }
         public string TestId
         {
             get { return this.testId; }

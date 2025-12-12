@@ -17,4 +17,9 @@
     <ProjectReference Include="..\FirstOrderKitLibary\FirstOrderKitModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Units\" />
+    <Folder Include="wwwroot\Images\Students\" />
+  </ItemGroup>
+
 </Project>
