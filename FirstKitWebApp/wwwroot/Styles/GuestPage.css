@@ -1,0 +1,113 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.container {
+    max-width: 1200px; /* 👈 נמתח לרוחב מסך רחב */
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    min-height: 100vh; /* נמתח לגובה הדף */
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+    header h1 {
+        font-size: 28px;
+        margin: 0;
+    }
+
+.signup {
+    position: absolute;
+    right: 0;
+    color: blue;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+    .signup:hover {
+        text-decoration: underline;
+    }
+
+hr {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #aaa;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.units {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 75%; /* 👈 תופס יותר מקום לרוחב */
+    text-align: center;
+}
+
+.unit img {
+    width: 180px;
+    height: 130px;
+    background-color: #e0e0e0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+.unit p {
+    margin-top: 8px;
+    font-size: 15px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 250px;
+}
+
+label {
+    font-size: 14px;
+}
+
+select,
+input[type="number"] {
+    padding: 6px;
+    font-size: 14px;
+    border: 1px solid #888;
+    border-radius: 4px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .units {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .filters {
+        width: 100%;
+        max-width: 300px;
+    }
+}

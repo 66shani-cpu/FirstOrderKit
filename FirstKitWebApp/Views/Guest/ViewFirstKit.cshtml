@@ -1,0 +1,43 @@
+﻿@using FirstOrderKitModel
+@model OrderFirstKitViewModel
+@{
+    ViewData["Title"] = "ViewFirstKit";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<link href="~/styles/guestpage.css" rel="stylesheet" />
+<section class="units">
+    @foreach(Unit unit in Model.Units)
+    {
+    <div class="unit">
+            <a href="http://localhost:5108/guest/GetUnitDetails/?unitId=@unit.UnitId">
+                <img src="http://localhost:5239/Images/Units/@unit.UnitPicture" alt="Unit cyber">
+            </a>
+        <p>@unit.UnitName</p>
+    </div>
+    }
+</section>
+
+<aside class="filters">
+    <label for="subject">Filter by subject</label>
+    <select id="subject">
+        @foreach(Subject subject in Model.Subject)
+        {
+        <option value="@subject.SubjectId">@subject.SubjectName</option>
+        }
+    </select>
+
+    <label for="difficulty">Select by difficulty</label>
+    <select id="difficulty">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+
+    <label for="compiled">Tests that were compiled</label>
+    <select id="compiled">
+        <option value="">Select</option>
+        <option value="test1">Test 1</option>
+        <option value="test2">Test 2</option>
+        <option value="test3">Test 3</option>
+    </select>
+</aside>

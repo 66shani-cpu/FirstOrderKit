@@ -11,41 +11,28 @@ namespace FirstKitWebApp.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpDate(string StudentId,
-            string UnitId, string StudentNickName, string passwword,
-            string StudentFirstName, string StudentLastName, string CityId,
-            string StudentTelephone, string StudentAdrres, string StudentImage)
+        public async Task<IActionResult> UpDate(Student student)
         {
-            ApiClient<Student> client = new ApiClient<Student>();
+            ApiClient<bool> client = new ApiClient<bool>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/UpDate";
-            client.AddParameter("StudentId", StudentId);
-            client.AddParameter("UnitId", UnitId);
-            client.AddParameter("StudentNickName", StudentNickName);
-            client.AddParameter("passwword", passwword);
-            client.AddParameter("StudentFirstName", StudentFirstName);
-            client.AddParameter("StudentLastName", StudentLastName);
-            client.AddParameter("CityId", CityId);
-            client.AddParameter("StudentTelephone", StudentTelephone);
-            client.AddParameter("StudentAdrres", StudentAdrres);
-            client.AddParameter("StudentImage", StudentImage);
-            Student student = await client.GetAsync();
+            bool ok = await client.GetAsync();
             return View(student);
         }
         [HttpPost]
         public async Task<IActionResult> LogInStusent(string StudentNickName, string passwword)
         {
-            ApiClient<Student> client = new ApiClient<Student>();
+            ApiClient<string> client = new ApiClient<string>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/LogInStusent";
             client.AddParameter("StudentNickName", StudentNickName);
             client.AddParameter("passwword", passwword);
-            Student student = await client.GetAsync();
-            return View(student);
+            string id = await client.GetAsync();
+            return View();
         }
         [HttpGet]
         public async Task<IActionResult> GetTest(string testId)
@@ -60,16 +47,14 @@ namespace FirstKitWebApp.Controllers
             return View(test);
         }
         [HttpGet]
-        //לשאול מה עושים עם זה
         public async Task<IActionResult> GetNewTest()
         {
-            ApiClient<Test> client = new ApiClient<Test>();
+            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/GetTest";
-            client.AddParameter("testId", testId);
-            Test test = await client.GetAsync();
+            List<TestQuestionViewModel> test = await client.GetAsync();
             return View(test);
         }
 

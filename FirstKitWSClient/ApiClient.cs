@@ -103,7 +103,7 @@ namespace FirstKitWSClient
 
             }
         }
-        public async Task<bool> PostAsync(T model,FileStream file)
+        public async Task<bool> PostAsync(T model,Stream file)
         {
             using (HttpRequestMessage httpRequest = new HttpRequestMessage())
             {
@@ -114,7 +114,7 @@ namespace FirstKitWSClient
                 StringContent modelcontent = new StringContent(json);
                 multipartFormDataContent.Add(modelcontent, "model");
                 StreamContent streamContent = new StreamContent(file);
-                multipartFormDataContent.Add(modelcontent, "file", file.Name);
+                multipartFormDataContent.Add(modelcontent, "file", "file");
                 httpRequest.Content = multipartFormDataContent;
                 using (HttpResponseMessage responseMessage = await this.httpClient.SendAsync(httpRequest))
                 {
@@ -125,7 +125,7 @@ namespace FirstKitWSClient
             }
         }
 
-        public async Task<bool> PostAsync(T model, List<FileStream> files)
+        public async Task<bool> PostAsync(T model, List<Stream> files)
         {
             using (HttpRequestMessage httpRequest = new HttpRequestMessage())
             {
@@ -138,7 +138,7 @@ namespace FirstKitWSClient
                 foreach (FileStream fileStream in files)
                 {
                     StreamContent streamContent = new StreamContent(fileStream);
-                    multipartFormDataContent.Add(modelcontent, "file", fileStream.Name);
+                    multipartFormDataContent.Add(modelcontent, "file", "file");
                 }
                 httpRequest.Content = multipartFormDataContent;
                 using (HttpResponseMessage responseMessage = await this.httpClient.SendAsync(httpRequest))

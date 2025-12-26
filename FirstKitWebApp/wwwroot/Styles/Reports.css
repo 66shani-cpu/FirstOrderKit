@@ -1,0 +1,45 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.page {
+    width: 98%;
+    height: 98vh;
+    border: 2px solid #c8c8c8;
+    margin: auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+.line {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.charts-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.chart-box {
+    width: 45%;
+    text-align: center;
+}
+
+canvas {
+    width: 100% !important;
+    height: 350px !important;
+}
+
+.chart-text {
+    font-size: 18px;
+    margin-top: 10px;
+}

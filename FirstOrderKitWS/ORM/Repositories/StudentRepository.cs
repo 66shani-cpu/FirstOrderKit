@@ -145,10 +145,10 @@ namespace FirstOrderKitWS
                 if (reader.Read() == true)
                 {
                     string salt = reader["StudentSalt"].ToString();
-                    string hash= reader["StudentSalt"].ToString();
+                    string hash= reader["Password"].ToString();
                     string calculateHash =GetHash(password, salt);
                     if(hash==calculateHash)
-                          return reader["ReaderId"].ToString();
+                          return reader["StudentId"].ToString();
                 }
                     
                 return null;

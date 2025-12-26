@@ -1,0 +1,98 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 30px 0 10px;
+}
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+.login-link {
+    position: absolute;
+    right: 60px;
+    font-size: 16px;
+}
+
+.divider {
+    width: 95%;
+    margin: auto;
+    border: 1px solid #ccc;
+}
+
+/* 🎯 המחלקה שגורמת לדף להיות מלא */
+.container {
+    width: 100%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    justify-items: center;
+}
+
+/* Left section */
+.left-section {
+    text-align: center;
+}
+
+.graph-img {
+    width: 260px;
+    height: 170px;
+    background: #e3e3e3;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border: 2px solid #777;
+    background: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Middle section */
+.middle-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.select-box {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.label {
+    margin-top: 0px;
+}
+
+/* Right section */
+.right-section {
+    text-align: left;
+}
+
+/* 🎯 עכשיו הקווים יופיעו כמו בתמונה */
+.text-block {
+    width: 300px;
+    height: 180px;
+    background: repeating-linear-gradient( to bottom, #cfcfcf, #cfcfcf 6px, transparent 6px, transparent 14px );
+    margin-left: 40px;
+    border-radius: 4px;
+}
+
+.students-label {
+    margin-left: 40px;
+    margin-top: 10px;
+}

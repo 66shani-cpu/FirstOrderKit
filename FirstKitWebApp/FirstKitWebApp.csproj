@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
-    <Folder Include="wwwroot\Styles\" />
-    <Folder Include="wwwroot\js\" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,81 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px; /* 👈 תופס את רוחב המסך בצורה רחבה */
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #aaa;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+    header h1 {
+        font-size: 28px;
+        margin: 0;
+    }
+
+.signup {
+    position: absolute;
+    right: 0;
+    color: blue;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+    .signup:hover {
+        text-decoration: underline;
+    }
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border: 1px solid #999;
+}
+
+main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.image-box img {
+    width: 400px;
+    height: 280px;
+    background-color: #ddd;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+.text-box {
+    flex: 1;
+}
+
+    .text-box p {
+        color: #555;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-box img {
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using FirstKitWSClient;
 using FirstOrderKitModel;
+using FirstOrderKitModel.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstKitWebApp.Controllers
@@ -13,38 +14,25 @@ namespace FirstKitWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LogInStusent(string StudentNickName, string passwword)
         {
-            ApiClient<Student> client = new ApiClient<Student>();
+            ApiClient<string> client = new ApiClient<string>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/LogInStusent";
             client.AddParameter("StudentNickName", StudentNickName);
             client.AddParameter("passwword", passwword);
-            Student student = await client.GetAsync();
-            return View(student);
+            string id = await client.GetAsync();
+            return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpDate(string StudentId,
-    string UnitId, string StudentNickName, string passwword,
-    string StudentFirstName, string StudentLastName, string CityId,
-    string StudentTelephone, string StudentAdrres, string StudentImage)
+        public async Task<IActionResult> UpDate(Student student)
         {
-            ApiClient<Student> client = new ApiClient<Student>();
+            ApiClient<bool> client = new ApiClient<bool>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/UpDate";
-            client.AddParameter("StudentId", StudentId);
-            client.AddParameter("UnitId", UnitId);
-            client.AddParameter("StudentNickName", StudentNickName);
-            client.AddParameter("passwword", passwword);
-            client.AddParameter("StudentFirstName", StudentFirstName);
-            client.AddParameter("StudentLastName", StudentLastName);
-            client.AddParameter("CityId", CityId);
-            client.AddParameter("StudentTelephone", StudentTelephone);
-            client.AddParameter("StudentAdrres", StudentAdrres);
-            client.AddParameter("StudentImage", StudentImage);
-            Student student = await client.GetAsync();
+            bool ok = await client.GetAsync();
             return View(student);
         }
         [HttpGet]
@@ -62,26 +50,25 @@ namespace FirstKitWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> GetReportsAVG()
         {
-            ApiClient<Test> client = new ApiClient<Test>();
+            ApiClient<double> client = new ApiClient<double>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/GetReportsAVG";
-            //client.AddParameter("messageId", messageId);
-            Test test = await client.GetAsync();
-            return View(test);
+            double avg = await client.GetAsync();
+            return View(avg);
         }
         [HttpGet]
         public async Task<IActionResult> GetReportsPast()
         {
-            ApiClient<Test> client = new ApiClient<Test>();
+            ApiClient<List<ReportsViewModel>> client = new ApiClient<List<ReportsViewModel>>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/GetReportsPast";
             //client.AddParameter("messageId", messageId);
-            Test test = await client.GetAsync();
-            return View(test);
+            List<ReportsViewModel> past = await client.GetAsync();
+            return View(past);
         }
 
     }

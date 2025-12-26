@@ -1,0 +1,43 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    border: 1px solid #999;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+select,
+.number-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.post-btn {
+    width: 100%;
+    padding: 6px;
+    background-color: #e6e6e6;
+    border: 1px solid #999;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .post-btn:hover {
+        background-color: #dcdcdc;
+    }

@@ -12,13 +12,13 @@ namespace FirstKitWebApp.Controllers
         }
         [HttpGet]
         //כל פעם מידע שונה פעם ראשונה מציג הכל אחרי שבחרו התז משתנה וצריך לשים פרמטק
-        public async Task<IActionResult> ViewFirstKit(string subjectId = null, string unitId = null)
+        public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
         {
             ApiClient<OrderFirstKitViewModel> client = new ApiClient<OrderFirstKitViewModel>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
-            client.Path = "api/Guest/OrderFirstKitViewModel";
+            client.Path = "api/Guest/GetFirstKit";
             if (subjectId != null)
             {
                 client.AddParameter("subjectId", subjectId);
@@ -55,27 +55,15 @@ namespace FirstKitWebApp.Controllers
             return View(test);
         }
         [HttpPost]
-        public async Task<IActionResult> InsertStudent(string StudentId,
-            string UnitId, string StudentNickName,string passwword,
-            string StudentFirstName, string StudentLastName, string CityId,
-            string StudentTelephone, string StudentAdrres, string StudentImage)
+        public async Task<IActionResult> InsertStudent(Student student
+)
         {
             ApiClient<Student> client = new ApiClient<Student>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/InsertStudent";
-            client.AddParameter("StudentId", StudentId);
-            client.AddParameter("UnitId", UnitId);
-            client.AddParameter("StudentNickName", StudentNickName);
-            client.AddParameter("passwword", passwword);
-            client.AddParameter("StudentFirstName", StudentFirstName);
-            client.AddParameter("StudentLastName", StudentLastName);
-            client.AddParameter("CityId", CityId);
-            client.AddParameter("StudentTelephone", StudentTelephone);
-            client.AddParameter("StudentAdrres", StudentAdrres);
-            client.AddParameter("StudentImage", StudentImage);
-            Student student = await client.GetAsync();
+           bool ok = await client.PostAsync(student);
             return View(student);
         }
 
