@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reactive.Subjects;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Encodings;
+using System.Text.Json;
 
 namespace FirstOrderKitWS.Controllers
 {//ATTRIBUTE
@@ -91,16 +93,31 @@ namespace FirstOrderKitWS.Controllers
 
         }
         [HttpPost]
-  public bool InsertStudent (Student student)
+  public bool InsertStudent ()
         {
+            string json = HttpContext.Request.Form["model"];
+            Student student = JsonSerializer.Deserialize<Student>(json);
+            IFormFile file = null;
+            if(HttpContext.Request.Form.Files.Count>0)
+            {
+                file=HttpContext.Request.Form.Files[0];
+            }
             try
             {
+                repositoryUOF.DBHelperOledb.OpenTransaction();
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                 return this.repositoryUOF.StudentRepository.Create(student);
-
+                 bool ok= this.repositoryUOF.StudentRepository.Create(student);
+                string path = $@"{Directory.GetCurrentDirectory()}\wwwroot\Images\Students\{student.StudentId}.{student.StudentImage}";
+                 using (FileStream fileStream = new FileStream(path, FileMode.Open))
+                {
+                    fileStream.CopyTo(fileStream);
+                }
+                 this.repositoryUOF.DBHelperOledb.Commit();
+                  return true;
             }
             catch (Exception ex)
             {
+                this.repositoryUOF.DBHelperOledb.Rollback();
                 Console.WriteLine(ex.ToString());
                 return false;
             }

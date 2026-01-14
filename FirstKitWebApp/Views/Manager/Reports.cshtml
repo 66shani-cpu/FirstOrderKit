@@ -1,0 +1,30 @@
+﻿@using FirstOrderKitModel
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<link href="~/styles/reports.css" rel="stylesheet" />
+<div class="page">
+
+    <h1 class="title">Meitav test</h1>
+    <hr class="line">
+
+    <div class="charts-row">
+
+        <div class="chart-box">
+            <canvas id="barChart"></canvas>
+            <p class="chart-text">Distribution of grades by student</p>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="pieChart"></canvas>
+            <p class="chart-text">Student who passed</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+

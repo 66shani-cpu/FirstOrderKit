@@ -11,6 +11,7 @@ namespace FirstOrderKitModel
     {
         public override bool IsValid(object? value)
         {
+            if(value == null) return false;
             string word = value.ToString();
             char firstLetter = word[0];
             char last = ' ';

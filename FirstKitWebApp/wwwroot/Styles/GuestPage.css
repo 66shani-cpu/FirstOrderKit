@@ -18,6 +18,9 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
+  /*  display: flex;
+    align-items: center;
+    gap: 20px;*/
 }
 
     header h1 {
@@ -42,21 +45,35 @@ hr {
     margin-bottom: 25px;
     border: 1px solid #aaa;
 }
-
 main {
+    display: flex;
+    flex-direction: column; /* 👈 זה השינוי הקריטי */
+    align-items: center; /* 👈 מרכז */
+    gap: 30px;
+}
+
+/*main {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
-}
+}*/
 
+/*.units {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 75%;*/ /* 👈 תופס יותר מקום לרוחב */
+    /*text-align: center;
+}*/
 .units {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
-    width: 75%; /* 👈 תופס יותר מקום לרוחב */
+    width: 100%;
     text-align: center;
 }
+
 
 .unit img {
     width: 180px;
@@ -106,8 +123,17 @@ select {
         width: 100%;
     }
 
-    .filters {
+    /*.filters {
         width: 100%;
         max-width: 300px;
+    }*/
+    .filters {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        width: 250px;
+        margin: 0 auto; /* 👈 זה המרכז */
+        align-items: center;
     }
+
 }

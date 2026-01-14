@@ -1,0 +1,68 @@
+﻿@using FirstOrderKitModel
+@model RegistationViewModel
+
+@{
+    ViewData["Title"] = "ViewRegistarion";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+<script>
+    function getFileName()
+    {
+        let imgName = document.getElementById("readerFile").value;
+        let ingNameSend= document.getElementById("readerFile");
+        ingNameSend.value=imgName;
+    }
+</script>
+<link href="~/styles/signup.css" rel="stylesheet" />
+if(ViewBag["Error"]!=null)
+{
+    <h1 class="errorMessage">
+        There was a Server error. Try later!
+    </h1>
+}
+<form>
+    asp-controller="guest" asp-action="Registarion"
+    class="regi"
+    method
+    <label for="fname">First name</label>
+    <input asp-for ="student.StudentId" type="text" id="fname" placeholder="Placeholder">
+    <span asp-validation-for="student.StudentId" class="errorDate"></span>
+
+    <label for="lname">Last name</label>
+    <input asp-for="student.StudentLastName" type="text" id="lname" placeholder="Placeholder">
+    <span asp-validation-for="student.StudentLastName" class="errorDate"></span>
+    <label for="city">City</label>
+    <select asp-for="student.CityId" id="city">
+        @foreach(City city in Model.cities)
+        {
+            <option value="@city.CityId" selected>@city.CityName</option>
+            <span asp-validation-for="student.CityId" class="errorDate"></span>
+        }
+        @*  <option>Select</option>
+        <option>Tel Aviv</option>
+        <option>Jerusalem</option>
+        <option>Haifa</option>
+        <option>Beer Sheva</option> *@
+    </select>
+
+    <label for="phone">Telephone</label>
+    <input asp-for="student.StudentTelephone"type ="text" id="phone" placeholder="Placeholder">
+    <span asp-validation-for="student.StudentTelephone" class="errorDate"></span>
+
+    <label for="address">Address</label>
+    <input asp-for="student.StudentAdrres" type="text" id="address" placeholder="Placeholder">
+    <span asp-validation-for="student.StudentAdrres" class="errorDate"></span>
+    <label for="picture">Picture</label>
+    <div class="picture-row">
+        <input asp-for="student.StudentImage" type =" text" id="picture" placeholder="Placeholder">
+        <input type="text" name="StudentImage" id="studentAvg"/>
+        <button type="button">Button</button>
+        <span asp-validation-for="student.StudentImage" class="errorDate"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="reset">Restart</button>
+        <button type="submit">Post</button>
+    </div>
+</form>
+
