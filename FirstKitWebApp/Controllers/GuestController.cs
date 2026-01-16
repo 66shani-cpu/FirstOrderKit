@@ -56,16 +56,15 @@ namespace FirstKitWebApp.Controllers
             return View(test);
         }
         [HttpPost]
-        public async Task<IActionResult> InsertStudent(Student student
-)
+        public async Task<IActionResult> InsertStudent(Student student)
         {
             ApiClient<Student> client = new ApiClient<Student>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/InsertStudent";
-           bool ok = await client.PostAsync(student);
-            return View(student);
+            bool ok = await client.PostAsync(student);
+            return RedirectToAction("HomePage");
         }
         //public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         //{
@@ -107,11 +106,12 @@ namespace FirstKitWebApp.Controllers
         //    registationViewModel.cities = await client.GetAsync();
         //    ViewBag.Error = true;
         //    return View("ViewRegistarion", registationViewModel);
-            
 
-                
+
+
         //}
-        public async Task <IActionResult> ViewRegistarion ()
+        [HttpGet]
+        public async Task<IActionResult> SignUp()
         {
             RegistationViewModel registationViewModel = new RegistationViewModel();
             registationViewModel.student = new Student();

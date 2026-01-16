@@ -10,6 +10,12 @@ namespace FirstKitWebApp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ViewLoginForm()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> UpDate(Student student)
         {
@@ -21,18 +27,23 @@ namespace FirstKitWebApp.Controllers
             bool ok = await client.GetAsync();
             return View(student);
         }
+
+
         [HttpPost]
-        public async Task<IActionResult> LogInStusent(string StudentNickName, string passwword)
+        public async Task<IActionResult> LogInStudent(string StudentNickName, string password)
         {
             ApiClient<string> client = new ApiClient<string>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
-            client.Path = "api/Guest/LogInStusent";
-            client.AddParameter("StudentNickName", StudentNickName);
-            client.AddParameter("passwword", passwword);
+            client.Path = "api/Student/LogInStudent";
+            client.AddParameter("nickName", StudentNickName);
+            client.AddParameter("password", password);
             string id = await client.GetAsync();
-            return View();
+            HttpContext.Session.SetString("studentId", id);
+
+            // get sdata from WS
+            return View("ViewStudentCreateTest");
         }
         [HttpGet]
         public async Task<IActionResult> GetTest(string testId)
@@ -56,6 +67,12 @@ namespace FirstKitWebApp.Controllers
             client.Path = "api/Guest/GetTest";
             List<TestQuestionViewModel> test = await client.GetAsync();
             return View(test);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewStudentCreateTest()
+        {
+            return View();
         }
 
 

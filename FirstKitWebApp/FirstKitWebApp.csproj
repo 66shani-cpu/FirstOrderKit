@@ -15,4 +15,8 @@
     <ProjectReference Include="..\FirstOrderKitLibary\FirstOrderKitModel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Student\NewFolder\" />
+  </ItemGroup>
+
 </Project>

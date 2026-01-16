@@ -82,7 +82,14 @@ main {
     border: 1px solid #bbb;
     border-radius: 6px;
 }
-
+.meitavtest
+{
+    margin-right:100px;
+}
+.login
+{
+    margin-right:100px;
+}
 .unit p {
     margin-top: 8px;
     font-size: 15px;

@@ -60,13 +60,14 @@ namespace FirstOrderKitWS.Controllers
         return false;
         }
         
-        [HttpPost]
-        public string LogInStusent(string nickName, string password)
+        [HttpGet]
+        [Produces("application/json")]
+        public string LogInStudent(string nickName, string password)
         {
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return repositoryUOF.StudentRepository.LogIn( nickName,password);
+                return repositoryUOF.StudentRepository.LogIn(nickName,password);
                 
             }
             catch (Exception ex)

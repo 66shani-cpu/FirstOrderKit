@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FirstKitWSClient
@@ -75,6 +76,8 @@ namespace FirstKitWSClient
                         //שימוש בפירוש ולא איך שכתבו
                         JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
                         jsonSerializerOptions.PropertyNameCaseInsensitive= true;
+                        jsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
+
                         //דסרליזציה
                         T model =JsonSerializer.Deserialize<T>(result, jsonSerializerOptions);
                         return model;

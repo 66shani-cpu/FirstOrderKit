@@ -1,5 +1,5 @@
 ﻿@using FirstOrderKitModel
-@model Student
+@model RegistationViewModel
 @{
     ViewData["Title"] = "LogIn";
     Layout = "~/Views/Shared/MasterPage.cshtml";
@@ -30,8 +30,8 @@
 
         <label for="picture">Picture</label>
         <div class="picture-row">
-            <input type="text" id="picture" placeholder="Placeholder">
-            <button type="button">Button</button>
+            <input type="file" id="picture" accept="image/*">
+            
         </div>
 
         <div class="buttons">

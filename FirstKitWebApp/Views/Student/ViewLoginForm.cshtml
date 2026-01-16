@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "ViewLoginForm";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+<link href="~/styles/login.css" rel="stylesheet" />
+<div class="login-container">
+    <h2>LogIn</h2>
+    <form action="http://localhost:5108/Student/LogInStudent" method="post">
+        <label >Nick Name</label>
+        <input type="text" name="StudentNickName" placeholder="Placeholder">
+
+        <label >Password</label>
+        <input type="password" name="password" placeholder="Placeholder">
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
