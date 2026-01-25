@@ -66,55 +66,71 @@ namespace FirstKitWebApp.Controllers
             bool ok = await client.PostAsync(student);
             return RedirectToAction("HomePage");
         }
-        //public async Task<IActionResult> Registration(Student student, IFormFile formFile)
-        //{
-        //    List<City> cities = await GetCitiesAsync();
 
-        //    if (ModelState.IsValid==false)
-        //    {
-        //        RegistationViewModel registationViewModel = new RegistationViewModel();
+        public async Task<IActionResult> Registration(Student student, IFormFile formFile)
+        {
+           
+            RegistationViewModel registationViewModel = new RegistationViewModel();
 
-        //        registationViewModel.student = student;
-        //        //ApiClient<List<City>> client = new ApiClient<List<City>>();
-        //        //client.Schema = "http";
-        //        //client.Host = "localhost";
-        //        //client.Port = 5239;
-        //        //client.Path = "api/Guest/GetCities";
-        //        //registationViewModel.cities =await client.GetAsync();
+            if (ModelState.IsValid == false)
+            {
+                registationViewModel.cities = await GetCitiesAsync();
+                registationViewModel.student = student;
+                return View("SignUp", registationViewModel);
+            }
+            ApiClient<Student> clientStudent = new ApiClient<Student>();
+            clientStudent.Schema = "http";
+            clientStudent.Host = "localhost";
+            clientStudent.Port = 5239;
+            clientStudent.Path = "api/Guest/InsertStudent";
+            bool ok = await clientStudent.PostAsync(student, formFile.OpenReadStream());
+            if (ok == true)
+            {
+                HttpContext.Session.SetString("studentId", student.StudentId);
+                //מעבר לקונטרוללר אחר
+                return RedirectToAction("GetNewTest", "Student");
+            }
+            else
+            {
+                ViewBag.Error = true;
+                return View("ViewRegistarion", registationViewModel);
+            }
 
-        //        return View("ViewRegistarion", registationViewModel);
-        //    }
-        //    ApiClient<Student> clientStudent = new ApiClient<Student>();
-        //    clientStudent.Schema = "http";
-        //    clientStudent.Host = "localhost";
-        //    clientStudent.Port = 5239;
-        //    clientStudent.Path = "api/Guest/InsertStudent";
-        //    bool ok = await clientStudent.PostAsync(student, file.OpenStudentStream());
-        //    if (ok ==true)
-        //    {
-        //        HttpContext.Session.SetString("studentId", student.StudentId);
-        //        //מעבר לקונטרוללר אחר
-        //        return RedirectToAction("GetNewTest", "Student");
-        //    }
-        //    RegistationViewModel registationViewModel = new RegistationViewModel();
-        //    registationViewModel.student = student;
-        //    ApiClient<List<City>> client = new ApiClient<List<City>>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/GetCities";
-        //    registationViewModel.cities = await client.GetAsync();
-        //    ViewBag.Error = true;
-        //    return View("ViewRegistarion", registationViewModel);
-
+                registationViewModel.student = student;
+            ApiClient<List<City>> client = new ApiClient<List<City>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Guest/GetCities";
+            registationViewModel.cities = await client.GetAsync();
+            ViewBag.Error = true;
+            return View("ViewRegistarion", registationViewModel);
 
 
-        //}
+
+        }
         [HttpGet]
         public async Task<IActionResult> SignUp()
         {
             RegistationViewModel registationViewModel = new RegistationViewModel();
-            registationViewModel.student = new Student();
+            registationViewModel.cities = await GetCitiesAsync();
+            string studentId = HttpContext.Session.GetString("studentId");
+            if (studentId==null)
+            {
+                registationViewModel.student = new Student();
+            }
+            else
+            {
+                ApiClient<Student> clientStudent =  new ApiClient<Student>();
+                clientStudent.Schema = "http";
+                clientStudent.Host = "localhost";
+                clientStudent.Port = 5239;
+                clientStudent.Path = "api/Student/GetStudent";
+                clientStudent.AddParameter("studentId", studentId);
+                //להוסיף פעולה 
+                registationViewModel.student = await clientStudent.GetAsync();
+            }
+
             ApiClient<List<City>> client = new ApiClient<List<City>>();
             client.Schema = "http";
             client.Host = "localhost";
@@ -126,15 +142,15 @@ namespace FirstKitWebApp.Controllers
         }
 
 
-        //private async Task<List<City>> GetCitiesAsync()
-        //{
-        //    ApiClient<List<City>> client = new ApiClient<List<City>>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/GetCities";
-        //    registationViewModel.cities = await client.GetAsync();
-        //}
+        private async Task<List<City>> GetCitiesAsync()
+        {
+            ApiClient<List<City>> client = new ApiClient<List<City>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Guest/GetCities";
+            return await client.GetAsync();
+        }
         //private async Task<bool> sendData (Student student)
 
 

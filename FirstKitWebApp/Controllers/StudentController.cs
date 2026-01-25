@@ -1,6 +1,7 @@
 ﻿using FirstKitWSClient;
 using FirstOrderKitModel;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstKitWebApp.Controllers
 {
@@ -28,7 +29,6 @@ namespace FirstKitWebApp.Controllers
             return View(student);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> LogInStudent(string StudentNickName, string password)
         {
@@ -41,7 +41,7 @@ namespace FirstKitWebApp.Controllers
             client.AddParameter("password", password);
             string id = await client.GetAsync();
             HttpContext.Session.SetString("studentId", id);
-
+            ViewBag.StudentId = HttpContext.Session.GetString("studentId");
             // get sdata from WS
             return View("ViewStudentCreateTest");
         }
@@ -58,23 +58,35 @@ namespace FirstKitWebApp.Controllers
             return View(test);
         }
         [HttpGet]
-        public async Task<IActionResult> GetNewTest()
-        {
-            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetTest";
-            List<TestQuestionViewModel> test = await client.GetAsync();
-            return View(test);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ViewStudentCreateTest()
+        public async Task<IActionResult> GetNewTestForm()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetNewTest(RequestNewTest requestNewTest)
+        {
+            ApiClient<Test> client = new ApiClient<Test>();
+            client.Schema = "http";
+            client.Host difficulty= "localhost";
+            client.Port = 5239;
+            client.Path = "api/Student/GetNewTest";
+            client.AddParameter("subjectId",requestNewTest.SubjectId);
+            client.AddParameter("", requestNewTest.Difficulty);
+            Test test = await client.GetAsync();
 
+            return View(test);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ViewStudentCreateTest()
+        {
+            ViewBag.StudentId = HttpContext.Session.GetString("studentId");
+            return View();
+        }
+
+       
+      
     }
 }

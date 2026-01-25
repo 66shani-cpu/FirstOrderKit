@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FirstOrderKitModel
 {
-    public class TestQuestionViewModel
+    public class RequestNewTest
     {
-         public Question Question {  get; set; }
-        public List<Answer> QuestionAnswer { get; set; }
+        public string SubjectId {  get; set; }
+        public string Difficulty { get; set; }
     }
 }

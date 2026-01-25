@@ -92,8 +92,28 @@ namespace FirstOrderKitWS.Controllers
             }
 
         }
+        [HttpGet]
+        public List<City> GetCities()
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+               return this.repositoryUOF.CityRepository.GetAll();
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+
+        }
         [HttpPost]
-  public bool InsertStudent ()
+        public bool InsertStudent ()
         {
             string json = HttpContext.Request.Form["model"];
             Student student = JsonSerializer.Deserialize<Student>(json);

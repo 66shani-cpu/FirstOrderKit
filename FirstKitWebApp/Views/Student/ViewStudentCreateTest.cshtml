@@ -3,6 +3,17 @@
     ViewData["Title"] = "ViewStudentCreateTest";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
-
-<h1>View Student CreateTest</h1>
+<link href="~/styles/studentpage.css" rel="stylesheet" />
+<div class="content">
+    <div class="right-section">
+      @{
+            string img = ViewBag.StudentId + ".jpg";
+      }
+        <img src="http://localhost:5239/Images/Students/@img" />
+    </div>
+    <div class="left-section">
+        <a href="http://localhost:5108/student/GetNewTestForm" class="requestNewTest">Request New Test</a>
+        <a href="http://localhost:5108/guest/SignUp" class="signup">Profile update</a>
+    </div>
+</div>
 

@@ -88,5 +88,21 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
 
         }
 
+        public List<Question> GetQuestion(string subjectId, string difficulty)
+        {
+            string sql = " Select * from Question ";
+
+            List<Question> questions = new List<Question>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    questions.Add(this.modelCreaters.QuestionCreater.CreateModel(reader));
+                }
+            }
+
+            return questions;
+        }
     }
 }
