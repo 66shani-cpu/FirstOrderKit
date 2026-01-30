@@ -110,5 +110,10 @@ WHERE
 
             return answers;
         }
+
+        internal List<Answer> GetAnswersByQuestionId(string questionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

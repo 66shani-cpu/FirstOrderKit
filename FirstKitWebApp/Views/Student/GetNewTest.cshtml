@@ -8,8 +8,9 @@
 <div class="form-container">
     <form asp-controller="" asp-action="">
         <label for="subject">Filter by subject</label>
-        <select asp-for="SubjectId">
-            <option value="">Select</option>
+        <select >
+            <option>Select</option>
+   @*          <option value="">Select</option>
             <option value="Analogies">Analogies</option>
             <option value="ReadingComprehension">ReadingComprehension</option>
             <option value="Diagrans">Diagrans</option>
@@ -19,11 +20,15 @@
             <option value="Geometry">Geometry</option>
             <option value="CalculateArea">CalculateArea</option>
             <option value="FigurativeAnalogies">FigurativeAnalogies</option>
-            <option value="Summery">Summery</option>
+            <option value="Summery">Summery</option> *@
+            @foreach (Subject subject in Model.Subjects)
+            {
+                <option value="@subject.SubjectId">@subject.SubjectName</option>
+            }
         </select>
 
         <label for="difficulty">Select by difficulty</label>
-        <select asp-for="Difficulty">
+        <select >
             <option value="">Select</option>
             <option value="1">1</option>
             <option value="2">2</option>

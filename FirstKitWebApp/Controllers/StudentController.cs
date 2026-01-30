@@ -64,15 +64,15 @@ namespace FirstKitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetNewTest(RequestNewTest requestNewTest)
+        public async Task<IActionResult> GetNewTest(string difficulty, string subjectId)
         {
             ApiClient<Test> client = new ApiClient<Test>();
             client.Schema = "http";
-            client.Host difficulty= "localhost";
+            client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Student/GetNewTest";
-            client.AddParameter("subjectId",requestNewTest.SubjectId);
-            client.AddParameter("", requestNewTest.Difficulty);
+            client.AddParameter("subjectId", subjectId);
+            client.AddParameter("difficulty", difficulty);
             Test test = await client.GetAsync();
 
             return View(test);
@@ -85,8 +85,19 @@ namespace FirstKitWebApp.Controllers
             ViewBag.StudentId = HttpContext.Session.GetString("studentId");
             return View();
         }
-
-       
+        //פעולה שתפקידה להציג את הטופס של מילוי פרטים  של נושא ורמת קושי למבחן חדש 
+        //כדי להציג טופס זה אני צריכה אובייקט של request new test שאותו אני צריכה לקבל מWeb Service ולהעביר את זה לView
+        [HttpGet]
+       public async Task<IActionResult> ViewRequestNewTestForm ()
+        {
+            ApiClient<RequestNewTest> client = new ApiClient<RequestNewTest>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Student/GetRequestNewTest";
+            RequestNewTest requestNewTest = await client.GetAsync();
+            return View(requestNewTest);
+        }
       
     }
 }

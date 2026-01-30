@@ -90,7 +90,28 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
 
         public List<Question> GetQuestion(string subjectId, string difficulty)
         {
-            string sql = " Select * from Question ";
+            string sql = @$"SELECT
+                                Question.QuestionId,
+                                Question.LevelQuestions,
+                                Question.Question,
+                                Subjects.SubjectId
+                            FROM
+                                (
+                                    Tests
+                                    INNER JOIN (
+                                        Question
+                                        INNER JOIN QuestionTest ON Question.QuestionId = QuestionTest.QuestionId
+                                    ) ON Tests.TestId = QuestionTest.TestId
+                                )
+                                INNER JOIN (
+                                    Subjects
+                                    INNER JOIN SubjectTest ON Subjects.SubjectId = SubjectTest.SubjectId
+                                ) ON Tests.TestId = SubjectTest.TestId
+                            WHERE
+                                (
+                                    ((Question.LevelQuestions) = {difficulty})
+                                    AND ((Subjects.SubjectId) = {subjectId})
+                                );";
 
             List<Question> questions = new List<Question>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -103,6 +124,23 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
             }
 
             return questions;
+        }
+
+        public List<int> GetDifficultys()
+        {
+            string sql = @"SELECT DISTINCT
+                                Question.LevelQuestions
+                           FROM
+                                Question;";
+            List<int> difficultys = new List<int>();
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    difficultys.Add(Convert.ToInt16(reader["LevelQuestions"]));
+                }
+            }
+            return difficultys;
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿@using FirstOrderKitModel
+@model RequestNewTest
+@{
+    ViewData["Title"] = "ViewRequestNewTestForm";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+<link href="~/styles/newtest.css" rel="stylesheet" />
+<div class="form-container">
+    <form asp-controller="student" asp-action="GetNewTest">
+        <label for="subject">Filter by subject</label>
+        <select name="subjectId">
+            @foreach (Subject subject in Model.Subjects)
+            {
+                <option value="@subject.SubjectId">@subject.SubjectName</option>
+            }
+        </select>
+
+        <label for="difficulty">Select by difficulty</label>
+        <select name="difficulty">
+            <option value="">Select</option>
+            @foreach (int difficulty in Model.Difficultys)
+            {
+                <option value="@difficulty">@difficulty</option>
+            }
+        </select>
+       <button type="submit" class="post-btn">Post</button>
+    </form>
+</div>
+
+
