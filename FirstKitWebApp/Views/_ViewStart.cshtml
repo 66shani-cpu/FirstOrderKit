@@ -1,3 +1,18 @@
-﻿@{
+﻿@* @{
     Layout = "_Layout";
+} *@
+@{
+    var path = Context.Request.Path.Value;
+
+    // דפי הזדהות ללא Master Page
+    if (path.Contains("/Student/ViewLoginForm") ||
+        path.Contains("/ViewLoginForm"))
+    {
+        Layout = null;
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }
+   

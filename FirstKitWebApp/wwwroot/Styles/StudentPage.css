@@ -62,13 +62,20 @@ main {
     gap: 50px;
 }
 
+/*.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}*/
 .right-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 50px; /* ← תוסיפי - תדחוף שמאלה */
+    margin-top: 50px; /* ← תוסיפי - תוריד למטה */
 }
 
-.image-placeholder {
+/*.image-placeholder {
     width: 300px;
     height: 270px;
     background-color: #e0e0e0;
@@ -76,11 +83,23 @@ main {
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
+}*/
+.image-placeholder {
+    width: 400px; /* ← הגדלתי מ-300px */
+    height: 360px; /* ← הגדלתי מ-270px */
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
 }
-
-.placeholder-icon {
+/*.placeholder-icon {
     width: 120px;
     height: 120px;
+}*/
+.placeholder-icon {
+    width: 160px; /* ← הגדלתי מ-120px */
+    height: 160px; /* ← הגדלתי מ-120px */
 }
 
 .image-caption {

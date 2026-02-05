@@ -46,16 +46,16 @@ namespace FirstKitWebApp.Controllers
             return View("ViewStudentCreateTest");
         }
         [HttpGet]
-        public async Task<IActionResult> GetTest(string testId)
+        public  IActionResult GetTest(/*string testId*/)
         {
-            ApiClient<Test> client = new ApiClient<Test>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetTest";
-            client.AddParameter("testId", testId);
-            Test test = await client.GetAsync();
-            return View(test);
+            //ApiClient<Test> client = new ApiClient<Test>();
+            //client.Schema = "http";
+            //client.Host = "localhost";
+            //client.Port = 5239;
+            //client.Path = "api/Guest/GetTest";
+            //client.AddParameter("testId", testId);
+            //Test test = await client.GetAsync();
+            return View(/*test*/);
         }
         [HttpGet]
         public async Task<IActionResult> GetNewTestForm()

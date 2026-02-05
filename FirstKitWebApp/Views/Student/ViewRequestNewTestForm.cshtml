@@ -2,9 +2,11 @@
 @model RequestNewTest
 @{
     ViewData["Title"] = "ViewRequestNewTestForm";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
+    // Layout = "~/Views/Shared/MasterPage.cshtml";
+    Layout = null;
 }
 
+@* <link href="~/styles/newtest.css" rel="stylesheet" /> *@
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
     <form asp-controller="student" asp-action="GetNewTest">
@@ -27,5 +29,56 @@
        <button type="submit" class="post-btn">Post</button>
     </form>
 </div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* ← שיניתי מ-height ל-min-height */
+        padding: 20px; /* ← תוסיפי */
+    }
 
+    .form-container {
+        border: 1px solid #999;
+        padding: 40px 50px; /* ← הגדלתי מ-15px 20px */
+        width: 500px; /* ← הגדלתי מ-200px */
+        max-width: 90%; /* ← תוסיפי */
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px; /* ← הגדלתי מ-5px */
+        font-size: 18px; /* ← הגדלתי מ-14px */
+        font-weight: bold; /* ← תוסיפי */
+    }
+
+    select,
+    .number-input {
+        width: 100%;
+        padding: 12px; /* ← הגדלתי מ-5px */
+        font-size: 16px; /* ← הגדלתי מ-14px */
+        margin-bottom: 25px; /* ← הגדלתי מ-15px */
+        box-sizing: border-box;
+        border: 1px solid #999; /* ← תוסיפי */
+        border-radius: 4px; /* ← תוסיפי - פינות מעוגלות */
+    }
+
+    .post-btn {
+        width: 100%;
+        padding: 14px; /* ← הגדלתי מ-6px */
+        background-color: #e6e6e6;
+        border: 1px solid #999;
+        cursor: pointer;
+        font-size: 16px; /* ← הגדלתי מ-14px */
+        border-radius: 4px; /* ← תוסיפי */
+        font-weight: bold; /* ← תוסיפי */
+    }
+
+        .post-btn:hover {
+            background-color: #dcdcdc;
+        }
+</style>
 
