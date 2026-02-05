@@ -1,0 +1,41 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #eef2f7, #d9e2ec);
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    text-align: right;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    line-height: 1.7;
+}
+
+h1 {
+    text-align: center;
+    color: #1f3c88;
+    margin-bottom: 40px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #2c5282;
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-right: 20px;
+}
+
+li {
+    margin-bottom: 6px;
+}

@@ -17,6 +17,12 @@ namespace FirstKitWebApp.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ViewAbout()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> UpDate(Student student)
         {
