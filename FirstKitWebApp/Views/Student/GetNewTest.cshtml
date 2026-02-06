@@ -6,9 +6,9 @@
 }
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
-    <form asp-controller="" asp-action="">
+    <form asp-controller="student" asp-action="NewTestForm">
         <label for="subject">Filter by subject</label>
-        <select >
+        <select name="subjectId">
             <option>Select</option>
    @*          <option value="">Select</option>
             <option value="Analogies">Analogies</option>
@@ -28,14 +28,14 @@
         </select>
 
         <label for="difficulty">Select by difficulty</label>
-        <select >
+        <select name="difficulty">
             <option value="">Select</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
 
-        <button type="button" class="post-btn">Post</button>
+        <button type="submit" class="post-btn">Post</button>
     </form>
 </div>
 

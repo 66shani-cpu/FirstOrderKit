@@ -1,5 +1,5 @@
 ﻿@using FirstOrderKitModel
-
+@model List<TestQuestionViewModel>
 @{
     ViewData["Title"] = "NewTestForm";
     Layout = "~/Views/Shared/MasterPage.cshtml";
@@ -11,7 +11,7 @@
     <form>
 
         <!-- שאלות -->
-       // עשר פעם לולאה של זה ולהביא את השאלות מהמסד
+      @*  // עשר פעם לולאה של זה ולהביא את השאלות מהמסד
         <div class="question">
             <label>שאלה 1</label>
             <select>
@@ -20,7 +20,24 @@
                 <option>אפשרות ב'</option>
                 <option>אפשרות ג'</option>
             </select>
-        </div>
+        </div> *@
+        @foreach (TestQuestionViewModel testQuestionViewModel in Model)
+        {
+            <p>
+                @testQuestionViewModel.Question.QuestionText
+            </p>
+            <ul>
+                <li>
+                    @testQuestionViewModel.QuestionAnswer[0].AnswerText
+                </li>
+                <li>
+                    @testQuestionViewModel.QuestionAnswer[1].AnswerText
+                </li>
+                <li>
+                    @testQuestionViewModel.QuestionAnswer[2].AnswerText
+                </li>
+            </ul>
+        }
         <button type="submit" class="submit-btn">submit</button>
 
     </form>

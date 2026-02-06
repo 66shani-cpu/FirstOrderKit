@@ -70,16 +70,16 @@ namespace FirstKitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetNewTest(string difficulty, string subjectId)
+        public async Task<IActionResult> NewTestForm(string difficulty, string subjectId)
         {
-            ApiClient<Test> client = new ApiClient<Test>();
+            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Student/GetNewTest";
             client.AddParameter("subjectId", subjectId);
             client.AddParameter("difficulty", difficulty);
-            Test test = await client.GetAsync();
+            List<TestQuestionViewModel> test = await client.GetAsync();
 
             return View(test);
         }

@@ -1,0 +1,49 @@
+﻿<Window x:Class="ManagerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        Height="668"
+        Width="1234"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- תפריט צד -->
+        <StackPanel Grid.Column="0">
+            <Button Content="StartPage" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="Change" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="Settings" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="20"
+                    <Image Source="/Images/jfkf.png" Margin="0,0,0,10"></Image>
+            <Border BorderThickness="2" BorderBrush="White"></Border>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Images/שם תמונה וסיומת" Width="32"></Image>
+                <TextBlock>
+                    <Hyperlink Foreground="White" FontFamily="Arial" FontSize="25"
+                               TextDecorations="None">Unit</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <Frame x:Name="frameMain" Grid.Column="1" Grid.Row="0"></Frame>
+        <!-- אזור תוכן -->
+        <Grid Grid.Column="1" Background="#EEE"/>
+    </Grid>
+</Window>
+

@@ -9,7 +9,7 @@
 @* <link href="~/styles/newtest.css" rel="stylesheet" /> *@
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
-    <form asp-controller="student" asp-action="GetNewTest">
+    <form asp-controller="student" asp-action="NewTestForm">
         <label for="subject">Filter by subject</label>
         <select name="subjectId">
             @foreach (Subject subject in Model.Subjects)

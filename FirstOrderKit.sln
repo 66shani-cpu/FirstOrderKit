@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstKitWSClient", "FirstKi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstKitWebApp", "FirstKitWebApp\FirstKitWebApp.csproj", "{038C9D3C-FA6E-416E-B67E-83485CCD13AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagerApp", "ManagerApp\ManagerApp.csproj", "{0F69E85A-BE1A-4CA7-A58A-6ACA6EB7F9D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{038C9D3C-FA6E-416E-B67E-83485CCD13AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{038C9D3C-FA6E-416E-B67E-83485CCD13AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{038C9D3C-FA6E-416E-B67E-83485CCD13AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F69E85A-BE1A-4CA7-A58A-6ACA6EB7F9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F69E85A-BE1A-4CA7-A58A-6ACA6EB7F9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F69E85A-BE1A-4CA7-A58A-6ACA6EB7F9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F69E85A-BE1A-4CA7-A58A-6ACA6EB7F9D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
