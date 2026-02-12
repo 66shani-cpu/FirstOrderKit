@@ -9,7 +9,55 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Exit.png" />
+    <None Remove="Images\Exit1.png" />
+    <None Remove="Images\home.png" />
+    <None Remove="Images\LogIn.png" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\Questions.png" />
+    <None Remove="Images\Reports.png" />
+    <None Remove="Images\StartPage.png" />
+    <None Remove="Images\Students.png" />
+    <None Remove="Images\UnitSubject.png" />
+    <None Remove="Images\Update.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Font\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Exit1.png" />
+    <Resource Include="Images\home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LogIn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Questions.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Reports.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\StartPage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Students.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\UnitSubject.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Update.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

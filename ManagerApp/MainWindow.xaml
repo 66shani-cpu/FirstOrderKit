@@ -5,8 +5,7 @@
         Height="668"
         Width="1234"
         ResizeMode="NoResize">
-
-    <Window.Resources>
+    <!--<Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="10"/>
@@ -14,36 +13,156 @@
             <Setter Property="Foreground" Value="Red"/>
         </Style>
     </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- תפריט צד -->
+        --><!-- תפריט צד --><!--
         <StackPanel Grid.Column="0">
             <Button Content="StartPage" Style="{StaticResource ButtonStyle}"/>
             <Button Content="Change" Style="{StaticResource ButtonStyle}"/>
             <Button Content="Settings" Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Margin="20"
-                    <Image Source="/Images/jfkf.png" Margin="0,0,0,10"></Image>
-            <Border BorderThickness="2" BorderBrush="White"></Border>
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Images/שם תמונה וסיומת" Width="32"></Image>
-                <TextBlock>
-                    <Hyperlink Foreground="White" FontFamily="Arial" FontSize="25"
-                               TextDecorations="None">Unit</Hyperlink>
-                </TextBlock>
+
+        --><!-- אזור תוכן --><!--
+        <Grid Grid.Column="1" Background="#EEE">
+            <StackPanel Orientation="Vertical" Margin="20">
+                --><!--<Image Source="/Images/jfkf.png" Margin="0,0,0,10"/>--><!--
+                <Border BorderThickness="2" BorderBrush="White"/>
+                <StackPanel Orientation="Horizontal">
+                    --><!--<Image Source="/Images/שם תמונה וסיומת" Width="32"/>--><!--
+                    <TextBlock>
+                        <Hyperlink Foreground="White" FontFamily="Arial" FontSize="25"
+                                   TextDecorations="None">Unit</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <Frame x:Name="frameMain"/>
             </StackPanel>
-            <Frame x:Name="frameMain" Grid.Column="1" Grid.Row="0"></Frame>
-        <!-- אזור תוכן -->
-        <Grid Grid.Column="1" Background="#EEE"/>
+        </Grid>
+    </Grid>-->
+    <Window.Resources>
+        <FontFamily x:Key="MainFont">/Font/#Special Elite</FontFamily>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="30"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="Foreground" Value="Red"></Setter>
+            <Setter Property="FontFamily" Value="{StaticResource MainFont}"></Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Background="#000000">
+            <StackPanel Orientation="Vertical" Margin="20" >
+                <Image Source="/Images/logo.png" 
+                       Height="100"
+                       Width="200"
+                       Margin="0,0,0,10">
+                    
+                </Image>
+
+                <Border BorderThickness="2"  BorderBrush="White" Margin="0,10,0,1"></Border>
+                <Border BorderThickness="2"  BorderBrush="White" Margin="0,3,0,20"></Border>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Home1.png"
+                           Width="32"></Image>
+                    <TextBlock Padding="10">
+         <Hyperlink Foreground="White" x:Name="hyperlinkStartPage"
+                    Click="hyperlinkStartPage_Click"
+                    FontFamily="{StaticResource MainFont}"
+                    TextDecorations="None"
+                    FontSize="25">Home</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Update1.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+                       <Hyperlink x:Name="hyperlinkBooks"
+                                  Foreground="White"
+                                  FontFamily="{StaticResource MainFont}"
+                                  TextDecorations="None"
+                                  FontSize="25" Click="hyperlinkBooks_Click">Update</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Reports2.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+        <Hyperlink Foreground="White"
+                   FontFamily="{StaticResource MainFont}"
+                   TextDecorations="None"
+                   FontSize="25">Reports</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Question1.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+        <Hyperlink Foreground="White"
+                   FontFamily="{StaticResource MainFont}"
+                   TextDecorations="None"
+                   FontSize="25">Questions</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Students2.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+        <Hyperlink Foreground="White"
+                   FontFamily="{StaticResource MainFont}"
+                   TextDecorations="None"
+                   FontSize="25">Students</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/UnitSubject1.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+        <Hyperlink Foreground="White"
+                   FontFamily="{StaticResource MainFont}"
+                   TextDecorations="None"
+                   FontSize="25">Unit/Subject</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/LogIn1.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+<Hyperlink Foreground="White" x:Name="hyperlinkLogin"
+           
+           FontFamily="{StaticResource MainFont}"
+           TextDecorations="None"
+           FontSize="25"
+           Click="hyperlinkLogin_Click">Login</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                <Border BorderThickness="2"  BorderBrush="White" Margin="0,20,0,1"></Border>
+                <Border BorderThickness="2"  BorderBrush="White" Margin="0,3,0,20"></Border>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/Exit1.png" Width="32"></Image>
+                    <TextBlock Padding="10">
+<Hyperlink Foreground="Red"
+           FontFamily="{StaticResource MainFont}"
+           TextDecorations="None"
+           FontSize="25">Exit</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <!--<Frame x:Name="frameMain" 
+               Grid.Column="1" 
+               Grid.Row="0"
+               NavigationUIVisibility="Hidden">
+            
+        </Frame>-->
+        <Frame x:Name="frameMain" Grid.Column="1" />
+
     </Grid>
 </Window>
-

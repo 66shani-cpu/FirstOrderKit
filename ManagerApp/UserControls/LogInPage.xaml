@@ -5,13 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagerApp.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="500" d:DesignWidth="900">
+    <!--<Grid>
         <Label Content="LogIn" Margin="203,191,0,0" 
                FontSize="48" Foreground="Black"
                Width="400"/>
         <Label x:Name="UserNick" HorizontalAlignment="Left" Margin="136,179,0,0" VerticalAlignment="Top"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="250,320,0,0" VerticalAlignment="Top"/>
 
+    </Grid>-->
+    <Grid>
+    <Canvas>
+        <TextBox x:Name="textBoxNickName" Canvas.Left="304" TextWrapping="Wrap" Text="TextBox" Canvas.Top="153" Width="120"/>
+        <Label x:Name="label" Content="User Nick" Canvas.Left="236" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxPassword" Canvas.Left="304" TextWrapping="Wrap" Text="TextBox" Canvas.Top="198" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="User Password" Canvas.Left="201" Canvas.Top="197" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="buttonLoin" Content="Login" Canvas.Left="294" Canvas.Top="252" HorizontalAlignment="Left" VerticalAlignment="Top" Width="78"/>
+        <Label x:Name="label1" Content="Login form" Canvas.Left="266" Canvas.Top="69" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152"/>
+    </Canvas>
     </Grid>
 </UserControl>
