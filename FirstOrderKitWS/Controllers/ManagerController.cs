@@ -162,5 +162,23 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        public List<Student> GetListStudent()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.StudentRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
     }
 }
