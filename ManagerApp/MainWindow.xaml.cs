@@ -25,6 +25,7 @@ namespace ManagerApp
         Reports reports;
         QuestionManagement questionManagement;
         Unit_SubjectManagement unit_SubjectManagement;
+        ExitPage exitPage;
         public MainWindow()
         {
             InitializeComponent();
@@ -95,6 +96,14 @@ namespace ManagerApp
                 this.frameMain.Content = this.unit_SubjectManagement;
             }
         }
+        private void ViewExit()
+        {
+            if (this.exitPage == null)
+            {
+                this.exitPage = new ExitPage();
+                this.frameMain.Content = this.exitPage;
+            }
+        }
 
         private void hyperlinkLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -105,10 +114,31 @@ namespace ManagerApp
             //ViewStartPage();
             frameMain.Navigate(new StartPage());
         }
-        private void hyperlinkLogin_Click(object sender, RoutedEventArgs e)
+        private void hyperlinkUpdate_Click(object sender, RoutedEventArgs e)
         {
-            ViewLogInPage();
+            ViewUpdatePage();
         }
+        private void hyperlinkReports_Click(object sender, RoutedEventArgs e)
+        {
+            ViewReports();
+        }
+        private void hyperlinkQuestion_Click(object sender, RoutedEventArgs e)
+        {
+            ViewQuestionManagement();
+        }
+        private void hyperlinkStudent_Click(object sender, RoutedEventArgs e)
+        {
+            ViewStudentManagement();
+        }
+        private void hyperlinkUnit_Subject_Click(object sender, RoutedEventArgs e)
+        {
+            ViewUnit_SubjectManagement();
+        }
+        private void hyperlinkExit_Click(object sender, RoutedEventArgs e)
+        {
+            ViewExit();
+        }
+
 
     }
 }

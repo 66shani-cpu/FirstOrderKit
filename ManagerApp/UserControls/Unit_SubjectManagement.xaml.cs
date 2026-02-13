@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FirstOrderKitModel;
+using FirstKitWSClient;
+
 
 namespace ManagerApp.UserControls
 {
@@ -20,9 +23,24 @@ namespace ManagerApp.UserControls
     /// </summary>
     public partial class Unit_SubjectManagement : UserControl
     {
+        List<Unit> units;
         public Unit_SubjectManagement()
         {
             InitializeComponent();
+            GetUnitList();
         }
+        //אסינכרוני כדי שיהיה מהיר
+        private async Task GetUnitList()
+        {
+           ApiClient<List<Unit>> apiClient = new ApiClient<List<Unit>>();
+            apiClient.Schema = "http";
+            apiClient.Host = "localhost";
+            apiClient.Port =5239;
+            apiClient.Path = "api/Manager/GetListUnit";
+            this.units=await apiClient.GetAsync();
+            ListViewUnit.ItemsSource = this.units;
+            this.DataContext= this.units;
+        }
+
     }
 }

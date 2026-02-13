@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow"
         Height="668"
-        Width="1234"
+        Width="1250"
         ResizeMode="NoResize">
     <!--<Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -70,7 +70,7 @@
                        Height="100"
                        Width="200"
                        Margin="0,0,0,10">
-                    
+
                 </Image>
 
                 <Border BorderThickness="2"  BorderBrush="White" Margin="0,10,0,1"></Border>
@@ -93,7 +93,9 @@
                                   Foreground="White"
                                   FontFamily="{StaticResource MainFont}"
                                   TextDecorations="None"
-                                  FontSize="25" Click="hyperlinkBooks_Click">Update</Hyperlink>
+                                   FontSize="25"
+                                  Click="hyperlinkUpdate_Click">Update</Hyperlink>
+
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -102,7 +104,8 @@
         <Hyperlink Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
-                   FontSize="25">Reports</Hyperlink>
+                   FontSize="25"
+Click="hyperlinkReports_Click">Reports</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -111,7 +114,8 @@
         <Hyperlink Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
-                   FontSize="25">Questions</Hyperlink>
+                    FontSize="25"
+Click="hyperlinkQuestion_Click">Question</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -120,7 +124,8 @@
         <Hyperlink Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
-                   FontSize="25">Students</Hyperlink>
+                   FontSize="25"
+Click="hyperlinkStudent_Click">Students</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -129,7 +134,8 @@
         <Hyperlink Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
-                   FontSize="25">Unit/Subject</Hyperlink>
+                                      FontSize="25"
+Click="hyperlinkUnit_Subject_Click">Unit/Subject</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -151,17 +157,12 @@
 <Hyperlink Foreground="Red"
            FontFamily="{StaticResource MainFont}"
            TextDecorations="None"
-           FontSize="25">Exit</Hyperlink>
+                              FontSize="25"
+Click="hyperlinkExit_Click">Exit</Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </StackPanel>
         </Border>
-        <!--<Frame x:Name="frameMain" 
-               Grid.Column="1" 
-               Grid.Row="0"
-               NavigationUIVisibility="Hidden">
-            
-        </Frame>-->
         <Frame x:Name="frameMain" Grid.Column="1" />
 
     </Grid>

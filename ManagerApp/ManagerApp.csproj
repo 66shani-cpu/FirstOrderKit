@@ -12,18 +12,39 @@
     <None Remove="Images\Exit.png" />
     <None Remove="Images\Exit1.png" />
     <None Remove="Images\home.png" />
+    <None Remove="Images\Home1.png" />
+    <None Remove="Images\Information.png" />
     <None Remove="Images\LogIn.png" />
+    <None Remove="Images\LogIn1.png" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\Question1.png" />
+    <None Remove="Images\QuestionImage.png" />
     <None Remove="Images\Questions.png" />
     <None Remove="Images\Reports.png" />
+    <None Remove="Images\Reports1.png" />
+    <None Remove="Images\Reports2.png" />
     <None Remove="Images\StartPage.png" />
+    <None Remove="Images\StudentPlace.png" />
     <None Remove="Images\Students.png" />
+    <None Remove="Images\Students1.png" />
+    <None Remove="Images\Students2.png" />
+    <None Remove="Images\UnitPlace.png" />
     <None Remove="Images\UnitSubject.png" />
+    <None Remove="Images\UnitSubject1.png" />
     <None Remove="Images\Update.png" />
+    <None Remove="Images\Update1.png" />
+    <None Remove="Images\UpdateDelete.png" />
+    <None Remove="Images\UpdateQuestion.png" />
+    <None Remove="Images\UpdateStudent.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Font\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FirstKitWebApp\FirstKitWebApp.csproj" />
+    <ProjectReference Include="..\FirstKitWSClient\FirstKitWSClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,30 +55,46 @@
     <Resource Include="Images\home.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Home1.png" />
+    <Resource Include="Images\Information.png" />
     <Resource Include="Images\LogIn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\LogIn1.png" />
     <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Question1.png" />
+    <Resource Include="Images\QuestionImage.png" />
     <Resource Include="Images\Questions.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Reports.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Reports1.png" />
+    <Resource Include="Images\Reports2.png" />
     <Resource Include="Images\StartPage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\StudentPlace.png" />
     <Resource Include="Images\Students.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Students1.png" />
+    <Resource Include="Images\Students2.png" />
+    <Resource Include="Images\UnitPlace.png" />
     <Resource Include="Images\UnitSubject.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\UnitSubject1.png" />
     <Resource Include="Images\Update.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\Update1.png" />
+    <Resource Include="Images\UpdateDelete.png" />
+    <Resource Include="Images\UpdateQuestion.png" />
+    <Resource Include="Images\UpdateStudent.png" />
   </ItemGroup>
 
 </Project>

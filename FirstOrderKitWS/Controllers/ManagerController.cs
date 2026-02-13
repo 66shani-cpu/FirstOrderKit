@@ -143,5 +143,24 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
+        public List<Unit> GetListUnit()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.UnitRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
     }
 }
