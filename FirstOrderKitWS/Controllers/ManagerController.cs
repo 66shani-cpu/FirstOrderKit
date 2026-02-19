@@ -162,6 +162,7 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
         public List<Student> GetListStudent()
         {
             try
@@ -169,6 +170,25 @@ namespace FirstOrderKitWS.Controllers
 
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 return this.repositoryUOF.StudentRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public List<Question> GetListQuestion()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.QuestionRepository.GetAll();
             }
             catch (Exception ex)
             {

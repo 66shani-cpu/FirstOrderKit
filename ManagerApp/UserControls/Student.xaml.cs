@@ -27,6 +27,7 @@ namespace ManagerApp.UserControls
         public Student()
         {
             InitializeComponent();
+            GetStudentList();
         }
         private async Task GetStudentList()
         {
@@ -34,9 +35,9 @@ namespace ManagerApp.UserControls
             apiClient.Schema = "http";
             apiClient.Host = "localhost";
             apiClient.Port = 5239;
-            apiClient.Path = "api/פעולה של לקיחת רשימה של תלמידים";
+            apiClient.Path = "api/Manager/GetListStudent";
             this.students = await apiClient.GetAsync();
-           // ListViewStudent.ItemsSource = this.students;
+            ListViewStudent.ItemsSource = this.students;
             this.DataContext = this.students;
         }
     }

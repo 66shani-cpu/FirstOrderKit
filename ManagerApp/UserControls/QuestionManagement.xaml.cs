@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FirstKitWSClient;
+using FirstOrderKitModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,22 @@ namespace ManagerApp.UserControls
     /// </summary>
     public partial class QuestionManagement : UserControl
     {
+        List<Question> questions;
         public QuestionManagement()
         {
             InitializeComponent();
+            GetQuestionList();
+        }
+        private async Task GetQuestionList()
+        {
+            ApiClient<List<Question>> apiClient = new ApiClient<List<Question>>();
+            apiClient.Schema = "http";
+            apiClient.Host = "localhost";
+            apiClient.Port = 5239;
+            apiClient.Path = "api/Manager/GetListQuestion";
+            this.questions = await apiClient.GetAsync();
+            ListViewQuestion.ItemsSource = this.questions;
+            this.DataContext = this.questions;
         }
     }
 }
