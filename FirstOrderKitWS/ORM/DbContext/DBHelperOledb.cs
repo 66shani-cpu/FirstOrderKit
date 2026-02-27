@@ -92,5 +92,12 @@ namespace FirstOrderKitWS
         {
             this.dbCommand.Parameters.Add(new OleDbParameter(name, value));
         }
+        public string GetLastInsertId()
+        {
+            string sql = "SELECT @@IDENTITY";
+            this.dbCommand.CommandText = sql;
+            object result = this.dbCommand.ExecuteScalar();
+            return result.ToString();
+        }
     }
 }

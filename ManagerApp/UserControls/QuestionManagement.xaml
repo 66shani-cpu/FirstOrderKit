@@ -35,16 +35,16 @@
                Canvas.Left="23" 
                Canvas.Top="21"
                Width="675">
-            <Canvas Width="675"
+                        <Canvas Width="700"
                Margin="0,0,0,23">
-                <Image Source="/Images/QuestionImage.png"
+                            <Image Source="/Images/QuestionImage.png"
                 x:Name="imageBook"
                       Width="50"
                       Height="68"
                       Canvas.Left="10"
                       Canvas.Top="5"/>
 
-                <!--<Button x:Name="btnInfo"
+                            <!--<Button x:Name="btnInfo"
                         Height="32" 
                         Canvas.Left="540" 
                         Canvas.Top="25"
@@ -52,33 +52,72 @@
                         Style="{StaticResource ImageButtonStyle}">
                     <Image Source="/Images/infoicon.png"/>
                 </Button>-->
-                <Button x:Name="btnEdit"
+                            <Button x:Name="btnEdit"
                     Canvas.Left="585"
                     Canvas.Top="25"
                     Width="32"
                     Style="{StaticResource ImageButtonStyle}" 
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="/Images/UpdateQuestion.png" />
-                </Button>
-                <Button x:Name="btnDelete"
+                                <Image Source="/Images/UpdateQuestion.png" />
+                            </Button>
+                            <Button x:Name="btnDelete"
                          Canvas.Left="630"
                          Canvas.Top="25"
                          Width="32"
                          Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="/Images/UpdateDelete.png" />
-                </Button>
-                <Label x:Name="labelBookTitele"
-                      Content="{Binding question}"
+                                <Image Source="/Images/UpdateDelete.png" />
+                            </Button>
+                            <Label x:Name="labelBookTitele"
+                      Content="{Binding QuestionText}"
                       Canvas.Left="77"
                       Canvas.Top="22"
                       Width="450"
-                      FontSize="30" 
+                      FontSize="17" 
                       FontFamily="{StaticResource SpecialElite}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Canvas>
+                        </Canvas>
 
-        </Border>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBox x:Name="textBoxQuestionText"
+                 Canvas.Left="236" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding Book.BookName, UpdateSourceTrigger=PropertyChanged}"
+                 Canvas.Top="49"
+                 Padding="7"
+                 Width="332"
+                 />
+        <TextBox x:Name="textBoxLevelQuestions" 
+                 Padding="7"
+                 AcceptsReturn="True" 
+                 Canvas.Left="238"
+                 TextWrapping="Wrap"
+                 Canvas.Top="117"
+                 Width="334"
+                 HorizontalAlignment="Left" 
+                 VerticalAlignment="Top"
+                 Height="68"/>
+        <Button x:Name="buttonAddNewBook"
+          Canvas.Left="268" 
+          Canvas.Top="490" 
+          Width="254" 
+          Height="47"
+          FontSize="20"
+          FontFamily="{StaticResource SpecialElite}"
+          Foreground="White"
+          Background="Navy"
+                Click="buttonAddNewQuestion_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="32" Source="/Images/AddQuestion.png"></Image>
+                    <Label Foreground="White"
+                     Padding="15,7,0,0"
+                     Content="Add new Question"
+                     FontSize="20"></Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
     </Canvas>
 </UserControl>

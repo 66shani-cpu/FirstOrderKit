@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FirstOrderKitModel;
 
 namespace ManagerApp.UserControls
 {
@@ -23,7 +24,7 @@ namespace ManagerApp.UserControls
     /// 
     public partial class Student : UserControl
     {
-        List<Student> students;
+        List<FirstOrderKitModel.Student> students;
         public Student()
         {
             InitializeComponent();
@@ -31,7 +32,8 @@ namespace ManagerApp.UserControls
         }
         private async Task GetStudentList()
         {
-            ApiClient<List<Student>> apiClient = new ApiClient<List<Student>>();
+            ApiClient<List<FirstOrderKitModel.Student>> apiClient = 
+                new ApiClient<List<FirstOrderKitModel.Student>>();
             apiClient.Schema = "http";
             apiClient.Host = "localhost";
             apiClient.Port = 5239;

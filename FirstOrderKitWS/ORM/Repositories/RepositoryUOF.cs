@@ -98,5 +98,21 @@
                 return this.unitRepository;
             }
         }
+        public void BeginTransaction()
+        {
+            this.DBHelperOledb.OpenTransaction();
+        }
+        public void Commit()
+        {
+            this.DBHelperOledb.Commit();
+        }
+        public void RollBack()
+        {
+            this.DBHelperOledb.Rollback();
+        }
+        public string GetLastInsertId()
+        {
+           return this.DBHelperOledb.GetLastInsertId();
+        }
     }
 }

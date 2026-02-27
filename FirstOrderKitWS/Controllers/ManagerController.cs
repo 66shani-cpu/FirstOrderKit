@@ -1,8 +1,10 @@
-﻿using FirstOrderKitWS.ORM.Repositories;
+﻿using FirstOrderKitModel;
+using FirstOrderKitModel.ViewModel;
+using FirstOrderKitWS.ORM.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using FirstOrderKitModel;
-using FirstOrderKitModel.ViewModel;
+using System.IO;
+using System.Text.Json;
 
 namespace FirstOrderKitWS.Controllers
 {
@@ -40,6 +42,47 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpPost]
+        public async Task<bool> AddNewQuestion()
+        {
+            string json = Request.Form["model"].ToString();
+            AddQuestionViewModel addQuestionViewModel =
+                           JsonSerializer.Deserialize<AddQuestionViewModel>(json);
+            //אם תמונה
+            IFormFile image = Request.Form.Files["file"];
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                this.repositoryUOF.BeginTransaction();
+               bool ok= this.repositoryUOF.QuestionRepository.Create(addQuestionViewModel.Question);
+                string id = this.repositoryUOF.GetLastInsertId();
+                foreach(Answer answer in addQuestionViewModel.Answers)
+                {
+                    this.repositoryUOF.AnswerRepository.Create(id, answer.Answerid);
+                }
+                //בשביל תמונה
+                //string fileName = $"{id}{addQuestionViewModel.Answers.image}";
+                //this.repositoryUOF.QuestionRepository.UpdateImageName(id, fileName);
+                //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Units", fileName);
+                using (Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                this.repositoryUOF.Commit();
+                return true;
+
+            }
+            catch
+            {
+                this.repositoryUOF.RollBack();
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        
 
         [HttpGet]
         public Message Message(string messageId)

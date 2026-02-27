@@ -26,11 +26,33 @@ namespace ManagerApp
         QuestionManagement questionManagement;
         Unit_SubjectManagement unit_SubjectManagement;
         ExitPage exitPage;
+
+        bool isLogin;
+        public void SetAdmin(bool isadmin)
+        {
+            this.isLogin=isadmin;
+            HyperLinkState();
+            if (this.isLogin==true)
+            {
+                ViewStartPage();
+            }
+        }
+        private void HyperLinkState()
+        {
+            this.hyperlinkQuestion_Click.IsEnable = this.isLogin;
+            this.hyperlinkStudent_Click.IsEnable = this.isLogin;
+            this.hyperlinkReports_Click.IsEnable = this.isLogin;
+            this.hyperlinkUnit_Subject_Click.IsEnable = this.isLogin;
+            this.hyperlinkUpdate_Click.IsEnable = this.isLogin;
+        }
+       
         public MainWindow()
         {
             InitializeComponent();
             //ViewStartPage();
             frameMain.Navigate(new StartPage());
+            this.isLogin = false;
+            HyperLinkState();
         }
         private void ViewStartPage()
         {
@@ -107,7 +129,19 @@ namespace ManagerApp
 
         private void hyperlinkLogin_Click(object sender, RoutedEventArgs e)
         {
-            ViewLogInPage();
+            if(this.isLogin == false)
+            {
+                ViewLogInPage();
+                this.hyperlinkLogin.Inlines.Clear();
+                this.hyperlinkLogin.Inlines.Add("Logout");
+            }
+            else
+            {
+                this.isLogin = false;
+                this.hyperlinkLogin.Inlines.Clear();
+                this.hyperlinkLogin.Inlines.Add("Login");
+                HyperLinkState();
+            }
         }
         private void hyperlinkStartPage_Click(object sender, RoutedEventArgs e)
         {

@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AddQuestion.png" />
     <None Remove="Images\Exit.png" />
     <None Remove="Images\Exit1.png" />
     <None Remove="Images\home.png" />
     <None Remove="Images\Home1.png" />
     <None Remove="Images\Information.png" />
+    <None Remove="Images\LevelQuestion.png" />
     <None Remove="Images\LogIn.png" />
     <None Remove="Images\LogIn1.png" />
     <None Remove="Images\logo.png" />
@@ -48,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\AddQuestion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -57,6 +62,9 @@
     </Resource>
     <Resource Include="Images\Home1.png" />
     <Resource Include="Images\Information.png" />
+    <Resource Include="Images\LevelQuestion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\LogIn.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
