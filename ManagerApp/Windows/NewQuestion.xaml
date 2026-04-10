@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagerApp.Windows"
         mc:Ignorable="d"
-        Title="NewQuestion" Height="450" Width="800">
+        Title="NewQuestion" Height="613" Width="800">
     <!--<Window.Resources>-->
     <!--<FontFamily x:Key="SpecialElite">/Fonts/#Special Elite</FontFamily>
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
@@ -157,30 +157,20 @@
 
     </Window.Resources>
     <Canvas Margin="0,0,0,0">
-        <TextBox x:Name="textBoxNickName"
-                 Canvas.Left="250"
-                 TextWrapping="Wrap"
-                 Text="" 
-                 Canvas.Top="103"
-                 Width="262"
-                 FontSize="20"
-                 Padding="20,7,7,7" HorizontalAlignment="Left" VerticalAlignment="Center" 
-                 
-                 />
         <Label x:Name="label"
                Content="Level Question"
-               Canvas.Left="88"
-               Canvas.Top="103"
+               Canvas.Left="47"
+               Canvas.Top="101"
                FontSize="20"
-               FontFamily="{StaticResource SpecialElite}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="textBoxPassword"
+               FontFamily="{StaticResource SpecialElite}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxQuestionText"
                  Canvas.Left="250"
                  TextWrapping="Wrap"
                  Text=""
                  Canvas.Top="170"
-                 Width="262"
+                 Width="518"
                  FontSize="20"
-                 Padding="20,7,7,7" HorizontalAlignment="Center" VerticalAlignment="Top" Height="91" />
+                 Padding="20,7,7,7" HorizontalAlignment="Left" VerticalAlignment="Center" Height="91" />
         <Label x:Name="label_Copy"
                Content="Question Text"
                Canvas.Left="47" 
@@ -189,15 +179,15 @@
                VerticalAlignment="Center"
                FontSize="20"
                FontFamily="{StaticResource SpecialElite}"/>
-        <Button x:Name="buttonLoin"
+        <Button x:Name="buttonClose"
                 Canvas.Left="248" 
-                Canvas.Top="409" 
+                Canvas.Top="502" 
                 Width="254" 
                 Height="47"
                 FontSize="20"
                 FontFamily="{StaticResource SpecialElite}"
                 Foreground="White"
-                Background="Navy" HorizontalAlignment="Center" VerticalAlignment="Top">
+                Background="Navy" HorizontalAlignment="Center" VerticalAlignment="Top" Click="buttonClose_Click_1">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="32" Source="/Images/Exit1.png"></Image>
@@ -208,15 +198,17 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-        <Button x:Name="buttonClose"
+        <Button x:Name="buttonAddQuestion"
         Canvas.Left="536" 
-        Canvas.Top="407" 
+        Canvas.Top="500" 
         Width="254" 
         Height="47"
         FontSize="20"
         FontFamily="{StaticResource SpecialElite}"
         Foreground="White"
-        Background="Navy" HorizontalAlignment="Center" VerticalAlignment="Top">
+        Background="Navy" HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Click="buttonAddQuestion_Click">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="32" Source="/Images/AddQuestion.png"></Image>
@@ -269,15 +261,54 @@
    
 />
         </Grid>
-        <Button x:Name="button" Content="Button" Canvas.Left="648" Canvas.Top="257"/>
-        <ListBox x:Name="listBox" Height="121" Width="156" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Left="178" Canvas.Top="288" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <ListBox x:Name="listBox_Copy" Height="121" Width="156" d:ItemsSource="{d:SampleData ItemCount=5}" Canvas.Left="356" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <GroupBox Height="262"  Width="196" Canvas.Top="58" Canvas.Left="570" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Canvas>
-                <RadioButton HorizontalAlignment="Center" Canvas.Top="120" VerticalAlignment="Top"></RadioButton>
-                <RadioButton></RadioButton>
-                <RadioButton HorizontalAlignment="Center" Canvas.Top="72" VerticalAlignment="Top"></RadioButton>
-            </Canvas>
+        <ComboBox x:Name="ComboBoxLevel"
+                  Canvas.Left="260"
+                  Canvas.Top="108"
+                  Width="252"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+            <ComboBoxItem Content="1"></ComboBoxItem>
+            <ComboBoxItem Content="2"></ComboBoxItem>
+            <ComboBoxItem Content="
+3">
+
+            </ComboBoxItem>
+        </ComboBox>
+        <TextBox x:Name="TextBoxAnswerFirst"
+            Canvas.Left="254"
+            TextWrapping="Wrap"
+            Text=""
+            Canvas.Top="275"
+            Width="474"
+            FontSize="20"
+            Padding="20,7,7,7" Height="47" HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="TextBoxQuestionText_Copy_TextChanged" />
+        <TextBox x:Name="TextBoxAnswerSecond"
+            Canvas.Left="254"
+            TextWrapping="Wrap"
+            Text=""
+            Canvas.Top="337"
+            Width="473"
+            FontSize="20"
+            Padding="20,7,7,7" Height="47" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBox x:Name="TextBoxAnswerThird"
+            Canvas.Left="254"
+            TextWrapping="Wrap"
+            Text=""
+            Canvas.Top="406"
+            Width="473"
+            FontSize="20"
+            Padding="20,7,7,7" Height="47" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <GroupBox Height="186" 
+                  Canvas.Left="733" 
+                  Canvas.Top="275"
+                  Width="31"
+                  BorderThickness="0"
+                  >
+            <StackPanel>
+                <RadioButton x:Name="RadioButtonFirst" Margin="0,20,0,0" />
+                <RadioButton  x:Name="RadioButtonSecond" Margin="0,40,0,0" />
+                <RadioButton x:Name="RadioButtonThird" Margin="0,60,0,0"/>
+            </StackPanel>
         </GroupBox>
     </Canvas>
 </Window>

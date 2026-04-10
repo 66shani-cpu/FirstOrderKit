@@ -39,7 +39,8 @@
                     <Image Source="/Images/Home1.png"
                            Width="32"></Image>
                     <TextBlock Padding="10">
-         <Hyperlink Foreground="White" x:Name="hyperlinkStartPage"
+         <Hyperlink Foreground="White"
+                    x:Name="hyperlinkStartPage"
                     Click="hyperlinkStartPage_Click"
                     FontFamily="{StaticResource MainFont}"
                     TextDecorations="None"
@@ -49,7 +50,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/Update1.png" Width="32"></Image>
                     <TextBlock Padding="10">
-                       <Hyperlink x:Name="hyperlinkBooks"
+                       <Hyperlink x:Name="hyperlinkUpdate"
                                   Foreground="White"
                                   FontFamily="{StaticResource MainFont}"
                                   TextDecorations="None"
@@ -61,17 +62,19 @@
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/Reports2.png" Width="32"></Image>
                     <TextBlock Padding="10">
-        <Hyperlink Foreground="White"
+        <Hyperlink x:Name="hyperlinkReports"
+                    Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                    FontSize="25"
-Click="hyperlinkReports_Click">Reports</Hyperlink>
+                  Click="hyperlinkReports_Click">Reports</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/Question1.png" Width="32"></Image>
                     <TextBlock Padding="10">
-        <Hyperlink Foreground="White"
+          <Hyperlink x:Name="hyperlinkQuestion"
+                  Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                     FontSize="25"
@@ -81,7 +84,8 @@ Click="hyperlinkQuestion_Click">Question</Hyperlink>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/Students2.png" Width="32"></Image>
                     <TextBlock Padding="10">
-        <Hyperlink Foreground="White"
+       <Hyperlink x:Name="hyperlinkStudent"
+                   Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                    FontSize="25"
@@ -91,7 +95,8 @@ Click="hyperlinkStudent_Click">Students</Hyperlink>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Images/UnitSubject1.png" Width="32"></Image>
                     <TextBlock Padding="10">
-        <Hyperlink Foreground="White"
+        <Hyperlink x:Name="hyperlinkUnit_Subject"
+                   Foreground="White"
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                                       FontSize="25"

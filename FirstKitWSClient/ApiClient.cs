@@ -96,7 +96,7 @@ namespace FirstKitWSClient
                 httpRequest.Method = HttpMethod.Post;
                 httpRequest.RequestUri = this.uriBuilder.Uri;
                 string json = JsonSerializer.Serialize<T>(model);
-                StringContent content = new StringContent(json);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
                 httpRequest.Content = content;
                 using(HttpResponseMessage responseMessage= await this.httpClient.SendAsync(httpRequest))
                 {

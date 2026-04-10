@@ -28,7 +28,7 @@ namespace ManagerApp.UserControls
     /// </summary>
     public partial class QuestionManagement : UserControl
     {
-        AddQuestionViewModel addQuestionViewModel;
+        
         List<Question> questions;
         NewQuestion newQuestionWindow;
         string imagePath;
@@ -39,36 +39,8 @@ namespace ManagerApp.UserControls
         }
         private async void buttonAddNewQuestion_Click(object sender, RoutedEventArgs e)
         {
-            bool ok = false;
-            AddQuestionViewModel newQuestion = new AddQuestionViewModel();
-            newQuestion.Question = new Question();
-            newQuestion.Question.QuestionId = "0";
-            newQuestion.Question.LevelQuestions = textBoxLevelQuestions.Text;
-            newQuestion.Question.QuestionText = textBoxQuestionText.Text;
-            //newQuestion.Book.BookImage = System.IO.Path.GetExtension(this.imagePath);
-            newQuestion.Answers = listBoxAnswers.SelectedItems.Cast<Answer>().ToList<Answer>();
-            //newQuestion.Authors = listBoxAuthors.SelectedItems.Cast<Author>().ToList<Author>();
-            newQuestion.Question.Validate();
-            if (newQuestion.Question.HasErrors == false)
-            {
-                ApiClient<AddQuestionViewModel> apiClient = new ApiClient<AddQuestionViewModel>();
-                apiClient.Scheme = "http";
-                apiClient.Host = "localhost";
-                apiClient.Port = 5273;
-                apiClient.Path = "api/Manager/AddNewQuestion";
-                Stream stream = new FileStream(this.imagePath,
-                                                FileMode.Open,
-                                                FileAccess.Read);
-                ok = await apiClient.PostAsync(newQuestion, stream);
-            }
-            if (ok == true)
-            {
-                MessageBox.Show("New question have been addad");
-                this.DialogResult = true;
-                this.Close();
-            }
-        
-
+            NewQuestion question = new NewQuestion();           
+            bool? ok=  question.ShowDialog();                         
         }
         //שואו דיאלוג מציג חלונות
         //bool? נכון לא מכון ריק
@@ -87,18 +59,12 @@ namespace ManagerApp.UserControls
             apiClient.Schema = "http";
             apiClient.Host = "localhost";
             apiClient.Port = 5239;
-            apiClient.Path = "api/Manager/GetNewQuestionViewModel";
-            this.addQuestionViewModel = await apiClient.GetAsync();
-            this.addQuestionViewModel.Question = new Question();
-            this.listBoxAuthors.ItemsSource = this.addQuestionViewModel.Answers;
-            //this.listBoxGenres.ItemsSource = this.addQuestionViewModel.Genres;
-            this.DataContext = this.addQuestionViewModel;
+            apiClient.Path = "api/Manager/GetListQuestion";
+            this.questions = await apiClient.GetAsync();
+            ListViewQuestion.ItemsSource = this.questions;
+            this.DataContext = this.questions;
         }
-        private void buttonClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-            this.Close();
-        }
+       
         //private void ButtonSelectImage_Click()
         //{
         //    OpenFileDialog openFileDialog = new OpenFileDialog();

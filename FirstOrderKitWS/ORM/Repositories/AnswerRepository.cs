@@ -1,5 +1,6 @@
 ﻿using FirstOrderKitModel;
 using System.Data;
+using System.Reflection;
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
@@ -114,6 +115,23 @@ WHERE
         internal List<Answer> GetAnswersByQuestionId(string questionId)
         {
             throw new NotImplementedException();
+        }
+
+        internal bool Create(string questionId, string answertext,string trueFalse)
+        {
+            string sql = @"Insert into Answer
+                (
+                    TrueFalse,OuestionId,AnswerText
+                )
+                values
+                (
+                    @TrueFalse,@OuestionId,@AnswerText
+                )";
+            this.helperOledb.AddParameter("@TrueFalse", trueFalse);
+            this.helperOledb.AddParameter("@OuestionId", questionId);
+            this.helperOledb.AddParameter("@AnswerText", answertext);
+           
+            return this.helperOledb.Insert(sql) > 0;
         }
     }
 }

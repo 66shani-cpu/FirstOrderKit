@@ -43,13 +43,13 @@ namespace FirstOrderKitWS.Controllers
             }
         }
         [HttpPost]
-        public async Task<bool> AddNewQuestion()
+        public async Task<bool> AddNewQuestion([FromBody] AddQuestionViewModel addQuestionViewModel)
         {
-            string json = Request.Form["model"].ToString();
-            AddQuestionViewModel addQuestionViewModel =
-                           JsonSerializer.Deserialize<AddQuestionViewModel>(json);
-            //אם תמונה
-            IFormFile image = Request.Form.Files["file"];
+            //string json = Request.Form["model"].ToString();
+            //AddQuestionViewModel addQuestionViewModel =
+            //               JsonSerializer.Deserialize<AddQuestionViewModel>(json);
+            ////אם תמונה
+            //IFormFile image = Request.Form.Files["file"];
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
@@ -58,16 +58,13 @@ namespace FirstOrderKitWS.Controllers
                 string id = this.repositoryUOF.GetLastInsertId();
                 foreach(Answer answer in addQuestionViewModel.Answers)
                 {
-                    this.repositoryUOF.AnswerRepository.Create(id, answer.Answerid);
+                    this.repositoryUOF.AnswerRepository.Create(id,answer.AnswerText,answer.TrueFalse);
                 }
                 //בשביל תמונה
                 //string fileName = $"{id}{addQuestionViewModel.Answers.image}";
                 //this.repositoryUOF.QuestionRepository.UpdateImageName(id, fileName);
                 //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Units", fileName);
-                using (Stream stream = new FileStream(path, FileMode.Create))
-                {
-                    await image.CopyToAsync(stream);
-                }
+               
                 this.repositoryUOF.Commit();
                 return true;
 
