@@ -93,8 +93,7 @@ Height="47"
 FontSize="20"
 FontFamily="{StaticResource SpecialElite}"
 Foreground="White"
-Background="Navy"
-      Click="buttonAddNewQuestion_Click">
+Background="Navy">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="32" Source="/Images/AddQuestion.png"></Image>

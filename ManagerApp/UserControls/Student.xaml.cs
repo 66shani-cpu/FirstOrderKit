@@ -46,6 +46,9 @@ namespace ManagerApp.UserControls
 
         private void btnInfo_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            string studentId = button.Tag.ToString();
+
             StudentInfo question = new StudentInfo();
             bool? ok = question.ShowDialog();
         }
