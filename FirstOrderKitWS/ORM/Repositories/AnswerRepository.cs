@@ -117,20 +117,26 @@ WHERE
             throw new NotImplementedException();
         }
 
-        internal bool Create(string questionId, string answertext,string trueFalse)
+        //internal bool Create(string questionId, string answertext,string trueFalse)
+        //{
+        //    string sql = @"Insert into Answer
+        //        (
+        //            TrueFalse,OuestionId,AnswerText
+        //        )
+        //        values
+        //        (
+        //            @TrueFalse,@OuestionId,@AnswerText
+        //        )";
+        //    this.helperOledb.AddParameter("@TrueFalse", trueFalse);
+        //    this.helperOledb.AddParameter("@OuestionId", questionId);
+        //    this.helperOledb.AddParameter("@AnswerText", answertext);
+
+        //    return this.helperOledb.Insert(sql) > 0;
+        //}
+        internal bool Create(string questionId, string answertext, string trueFalse)
         {
-            string sql = @"Insert into Answer
-                (
-                    TrueFalse,OuestionId,AnswerText
-                )
-                values
-                (
-                    @TrueFalse,@OuestionId,@AnswerText
-                )";
-            this.helperOledb.AddParameter("@TrueFalse", trueFalse);
-            this.helperOledb.AddParameter("@OuestionId", questionId);
-            this.helperOledb.AddParameter("@AnswerText", answertext);
-           
+            string sql = $@"INSERT INTO  Answer ([TrueFalse], [OuestionId], [AnswerText])
+                   Values({trueFalse}, {questionId},'{answertext}')";
             return this.helperOledb.Insert(sql) > 0;
         }
     }

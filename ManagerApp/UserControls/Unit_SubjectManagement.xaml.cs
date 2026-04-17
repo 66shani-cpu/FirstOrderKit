@@ -42,5 +42,9 @@ namespace ManagerApp.UserControls
             this.DataContext= this.units;
         }
 
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

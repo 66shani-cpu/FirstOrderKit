@@ -51,7 +51,7 @@ namespace ManagerApp
             InitializeComponent();
             //ViewStartPage();
             frameMain.Navigate(new StartPage());
-            this.isLogin = true;
+           
             HyperLinkState();
         }
         private void ViewStartPage()
@@ -59,72 +59,73 @@ namespace ManagerApp
             if (this.startPage == null)
             {
                 this.startPage = new StartPage();
-                this.frameMain.Content = this.startPage;
-            }
+                
+            }this.frameMain.Content = this.startPage;
         }
         private void ViewLogInPage()
         {
             if (this.logInPage == null)
             {
                 this.logInPage = new LogInPage();
-                this.frameMain.Content = this.logInPage;
-            }
+                
+            }this.frameMain.Content = this.logInPage;
         }
         private void ViewUpdatePage()
         {
             if (this.update == null)
             {
                 this.update = new Update();
-                this.frameMain.Content = this.update;
-            }
+                
+            }this.frameMain.Content = this.update;
         }
         private void ViewStudentManagement()
         {
             if (this.student == null)
             {
                 this.student = new Student();
-                this.frameMain.Content = this.student;
-            }
+                
+            }this.frameMain.Content = this.student;
         }
         private void ViewHome()
         {
             if (this.home == null)
             {
                 this.home = new Home();
-                this.frameMain.Content = this.home;
-            }
+                
+            }this.frameMain.Content = this.home;
         }
         private void ViewReports()
         {
             if (this.reports == null)
             {
                 this.reports = new Reports();
-                this.frameMain.Content = this.reports;
-            }
+              
+            } 
+            this.frameMain.Content = this.reports;
         }
         private void ViewQuestionManagement()
         {
             if (this.questionManagement == null)
             {
                 this.questionManagement = new QuestionManagement();
-                this.frameMain.Content = this.questionManagement;
-            }
+                
+            }this.frameMain.Content = this.questionManagement;
         }
         private void ViewUnit_SubjectManagement()
         {
             if (this.unit_SubjectManagement == null)
             {
                 this.unit_SubjectManagement = new Unit_SubjectManagement();
-                this.frameMain.Content = this.unit_SubjectManagement;
-            }
+               
+            } this.frameMain.Content = this.unit_SubjectManagement;
         }
         private void ViewExit()
         {
             if (this.exitPage == null)
             {
                 this.exitPage = new ExitPage();
-                this.frameMain.Content = this.exitPage;
-            }
+                
+            }this.frameMain.Content = this.exitPage;
         }
 
         private void hyperlinkLogin_Click(object sender, RoutedEventArgs e)

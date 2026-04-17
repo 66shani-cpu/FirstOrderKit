@@ -46,18 +46,21 @@
                Canvas.Left="10"
                Canvas.Top="5"/>
 
-                            <Button x:Name="btnInfo"
+                            <!--<Button x:Name="btnInfo"
                  Height="32" 
                  Canvas.Left="540" 
                  Canvas.Top="25"
                  Width="32"
-                 Style="{StaticResource ImageButtonStyle}">
+                 Cursor="Hand"
+                                    
+                 Style="{StaticResource ImageButtonStyle}" Click="btnInfo_Click">
                                 <Image Source="/Images/Information.png"/>
-                            </Button>
+                            </Button>-->
                             <Button x:Name="btnEdit"
              Canvas.Left="585"
              Canvas.Top="25"
              Width="32"
+             Cursor="Hand"
              Style="{StaticResource ImageButtonStyle}" 
              HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image Source="/Images/Update.png" />
@@ -69,7 +72,7 @@
                   Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image Source="/Images/UpdateDelete.png" />
                             </Button>
-                            <Label x:Name="labelBookTitele"
+                            <Label x:Name="UnitName"
                Content="{Binding UnitName}"
                Canvas.Left="77"
                Canvas.Top="22"
@@ -82,5 +85,25 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button x:Name="buttonAddNewUnit"
+Canvas.Left="268" 
+Canvas.Top="490" 
+Width="254" 
+Height="47"
+FontSize="20"
+FontFamily="{StaticResource SpecialElite}"
+Foreground="White"
+Background="Navy"
+      Click="buttonAddNewQuestion_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="32" Source="/Images/AddQuestion.png"></Image>
+                    <Label Foreground="White"
+           Padding="15,7,0,0"
+           Content="Add new Unit"
+           FontSize="20"></Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
     </Canvas>
 </UserControl>

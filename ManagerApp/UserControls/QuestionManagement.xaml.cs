@@ -40,7 +40,12 @@ namespace ManagerApp.UserControls
         private async void buttonAddNewQuestion_Click(object sender, RoutedEventArgs e)
         {
             NewQuestion question = new NewQuestion();           
-            bool? ok=  question.ShowDialog();                         
+            bool? ok=  question.ShowDialog(); 
+            if(ok==true)
+            {
+                ListViewQuestion.ItemsSource = null;
+                await GetQuestionList();
+            }
         }
         //שואו דיאלוג מציג חלונות
         //bool? נכון לא מכון ריק
@@ -64,7 +69,12 @@ namespace ManagerApp.UserControls
             ListViewQuestion.ItemsSource = this.questions;
             this.DataContext = this.questions;
         }
-       
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         //private void ButtonSelectImage_Click()
         //{
         //    OpenFileDialog openFileDialog = new OpenFileDialog();

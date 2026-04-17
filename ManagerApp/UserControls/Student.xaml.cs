@@ -1,5 +1,7 @@
 ﻿using FirstKitWSClient;
 using FirstOrderKitModel;
+using FirstOrderKitModel;
+using ManagerApp.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FirstOrderKitModel;
 
 namespace ManagerApp.UserControls
 {
@@ -41,6 +42,12 @@ namespace ManagerApp.UserControls
             this.students = await apiClient.GetAsync();
             ListViewStudent.ItemsSource = this.students;
             this.DataContext = this.students;
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            StudentInfo question = new StudentInfo();
+            bool? ok = question.ShowDialog();
         }
     }
 }

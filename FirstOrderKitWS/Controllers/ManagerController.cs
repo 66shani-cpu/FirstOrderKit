@@ -59,12 +59,7 @@ namespace FirstOrderKitWS.Controllers
                 foreach(Answer answer in addQuestionViewModel.Answers)
                 {
                     this.repositoryUOF.AnswerRepository.Create(id,answer.AnswerText,answer.TrueFalse);
-                }
-                //בשביל תמונה
-                //string fileName = $"{id}{addQuestionViewModel.Answers.image}";
-                //this.repositoryUOF.QuestionRepository.UpdateImageName(id, fileName);
-                //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "Units", fileName);
-               
+                }         
                 this.repositoryUOF.Commit();
                 return true;
 
@@ -101,8 +96,11 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-        [HttpPost]
-        public string LogInStusent(string nickName, string password)
+
+
+        [HttpGet]
+        [Produces("application/json")]// כופה על הפעולה להחזיר JSON 
+        public string LogInStudent(string nickName, string password)
         {
             try
             {

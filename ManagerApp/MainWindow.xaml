@@ -78,7 +78,7 @@
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                     FontSize="25"
-Click="hyperlinkQuestion_Click">Question</Hyperlink>
+                    Click="hyperlinkQuestion_Click">Question</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -89,7 +89,7 @@ Click="hyperlinkQuestion_Click">Question</Hyperlink>
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                    FontSize="25"
-Click="hyperlinkStudent_Click">Students</Hyperlink>
+                    Click="hyperlinkStudent_Click">Students</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -100,7 +100,7 @@ Click="hyperlinkStudent_Click">Students</Hyperlink>
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                                       FontSize="25"
-Click="hyperlinkUnit_Subject_Click">Unit/Subject</Hyperlink>
+Click="hyperlinkUnit_Subject_Click">Unit</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -128,7 +128,7 @@ Click="hyperlinkExit_Click">Exit</Hyperlink>
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Frame x:Name="frameMain" Grid.Column="1" />
+        <Frame x:Name="frameMain"  NavigationUIVisibility="Hidden" Grid.Column="1" />
 
     </Grid>
 </Window>

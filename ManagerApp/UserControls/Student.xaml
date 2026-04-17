@@ -50,7 +50,8 @@
                         Canvas.Left="540" 
                         Canvas.Top="25"
                         Width="32"
-                        Style="{StaticResource ImageButtonStyle}">
+                        Cursor="Hand"
+                        Style="{StaticResource ImageButtonStyle}" Click="btnInfo_Click">
                     <Image Source="/Images/Information.png"/>
                 </Button>
                 <Button x:Name="btnEdit"

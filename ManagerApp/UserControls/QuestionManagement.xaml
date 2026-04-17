@@ -44,9 +44,11 @@
                                       Canvas.Left="585"
                                       Canvas.Top="25"
                                       Width="32"
-                                      Style="{StaticResource ImageButtonStyle}" 
+                                      Cursor="Hand"
+                                      Style="{StaticResource ImageButtonStyle}" Click="btnEdit_Click"
                                       HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Image Source="/Images/UpdateQuestion.png" />
+                                <Image Source="/Images/UpdateQuestion.png"
+                                       />
                             </Button>
                             <Button x:Name="btnDelete"
                                                Canvas.Left="630"
@@ -55,7 +57,7 @@
                                                Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Image Source="/Images/UpdateDelete.png" />
                             </Button>
-                            <Label x:Name="labelBookTitele"
+                            <Label x:Name="QuestionText"
                                     Margin="10"
                                     Canvas.Left="77"
                                     Canvas.Top="2"
