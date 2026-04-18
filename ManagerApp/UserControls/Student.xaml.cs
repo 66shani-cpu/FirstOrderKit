@@ -48,8 +48,7 @@ namespace ManagerApp.UserControls
         {
             Button button = sender as Button;
             string studentId = button.Tag.ToString();
-
-            StudentInfo question = new StudentInfo();
+            StudentInfo question = new StudentInfo(studentId);
             bool? ok = question.ShowDialog();
         }
     }

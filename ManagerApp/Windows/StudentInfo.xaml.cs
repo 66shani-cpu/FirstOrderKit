@@ -22,18 +22,19 @@ namespace ManagerApp.Windows
     public partial class StudentInfo : Window
     {
         Student student;
-        public StudentInfo()
+        public StudentInfo(string studentId)
         {
-            GetStudentInfo();
+            GetStudentInfo(studentId);
             InitializeComponent();
         }
-        private async Task GetStudentInfo()
+        private async Task GetStudentInfo(string studentId)
         {
             ApiClient<Student> apiClient = new ApiClient<Student>();
             apiClient.Schema = "http";
             apiClient.Host = "localhost";
             apiClient.Port = 5239;
             apiClient.Path = "api/Manager/GetStudentInfo";
+            apiClient.AddParameter("studentId", studentId);
             this.student = await apiClient.GetAsync();
             this.DataContext = this.student;
         }

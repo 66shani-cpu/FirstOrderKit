@@ -239,13 +239,13 @@ namespace FirstOrderKitWS.Controllers
             }
         }
         [HttpGet]
-        public Student GetStudentInfo(string StudentId)
+        public Student GetStudentInfo(string studentId)
         {
             try
             {
 
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.StudentRepository.GetById(StudentId);
+                return this.repositoryUOF.StudentRepository.GetById(studentId);
             }
             catch (Exception ex)
             {
