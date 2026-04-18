@@ -36,8 +36,7 @@ namespace ManagerApp.Windows
             apiClient.Host = "localhost";
             apiClient.Port = 5239;
             apiClient.Path = "api/Manager/AddQuestion";
-            this.addQuestionViewModel = await apiClient.GetAsync();
-           
+            this.addQuestionViewModel = await apiClient.GetAsync();          
             this.DataContext = this.addQuestionViewModel;
         }
         private async void buttonAddQuestion_Click(object sender, RoutedEventArgs e)

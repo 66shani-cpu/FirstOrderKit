@@ -67,7 +67,7 @@
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                    FontSize="25"
-                  Click="hyperlinkReports_Click">Reports</Hyperlink>
+                  Click="hyperlinkReports_Click">Report</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -89,7 +89,7 @@
                    FontFamily="{StaticResource MainFont}"
                    TextDecorations="None"
                    FontSize="25"
-                    Click="hyperlinkStudent_Click">Students</Hyperlink>
+                    Click="hyperlinkStudent_Click">Student</Hyperlink>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">

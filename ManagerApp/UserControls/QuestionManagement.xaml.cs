@@ -74,12 +74,5 @@ namespace ManagerApp.UserControls
         {
 
         }
-
-        //private void ButtonSelectImage_Click()
-        //{
-        //    OpenFileDialog openFileDialog = new OpenFileDialog();
-        //    openFileDialog.Filter = "Image Only(*.JPG,*.PNG)|*.JPG;*.PNG";
-        //        imagePath.Source = BitmapImage;
-        //}
     }
 }
