@@ -91,6 +91,7 @@ Canvas.Top="490"
 Width="254" 
 Height="47"
 FontSize="20"
+Margin="90,60,10,10"                
 FontFamily="{StaticResource SpecialElite}"
 Foreground="White"
 Background="Navy">
