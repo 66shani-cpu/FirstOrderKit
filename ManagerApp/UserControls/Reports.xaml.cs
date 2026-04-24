@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FirstKitWSClient;
+using FirstOrderKitModel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,12 @@ namespace ManagerApp.UserControls
     /// </summary>
     public partial class Reports : UserControl
     {
+        UnitBarData unitBarData;    
         public Reports()
         {
             InitializeComponent();
         }
+
+      
     }
 }

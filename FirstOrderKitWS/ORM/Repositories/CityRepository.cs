@@ -45,7 +45,7 @@ namespace FirstOrderKitWS.ORM.Repositories
 
         public City GetById(string id)
         {
-            string sql = " Select * from City  where CityId=@CityId";
+            string sql = " Select * from Cities  where CityId=@CityId";
             this.helperOledb.AddParameter("@CityId", id);
             using (IDataReader reader = this.helperOledb.Select(sql))
             {

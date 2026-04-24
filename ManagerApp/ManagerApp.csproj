@@ -45,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FirstKitWebApp\FirstKitWebApp.csproj" />
     <ProjectReference Include="..\FirstKitWSClient\FirstKitWSClient.csproj" />
   </ItemGroup>

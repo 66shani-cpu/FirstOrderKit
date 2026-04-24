@@ -40,15 +40,18 @@
                 <ComboBoxItem Content="Jerusalem"/>
                 <ComboBoxItem Content="Haifa"/>
             </ComboBox>-->
-        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,5" Height="40" FontSize="16" Text="{Binding CityId}"/>
+        <TextBlock Grid.Row="2" 
+                   Grid.Column="1"
+                   Margin="0,5" Height="40" FontSize="16"
+                   Text="{Binding CityName}"/>
 
         <!-- Telephone -->
         <TextBlock Grid.Row="3" Text="Telephone" Margin="20,5" FontSize="18" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,5" Height="40" FontSize="16" Text="{Binding StudentTelephone}"/>
 
             <!-- Address -->
-        <TextBlock Grid.Row="4" Text="Address" Margin="20,5" FontSize="18" VerticalAlignment="Center"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,5" Height="40" FontSize="16" Text="{Binding StudentAddress}"/>
+        <TextBlock Grid.Row="4" Text="Addres" Margin="20,5" FontSize="18" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Margin="0,5" Height="40" FontSize="16" Text="{Binding StudentAdrres}"/>
         <!-- Buttons -->
         <StackPanel Grid.Row="6" Grid.ColumnSpan="2"
                         Orientation="Horizontal"

@@ -20,6 +20,7 @@ namespace FirstOrderKitModel
         string studentAdrres;
         string studentImage;
         string studentSalt;
+        string cityName = "";
         public Student()
         {
 
@@ -41,7 +42,9 @@ namespace FirstOrderKitModel
         public string StudentNickName
         {
             get { return this.studentNickName; }
-            set { this.studentNickName = value;
+            set
+            {
+                this.studentNickName = value;
                 //ValidateProperty(value, "StudentNickName");
             }
         }
@@ -50,7 +53,9 @@ namespace FirstOrderKitModel
         public string Password
         {
             get { return this.password; }
-            set { this.password = value;
+            set
+            {
+                this.password = value;
                 //ValidateProperty(value, "Password");
             }
         }
@@ -60,7 +65,9 @@ namespace FirstOrderKitModel
         public string StudentFirstName
         {
             get { return this.studentFirstName; }
-            set { this.studentFirstName = value;
+            set
+            {
+                this.studentFirstName = value;
                 //ValidateProperty(value, "StudentFirstName");
             }
         }
@@ -70,7 +77,9 @@ namespace FirstOrderKitModel
         public string StudentLastName
         {
             get { return this.studentLastName; }
-            set { this.studentLastName = value;
+            set
+            {
+                this.studentLastName = value;
                 //ValidateProperty(value, "StudentLastName");
             }
         }
@@ -84,7 +93,9 @@ namespace FirstOrderKitModel
         public string StudentTelephone
         {
             get { return this.studentTelephone; }
-            set { this.studentTelephone = value;
+            set
+            {
+                this.studentTelephone = value;
                 //ValidateProperty(value, "StudentTelephone");
             }
         }
@@ -94,7 +105,9 @@ namespace FirstOrderKitModel
         public string StudentAdrres
         {
             get { return this.studentAdrres; }
-            set { this.studentAdrres = value;
+            set
+            {
+                this.studentAdrres = value;
                 //ValidateProperty(value, "StudentAdrres");
             }
         }
@@ -103,10 +116,21 @@ namespace FirstOrderKitModel
         public string StudentImage
         {
             get { return this.studentImage; }
-            set { this.studentImage = value;
+            set
+            {
+                this.studentImage = value;
                 //ValidateProperty(value, "StudentImage");
             }
         }
+        public string CityName
+        {
+            get { return this.cityName; }
+            set
+            {
+                this.cityName = value;
+
+            }
+        }
+
     }
-   
 }

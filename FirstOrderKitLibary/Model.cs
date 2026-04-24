@@ -50,7 +50,7 @@ namespace FirstOrderKitModel
                 return errors.SelectMany(err => err.Value.ToList());
         }
 
-        public Dictionary<string, List<string>> AllErrors()
+        public Dictionary<string, List<string>> AllError()
         {
             return this.errors;
         }

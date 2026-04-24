@@ -245,7 +245,10 @@ namespace FirstOrderKitWS.Controllers
             {
 
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.StudentRepository.GetById(studentId);
+               Student student= this.repositoryUOF.StudentRepository.GetById(studentId);
+                City city = this.repositoryUOF.CityRepository.GetById(student.CityId.ToString());
+                student.CityName=city.CityName;
+                return student;
             }
             catch (Exception ex)
             {
@@ -256,6 +259,28 @@ namespace FirstOrderKitWS.Controllers
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
+        }
+
+
+        [HttpGet]
+        public UnitBarData GetUnitBarData()
+        {
+
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.UnitRepository.GetBarData();
+
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+           
         }
     }
 }
