@@ -1,7 +1,9 @@
 ﻿using FirstKitWSClient;
 using FirstOrderKitModel;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.IO;
 
 namespace ManagerApp.Windows
 {
@@ -67,6 +68,28 @@ namespace ManagerApp.Windows
             answer3.TrueFalse = RadioButtonThird.IsChecked.ToString();
             newQuestion.Answers.Add(answer3);
             newQuestion.Question.Validate();
+            Directory<string, List<string>> errors = newQuestion.Question.AllErrors();
+            StringBuilder sb = new StringBuilder();
+            foreach(var errorEntry  in errors)
+            {
+                string propertyName = errorEntry.Key;
+                sb.Append($"{propertyName}:\n\n");
+                foreach(var error  in errorEntry.Value)
+                {
+                    sb.Append($"{error}, ");
+                    string errorMessage = string.Join(error, "\n");
+                    sb.Append($"{propertyName} : {errorMessage}");
+                }
+                sb.Append($"\n\n");
+                //מחבר את כל השגיאות ברשימה למחרוזת אחת מופרדת בפסיקים 
+
+                //הדפסה בפורמט המבוקש
+                MessageBox.Show(sb.ToString(),
+                "Please correct the following errors:",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+
+            }
             if (newQuestion.Question.HasErrors == false)
             {
                 ApiClient<AddQuestionViewModel> apiClient = new ApiClient<AddQuestionViewModel>();
