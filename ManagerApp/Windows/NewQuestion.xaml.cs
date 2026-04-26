@@ -68,7 +68,7 @@ namespace ManagerApp.Windows
             answer3.TrueFalse = RadioButtonThird.IsChecked.ToString();
             newQuestion.Answers.Add(answer3);
             newQuestion.Question.Validate();
-            Directory<string, List<string>> errors = newQuestion.Question.AllErrors();
+            Dictionary<string, List<string>> errors = newQuestion.Question.AllError();
             StringBuilder sb = new StringBuilder();
             foreach(var errorEntry  in errors)
             {

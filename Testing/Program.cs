@@ -169,7 +169,7 @@ namespace Testing
             subject.SubjectName = "Test";
             if(subject.HasErrors==true)
             {
-                foreach(KeyValuePair<string,List<string>> keyValuePair in subject.AllErrors())
+                foreach(KeyValuePair<string,List<string>> keyValuePair in subject.AllError())
                 {
                     Console.WriteLine(keyValuePair.Key);
                     foreach(string str in keyValuePair.Value)
