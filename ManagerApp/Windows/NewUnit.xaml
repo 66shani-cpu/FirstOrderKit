@@ -5,8 +5,128 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagerApp.Windows"
         mc:Ignorable="d"
-        Title="NewUnit" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="NewUnit" Height="400" Width="740">
+    <Window.Resources>
+        <FontFamily x:Key="SpecialElite">/Fonts/#Special Elite</FontFamily>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Canvas Margin="0,0,0,0">
+        <Label x:Name="label"
+               Content="Unit Image"
+               Canvas.Left="47"
+               Canvas.Top="101"
+               FontSize="20"
+               FontFamily="{StaticResource SpecialElite}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <!--<TextBlock x:Name="TextBoxImage"
+                  Text="Choose an image"
+                  FontSize="17"
+                  Canvas.Left="210"
+                  Canvas.Top="108"
+                  Width="140"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+        </TextBlock>-->
+        <Button x:Name="buttonSelectImage" 
+        Content="Choose an image" 
+        Canvas.Left="210" Canvas.Top="101" 
+        Width="150" Height="30"
+        Click="buttonSelectImage_Click"/>
+
+        <!-- אופציונלי: לייבל שיציג את שם הקובץ שנבחר -->
+        <Label x:Name="labelSelectedFileName" 
+       Content="No file selected" 
+       Canvas.Left="370" Canvas.Top="101" 
+       FontSize="14"/>
+        <TextBox x:Name="TextBoxQuestionText"
+                 Canvas.Left="210"
+                 TextWrapping="Wrap"
+                 Text=""
+                 Canvas.Top="170"
+                 Width="330"
+                 FontSize="20"
+                 Padding="20,7,7,7" HorizontalAlignment="Left" VerticalAlignment="Center" Height="61" TextChanged="TextBoxQuestionText_TextChanged" />
+        <Label x:Name="label_Copy"
+               Content="Unit Name"
+               Canvas.Left="47" 
+               Canvas.Top="172" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               FontSize="20"
+               FontFamily="{StaticResource SpecialElite}"/>
+        <Button x:Name="buttonClose"
+                Canvas.Left="100" 
+                Canvas.Top="300" 
+                Width="254" 
+                Height="47"
+                FontSize="20"
+                FontFamily="{StaticResource SpecialElite}"
+                Foreground="White"
+                Background="Navy" HorizontalAlignment="Center" VerticalAlignment="Top" Click="buttonClose_Click_1">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="32" Source="/Images/Exit1.png"></Image>
+                    <Label Foreground="White"
+                           Padding="15,7,0,0"
+                           Content="Close"
+                           FontSize="20"></Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button x:Name="buttonAddQuestion"
+        Canvas.Left="400" 
+        Canvas.Top="300" 
+        Width="254" 
+        Height="47"
+        FontSize="20"
+        FontFamily="{StaticResource SpecialElite}"
+        Foreground="White"
+        Background="Navy" HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Click="buttonAddUnit_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="32" Source="/Images/AddQuestion.png"></Image>
+                    <Label Foreground="White"
+                   Padding="15,7,0,0"
+                   Content="Add Unit"
+                   FontSize="20"></Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Label x:Name="label1"
+               Content="New Unit" 
+               Canvas.Left="243" 
+               Canvas.Top="16"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Width="273"
+               FontSize="40"
+               FontFamily="{StaticResource  SpecialElite}"/>
+        <Grid Background="Navy" 
+         HorizontalAlignment="Left"
+         Canvas.Left="160"
+         VerticalAlignment="Center" 
+         Canvas.Top="169"
+         Height="43"
+         Width="43">
+            <!-- The Image control goes first (background layer) -->
+            <Image Source="/Images/logo.png" Stretch="Uniform"/>
+
+            <Rectangle
+   
+    
+    
+   
+/>
+        </Grid>
+    </Canvas>
 </Window>

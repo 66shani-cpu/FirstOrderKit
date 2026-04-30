@@ -94,14 +94,17 @@ FontSize="20"
 Margin="90,60,10,10"                
 FontFamily="{StaticResource SpecialElite}"
 Foreground="White"
-Background="Navy">
+Background="Navy" 
+                Click="buttonAddNewUnit_Click">
+            
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="32" Source="/Images/AddQuestion.png"></Image>
                     <Label Foreground="White"
            Padding="15,7,0,0"
            Content="Add new Unit"
-           FontSize="20"></Label>
+           FontSize="20"></Label
+                           >
                 </StackPanel>
             </Button.Content>
         </Button>

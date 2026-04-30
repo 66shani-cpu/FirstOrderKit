@@ -46,5 +46,10 @@ namespace ManagerApp.UserControls
         {
 
         }
+
+        private void buttonAddNewUnit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
