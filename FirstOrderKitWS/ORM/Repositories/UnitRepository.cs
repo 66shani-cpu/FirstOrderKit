@@ -14,7 +14,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         }
         public bool Create(Unit model)
         {
-            string sql = @$"Insert into Unit 
+            string sql = @$"Insert into Units 
                            (UnitName,UnitPicture)
                           values(@UnitName,@UnitPicture)";
             this.helperOledb.AddParameter("@UnitName", model.UnitName);
@@ -31,7 +31,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         //מעביר את הטבלה למודל
         public List<Unit> GetAll()
         {
-            string sql = " Select * from Units";
+            string sql = " Select * from Units where UnitActive=true";
 
             List<Unit> units = new List<Unit>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -116,6 +116,15 @@ namespace FirstOrderKitWS.ORM.Repositories
                 data.Pass.Add(Convert.ToInt32(reader["Passed"]));
             }
             return data;    
+        }
+        public bool UpdateImageName(string unitId, string fileName)
+        {
+            string sql = $@"Update Units set
+                              UnitPicture=@UnitPicture 
+                              where UnitId=@UnitId";
+            this.helperOledb.AddParameter("@UnitPicture", fileName);
+            this.helperOledb.AddParameter("@UnitId", unitId);
+            return this.helperOledb.Update(sql) > 0;
         }
     }
 

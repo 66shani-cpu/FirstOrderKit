@@ -117,7 +117,7 @@ namespace FirstKitWSClient
                 StringContent modelcontent = new StringContent(json);
                 multipartFormDataContent.Add(modelcontent, "model");
                 StreamContent streamContent = new StreamContent(file);
-                multipartFormDataContent.Add(modelcontent, "file", "file");
+                multipartFormDataContent.Add(streamContent, "file", "file");
                 httpRequest.Content = multipartFormDataContent;
                 using (HttpResponseMessage responseMessage = await this.httpClient.SendAsync(httpRequest))
                 {

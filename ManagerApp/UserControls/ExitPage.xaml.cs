@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace ManagerApp.UserControls
 {
     /// <summary>
@@ -23,6 +24,18 @@ namespace ManagerApp.UserControls
         public ExitPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void Button_Click_Stay(object sender, RoutedEventArgs e)
+        {
+
+            MainWindow mainWin = (MainWindow)Application.Current.MainWindow;
+            mainWin.ViewStartPage();    
+
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using FirstKitWSClient;
+using FirstOrderKitModel;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +16,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.Win32;
 
 namespace ManagerApp.Windows
 {
@@ -31,16 +34,7 @@ private string selectedImagePath = ""; // משתנה שיחזיק את הנתי�
 
     private void buttonSelectImage_Click(object sender, RoutedEventArgs e)
     {
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            //// הגדרת פילטר לסוגי תמונות
-            //openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
-
-            //if (openFileDialog.ShowDialog() == true)
-            //{
-            //    selectedImagePath = openFileDialog.FileName; // הנתיב המלא של הקובץ
-            //    labelSelectedFileName.Content = openFileDialog.SafeFileName; // רק שם הקובץ לתצוגה
-            //}
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Only(*.jpg, *.png, *.gif)|*.jpg; *.png; *.gif";
             bool? dialogResult = openFileDialog.ShowDialog();
@@ -50,28 +44,66 @@ private string selectedImagePath = ""; // משתנה שיחזיק את הנתי�
                 imagePath = fileName;
                 Uri uri = new Uri(fileName);
                 BitmapImage bitmapImage = new BitmapImage(uri);
-                imageBook.Source = bitmapImage;
-                this.textBlockSelectImage.Visibility = Visibility.Hidden;
+              
+                this.labelSelectedFileName.Visibility = Visibility.Hidden;
             }
         }
-        private void buttonAddUnit_Click(object sender, RoutedEventArgs e)
+        private async void buttonAddUnit_Click(object sender, RoutedEventArgs e)
         {
+
             string unitName = TextBoxQuestionText.Text;
+           
+            FirstOrderKitModel.Unit unit = new FirstOrderKitModel.Unit();
+            unit.UnitId = "0";
+            unit.UnitName= unitName;
+            unit.UnitPicture = System.IO.Path.GetExtension(imagePath) ;
 
-            if (string.IsNullOrEmpty(unitName) || string.IsNullOrEmpty(selectedImagePath))
+            // 3. הרצת בדיקת תקינות
+            unit.Validate();
+
+            // 4. בדיקה האם נמצאו שגיאות
+            Dictionary<string, List<string>> errors = unit.AllError();
+            if (errors.Count > 0)
             {
-                MessageBox.Show("נא להזין שם ולבחור תמונה");
-                return;
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Please correct the following errors:\n");
+
+                foreach (var errorEntry in errors)
+                {
+                    // שם השדה (למשל: UnitName)
+                    string propertyName = errorEntry.Key;
+                    // חיבור כל השגיאות של השדה למחרוזת אחת
+                    string errorMessage = string.Join(", ", errorEntry.Value);
+
+                    sb.AppendLine($"• {propertyName}: {errorMessage}");
+                }
+
+                // הצגת הודעת השגיאה למשתמש
+                MessageBox.Show(sb.ToString(), "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                return; // חשוב! עוצרים כאן ולא ממשיכים לשלוח לשרת
             }
-
             // כאן נכנס הקוד של מסד הנתונים שלך (SQL/Entity Framework)
-            // דוגמה רעיונית:
-            SaveUnitToDatabase(unitName, selectedImagePath);
-
-            MessageBox.Show("היחידה נוספה בהצלחה!");
+            ApiClient<Unit> apiClient = new ApiClient<Unit>();
+            apiClient.Schema = "http";
+            apiClient.Host = "localhost";
+            apiClient.Port = 5239;
+            apiClient.Path = "api/Manager/AddNewUnit";
+            Stream stream = new FileStream(this.imagePath,
+                                            FileMode.Open,
+                                            FileAccess.Read);
+           bool ok= await apiClient.PostAsync(unit, stream);
+            if (ok)
+            {
+                MessageBox.Show("היחידה נוספה בהצלחה!");
+                this.DialogResult = true;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("הוספת יחידה נכשלה");
+            }
         }
-
-
 
 
         private void TextBoxQuestionText_TextChanged(object sender, TextChangedEventArgs e)
@@ -79,10 +111,10 @@ private string selectedImagePath = ""; // משתנה שיחזיק את הנתי�
             // הקוד שירוץ כשהטקסט משתנה (אפשר להשאיר ריק כרגע)
         }
 
-        private void buttonAddUnit_Click(object sender, RoutedEventArgs e)
-        {
-            // הקוד שירוץ כשלוחצים על "הוסף יחידה"
-        }
+        //private void buttonAddUnit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // הקוד שירוץ כשלוחצים על "הוסף יחידה"
+        //}
 
 
         private void buttonClose_Click_1(object sender, RoutedEventArgs e)

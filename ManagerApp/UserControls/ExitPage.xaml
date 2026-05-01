@@ -27,16 +27,18 @@
                 Height="45"
                 Margin="15"
                 FontSize="18"
-                Background="Red"
-                Foreground="White"/>
+                Background="Green"
+                Foreground="White"
+                    Click="Button_Click"/>
 
             <Button Content="לא"
                 Width="120"
                 Height="45"
                 Margin="15"
                 FontSize="18"
-                Background="Green"
-                Foreground="White"/>
+                Background="Red"
+                Foreground="White"
+                    Click="Button_Click_Stay"/>
 
         </StackPanel>
     </Grid>

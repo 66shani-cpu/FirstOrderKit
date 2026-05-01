@@ -69,7 +69,8 @@
                   Canvas.Left="630"
                   Canvas.Top="25"
                   Width="32"
-                  Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                  Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    Click="btnDelete_Click">
                                 <Image Source="/Images/UpdateDelete.png" />
                             </Button>
                             <Label x:Name="UnitName"

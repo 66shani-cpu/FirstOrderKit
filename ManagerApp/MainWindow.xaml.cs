@@ -49,12 +49,12 @@ namespace ManagerApp
         public MainWindow()
         {
             InitializeComponent();
-            //ViewStartPage();
-            frameMain.Navigate(new StartPage());
+            ViewStartPage();
+            //frameMain.Navigate(new StartPage());
            
             HyperLinkState();
         }
-        private void ViewStartPage()
+        public void ViewStartPage()
         {
             if (this.startPage == null)
             {
@@ -171,9 +171,11 @@ namespace ManagerApp
         }
         private void hyperlinkExit_Click(object sender, RoutedEventArgs e)
         {
-            //ViewExit();
-            Application.Current.Shutdown();
+            ViewExit();
+            //Application.Current.Shutdown();
         }
+        //להוסיף שדה בטבלה שרוצים פעיל או לא פעיל 
+        // בגט אולל לשנות עם סינון WHERE שם של דה שווה נכון או לא נכון
 
 
     }

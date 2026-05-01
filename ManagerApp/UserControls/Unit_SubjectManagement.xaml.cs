@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FirstKitWSClient;
+using FirstOrderKitModel;
+using ManagerApp.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FirstOrderKitModel;
-using FirstKitWSClient;
 
 
 namespace ManagerApp.UserControls
@@ -47,9 +48,20 @@ namespace ManagerApp.UserControls
 
         }
 
-        private void buttonAddNewUnit_Click(object sender, RoutedEventArgs e)
+        private async void buttonAddNewUnit_Click(object sender, RoutedEventArgs e)
         {
+            NewUnit newUnitWin = new NewUnit();
+            bool? ok = newUnitWin.ShowDialog();
+            if (ok == true)
+            {
+                ListViewUnit.ItemsSource = null;
+                await GetUnitList();
+            }
+        }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            // לקחת תעודת זהות של יחידה ולהפוך את זה לFAKSE בטבלה של יחידות
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstOrderKitWS.Controllers
 {
@@ -261,7 +262,6 @@ namespace FirstOrderKitWS.Controllers
             }
         }
 
-
         [HttpGet]
         public UnitBarData GetUnitBarData()
         {
@@ -281,6 +281,42 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
            
+        }
+        [HttpPost]
+        public async Task<bool> AddNewUnit()
+        {
+            string json = Request.Form["model"].ToString();
+            FirstOrderKitModel.Unit unit =JsonSerializer.Deserialize<FirstOrderKitModel.Unit>(json);
+            IFormFile image = Request.Form.Files["file"];
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                this.repositoryUOF.BeginTransaction();
+                bool ok = this.repositoryUOF.UnitRepository.Create(unit);
+                string id = this.repositoryUOF.GetLastInsertId();
+                string fileName = $"{id}{unit.UnitPicture}";
+                this.repositoryUOF.UnitRepository.UpdateImageName(id, fileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(),
+                                           "wwwroot",
+                                           "Images",
+                                           "Units",
+                                           fileName);
+                using (Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+                this.repositoryUOF.Commit();
+                return true;
+            }
+            catch
+            {
+                this.repositoryUOF.RollBack();
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
         }
     }
 }
