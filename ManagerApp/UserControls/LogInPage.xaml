@@ -6,22 +6,143 @@
              xmlns:local="clr-namespace:ManagerApp.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="900">
-    <!--<Grid>
-        <Label Content="LogIn" Margin="203,191,0,0" 
-               FontSize="48" Foreground="Black"
-               Width="400"/>
-        <Label x:Name="UserNick" HorizontalAlignment="Left" Margin="136,179,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="250,320,0,0" VerticalAlignment="Top"/>
-
-    </Grid>-->
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="DropShadow"
+                          Color="#000000" 
+                          Direction="270" 
+                          ShadowDepth="5" 
+                          BlurRadius="20" 
+                          Opacity="0.1"/>
+    </UserControl.Resources>
     <Grid>
-    <Canvas>
+    <!--<Canvas>
         <TextBox x:Name="textBoxNickName" Canvas.Left="304" TextWrapping="Wrap" Canvas.Top="153" Width="120"/>
         <Label x:Name="label" Content="User Nick" Canvas.Left="236" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxPassword" Canvas.Left="304" TextWrapping="Wrap"  Canvas.Top="198" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy" Content="User Password" Canvas.Left="201" Canvas.Top="197" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="buttonLoin" Content="Login" Canvas.Left="294" Canvas.Top="252" HorizontalAlignment="Left" VerticalAlignment="Top" Width="78" Click="buttonLoin_Click"/>
         <Label x:Name="label1" Content="Login form" Canvas.Left="266" Canvas.Top="69" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152"/>
-    </Canvas>
+    </Canvas>-->
+        <Canvas Background="#F0F4F8">
+            <!-- כותרת -->
+            <Border Canvas.Left="150" Canvas.Top="40" 
+            Width="400" Height="60"
+            Background="#4A90E2" 
+            CornerRadius="10"
+            Effect="{StaticResource DropShadow}">
+                <Label x:Name="label1" 
+               Content="Login Form" 
+               FontSize="28" 
+               FontWeight="Bold"
+               Foreground="White"
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Center"/>
+            </Border>
+
+            <!-- קונטיינר הטופס -->
+            <Border Canvas.Left="150" Canvas.Top="120" 
+            Width="400" Height="280"
+            Background="White" 
+            CornerRadius="15"
+            Padding="40">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" 
+                            Direction="270" 
+                            ShadowDepth="5" 
+                            BlurRadius="20" 
+                            Opacity="0.1"/>
+                </Border.Effect>
+
+                <Canvas>
+                    <!-- User Nick -->
+                    <Label x:Name="label" 
+                   Content="Username" 
+                   Canvas.Left="20" 
+                   Canvas.Top="20"
+                   FontSize="14"
+                   FontWeight="SemiBold"
+                   Foreground="#2C3E50"/>
+
+                    <Border Canvas.Left="20" Canvas.Top="50"
+                    Width="280" Height="40"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="2"
+                    CornerRadius="8"
+                    Background="White">
+                        <TextBox x:Name="textBoxNickName" 
+                         TextWrapping="Wrap"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         Padding="10,0"
+                         FontSize="14"
+                         Foreground="#2C3E50"/>
+                    </Border>
+
+                    <!-- User Password -->
+                    <Label x:Name="label_Copy" 
+                   Content="Password" 
+                   Canvas.Left="20" 
+                   Canvas.Top="110"
+                   FontSize="14"
+                   FontWeight="SemiBold"
+                   Foreground="#2C3E50"/>
+
+                    <Border Canvas.Left="20" Canvas.Top="140"
+                    Width="280" Height="40"
+                    BorderBrush="#E0E0E0"
+                    BorderThickness="2"
+                    CornerRadius="8"
+                    Background="White">
+                        <TextBox x:Name="textBoxPassword"
+                            BorderThickness="0"
+                            VerticalContentAlignment="Center"
+                            Padding="10,0"
+                            FontSize="14"
+                            Foreground="#2C3E50"/>
+                    </Border>
+
+                    <!-- Login Button -->
+                    <Button x:Name="buttonLoin" 
+                    Content="Login" 
+                    Canvas.Left="20" 
+                    Canvas.Top="200" 
+                    Width="280" 
+                    Height="45"
+                    Click="buttonLoin_Click"
+                    Background="#4A90E2"
+                    Foreground="White"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#4A90E2"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                            CornerRadius="8"
+                                            Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#357ABD"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="Background" Value="#2D6DA3"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Canvas>
+            </Border>
+        </Canvas>
     </Grid>
 </UserControl>

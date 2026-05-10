@@ -1,63 +1,195 @@
 ﻿@using FirstOrderKitModel;
 @{
     ViewData["Title"] = "ViewAbout";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
+    Layout = null; // ביטול ה-MasterPage לגמרי
 }
-<link href="~/wwwroot/styles/aboutform.css" rel="stylesheet" />
-<div class="about-container">
-    <h1>אודות אתר ההכנה לצו הראשון</h1>
 
-    <section>
-        <h2>🎯 מטרת האתר</h2>
-        <p>
-            האתר נועד לסייע למועמדים לשירות ביטחון להתכונן למבחני הצו הראשון
-            בצורה ברורה, נוחה וממוקדת. המערכת מדמה מבחנים אמיתיים ומאפשרת
-            תרגול חכם לפי רמה ונושא.
-        </p>
-    </section>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>אודות - Meitav Test</title>
+    <style>
+        :root {
+            --dark-green: #1a2f23;
+            --army-green: #2d4f3c;
+            --bright-green: #adff2f;
+            --soft-green: rgba(173, 255, 47, 0.05);
+            --white: #ffffff;
+        }
 
-    <section>
-        <h2>🧠 מבחני תרגול לפי נושאים</h2>
-        <ul>
-            <li>חשיבה כמותית</li>
-            <li>חשיבה לוגית</li>
-            <li>הבנת הנקרא</li>
-            <li>צורות וסדרות</li>
-            <li>אנלוגיות מילוליות</li>
-        </ul>
-        <p>השאלות מחולקות לרמות קושי שונות כדי לאפשר התקדמות הדרגתית.</p>
-    </section>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--dark-green);
+            /* הרקע כאן כהה ונקי כדי למנוע את המראה האפור */
+            background-image: radial-gradient(circle at center, #234232 0%, #1a2f23 100%);
+            color: var(--white);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    <section>
-        <h2>🏅 מידע על יחידות</h2>
-        <p>
-            באתר תמצאו מידע כללי על מגוון יחידות ותפקידים בצה"ל,
-            במטרה להכיר את האפשרויות הקיימות ולהבין אילו כישורים חשובים לכל תחום.
-        </p>
-        <ul>
-            <li>יחידות טכנולוגיות</li>
-            <li>מודיעין</li>
-            <li>תפקידי מחשוב וסייבר</li>
-            <li>תפקידי שטח</li>
-        </ul>
-    </section>
+        /* כפתור חזרה לעמוד הראשי - בצד שמאל למעלה */
+        .back-to-main {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            text-decoration: none;
+            color: var(--bright-green);
+            border: 2px solid var(--bright-green);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            background: rgba(173, 255, 47, 0.05);
+        }
 
-    <section>
-        <h2>📈 התאמה אישית</h2>
-        <p>
-            המערכת מאפשרת תרגול לפי נושא, רמת קושי וסוג חשיבה,
-            כך שכל משתמש יכול לבנות מסלול למידה אישי.
-        </p>
-    </section>
+            .back-to-main:hover {
+                background: var(--bright-green);
+                color: var(--dark-green);
+                box-shadow: 0 0 20px rgba(173, 255, 47, 0.5);
+                transform: scale(1.05);
+            }
 
-    <section>
-        <h2>💪 בהצלחה!</h2>
-        <p>
-            מטרתנו להפחית לחץ, להעניק ביטחון, ולעזור לכם להגיע מוכנים ליום הצו הראשון.
-        </p>
-    </section>
+        .about-container {
+            max-width: 850px;
+            width: 100%;
+            /* הסרת ה-blur והלבן השקוף שגרמו לאפור */
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(173, 255, 47, 0.15);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            margin-top: 60px; /* מרווח בגלל הכפתור */
+        }
 
-</div>
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--bright-green);
+            margin-bottom: 50px;
+            font-weight: 800;
+            text-shadow: 0 0 15px rgba(173, 255, 47, 0.3);
+        }
+
+        section {
+            margin-bottom: 35px;
+            border-right: 5px solid var(--bright-green);
+            padding-right: 25px;
+            background: var(--soft-green);
+            padding: 25px;
+            border-radius: 15px 0 0 15px;
+            transition: all 0.3s ease;
+        }
+
+            section:hover {
+                background: rgba(173, 255, 47, 0.1);
+                transform: translateX(-5px);
+            }
+
+        h2 {
+            font-size: 1.7rem;
+            margin-top: 0;
+            color: var(--bright-green);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        li {
+            background: var(--army-green);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            border: 1px solid rgba(173, 255, 47, 0.3);
+            color: var(--bright-green);
+            font-weight: 600;
+        }
+
+        /* רספונסיביות */
+        @@media (max-width: 768px) {
+            .back-to-main {
+                position: static;
+                margin-bottom: 30px;
+            }
+
+            .about-container {
+                padding: 25px;
+                margin-top: 20px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="http://localhost:5108/Guest/ViewFirstKit" class="back-to-main">חזרה לעמוד הראשי</a>
+
+    <div class="about-container">
+        <h1>אודות אתר ההכנה לצו הראשון</h1>
+
+        <section>
+            <h2>🎯 מטרת האתר</h2>
+            <p>
+                האתר נועד לסייע למועמדים לשירות ביטחון להתכונן למבחני הצו הראשון
+                בצורה ברורה, נוחה וממוקדת. המערכת מדמה מבחנים אמיתיים ומאפשרת
+                תרגול חכם לפי רמה ונושא.
+            </p>
+        </section>
+
+        <section>
+            <h2>🧠 מבחני תרגול ויצירת מבחנים</h2>
+            <ul>
+                <li>חשיבה כמותית</li>
+                <li>חשיבה לוגית</li>
+                <li>הבנת הנקרא</li>
+                <li>צורות וסדרות</li>
+                <li>אנלוגיות מילוליות</li>
+            </ul>
+            <p style="margin-top:20px;">השאלות מחולקות לרמות קושי שונות כדי לאפשר התקדמות הדרגתית.</p>
+        </section>
+
+        <section>
+            <h2>📈 התאמה אישית</h2>
+            <p>
+                המערכת מאפשרת תרגול לפי נושא, רמת קושי וסוג חשיבה,
+                כך שכל משתמש יכול לבנות מסלול למידה אישי.
+            </p>
+        </section>
+
+        <section>
+            <h2>💪 בהצלחה!</h2>
+            <p>
+                מטרתנו להפחית לחץ, להעניק ביטחון, ולעזור לכם להגיע מוכנים ליום הצו הראשון.
+            </p>
+        </section>
+    </div>
+
+</body>
+</html>
 
 
 

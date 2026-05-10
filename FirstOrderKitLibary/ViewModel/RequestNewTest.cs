@@ -8,7 +8,7 @@ namespace FirstOrderKitModel
 {
     public class RequestNewTest
     {
-        public List<Subject> Subjects { get; set; }
+        public List<Unit> Units { get; set; }
       
         public List<int> Difficultys { get; set; }
     }

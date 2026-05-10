@@ -13,44 +13,42 @@ namespace FirstOrderKitWS
         }
         public bool Create(Student model)
         {
-            //string sql = @$"Insert into Student 
-            //               (
-            //                 StudentNickName, Password, StudentLastName, 
-            //                 UnitId,StudentFirstName,CityId,StudentTelephone,
-            //                 StudentAdrres,StudentImage
-            //               )
-            //               values
-            //                 (
-            //                      '{model.StudentNickName}','{model.Password}',
-            //                      '{model.StudentLastName}',{model.UnitId},
-            //                      '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
-            //                      '{model.StudentAdrres}','{model.StudentImage}'
-            //                  )
-            //                                         ";
             string sql = @$"Insert into Student 
                            (
-                             StudentNickName, [Password], StudentLastName, 
+                             StudentId,StudentNickName, [Password], StudentLastName, 
                              UnitId,StudentFirstName,CityId,StudentTelephone,
-                             StudentAdrres,StudentImage,StudentSalt
+                             StudentAdrres,StudentImage
                            )
                            values
                              (
-                                 @StudentNickName,@Password,
-                                 @StudentLastName,@UnitId,@StudentFirstName
-                                @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt
-                                 
-                              )";
-            this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
-           
-            this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
-            this.helperOledb.AddParameter("@UnitId", model.UnitId);
-            this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
-            this.helperOledb.AddParameter("@CityId", model.CityId);
-            this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
-            this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
-            this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
+                                  '{model.StudentId}','{model.StudentNickName}','{model.Password}',
+                                  '{model.StudentLastName}',{model.UnitId},
+                                  '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
+                                  '{model.StudentAdrres}','{model.StudentImage}'
+                              )
+                                                     ";
+            //string sql = @$"Insert into Student 
+            //               (
+            //                 StudentId,StudentNickName, [Password], StudentLastName, 
+            //                 UnitId,StudentFirstName,CityId,StudentTelephone,
+            //                 StudentAdrres,StudentImage,StudentSalt
+            //               )
+            //               values
+            //                 (
+            //                     @StudentNickName,@Password,
+            //                     @StudentLastName,@UnitId,@StudentFirstName,
+            //                     @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt)";
+            //this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
+            //this.helperOledb.AddParameter("@StudentId", model.StudentId);
+            //this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
+            //this.helperOledb.AddParameter("@UnitId", model.UnitId);
+            //this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
+            //this.helperOledb.AddParameter("@CityId", model.CityId);
+            //this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
+            //this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
+            //this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
             string salt = GetSalt(GetRandom());
-            this.helperOledb.AddParameter("@Password", GetHash(model.Password, salt));
+            //this.helperOledb.AddParameter("@Password", GetHash(model.Password, salt));
             this.helperOledb.AddParameter("@StudentSalt", salt);
             return this.helperOledb.Insert(sql) > 0;
         }
@@ -155,6 +153,15 @@ namespace FirstOrderKitWS
             }
 
 
+        }
+        public bool UpdateImageName(string studentId, string fileName)
+        {
+            string sql = $@"Update Student set
+                              StudentImage=@StudentImage 
+                              where StudentId=@StudentId";
+            this.helperOledb.AddParameter("@StudentImage", fileName);
+            this.helperOledb.AddParameter("@StudentId", studentId);
+            return this.helperOledb.Update(sql) > 0;
         }
     }
 }

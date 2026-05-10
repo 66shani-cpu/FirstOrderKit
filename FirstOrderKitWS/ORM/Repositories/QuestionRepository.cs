@@ -88,24 +88,23 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
 
         }
 
-        public List<Question> GetQuestion(string subjectId, string difficulty)
+        public List<Question> GetQuestion(string unitId, string difficulty)
         {
             string sql = @$"SELECT
-    Question.QuestionId,
+    TOP 10 Question.QuestionId,
     Question.LevelQuestions,
     Question.Question,
-    Subjects.SubjectId
+    Question.QuestionActive,
+    UnitQuestion.UnitId
 FROM
-    Subjects
-    INNER JOIN (
-        Question
-        INNER JOIN QuestionSubject ON Question.QuestionId = QuestionSubject.QuestionId
-    ) ON Subjects.SubjectId = QuestionSubject.SubjectId
+    Question
+    INNER JOIN UnitQuestion ON Question.QuestionId = UnitQuestion.QuestionId
 WHERE
-    (
-        ((Question.LevelQuestions) = {difficulty})
-        AND ((Subjects.SubjectId) = {subjectId})
-    );";
+    Question.LevelQuestions = {difficulty}
+    AND UnitQuestion.UnitId = {unitId}
+ORDER BY
+    Rnd (- (1000 * Question.QuestionId) * Time());
+    ";
 
             List<Question> questions = new List<Question>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל

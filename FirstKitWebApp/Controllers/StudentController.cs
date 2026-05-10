@@ -94,16 +94,19 @@ namespace FirstKitWebApp.Controllers
         //פעולה שתפקידה להציג את הטופס של מילוי פרטים  של נושא ורמת קושי למבחן חדש 
         //כדי להציג טופס זה אני צריכה אובייקט של request new test שאותו אני צריכה לקבל מWeb Service ולהעביר את זה לView
         [HttpGet]
-       public async Task<IActionResult> ViewRequestNewTestForm ()
+       public async Task<IActionResult> ViewRequestNewTestForm (string unitId, string difficulty)
         {
-            ApiClient<RequestNewTest> client = new ApiClient<RequestNewTest>();
+            ApiClient<TestQuestionViewModel> client = new ApiClient<TestQuestionViewModel>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Student/GetRequestNewTest";
-            RequestNewTest requestNewTest = await client.GetAsync();
-            return View(requestNewTest);
+            TestQuestionViewModel testQuestionViewModel = await client.GetAsync();
+            return View(testQuestionViewModel);
         }
+        // הוסיפי את השורות האלו כדי שהדף באמת ייפתח
       
+
+
     }
 }

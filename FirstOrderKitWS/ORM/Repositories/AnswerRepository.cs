@@ -112,10 +112,10 @@ WHERE
             return answers;
         }
 
-        internal List<Answer> GetAnswersByQuestionId(string questionId)
-        {
-            throw new NotImplementedException();
-        }
+        //internal List<Answer> GetAnswersByQuestionId(string questionId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //internal bool Create(string questionId, string answertext,string trueFalse)
         //{

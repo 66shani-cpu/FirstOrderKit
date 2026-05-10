@@ -7,7 +7,7 @@
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
     <form asp-controller="student" asp-action="NewTestForm">
-        <label for="subject">Filter by subject</label>
+        <label for="subject">Filter by unit</label>
         <select name="subjectId">
             <option>Select</option>
    @*          <option value="">Select</option>
@@ -21,9 +21,9 @@
             <option value="CalculateArea">CalculateArea</option>
             <option value="FigurativeAnalogies">FigurativeAnalogies</option>
             <option value="Summery">Summery</option> *@
-            @foreach (Subject subject in Model.Subjects)
+            @foreach (Unit unit in Model.Units)
             {
-                <option value="@subject.SubjectId">@subject.SubjectName</option>
+                <option value="@unit.UnitId">@unit.UnitName</option>
             }
         </select>
 

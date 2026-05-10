@@ -56,19 +56,21 @@ namespace FirstKitWebApp.Controllers
             return View(/*test*/);
         }
         [HttpPost]
-        public async Task<IActionResult> InsertStudent(Student student)
-        {
-            ApiClient<Student> client = new ApiClient<Student>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/InsertStudent";
-            bool ok = await client.PostAsync(student);
-            return RedirectToAction("HomePage");
-        }
-
+        //public async Task<IActionResult> InsertStudent(Student student)
+        //{
+        //    ApiClient<Student> client = new ApiClient<Student>();
+        //    client.Schema = "http";
+        //    client.Host = "localhost";
+        //    client.Port = 5239;
+        //    client.Path = "api/Guest/InsertStudent";
+        //    bool ok = await client.PostAsync(student);
+        //    return RedirectToAction("HomePage");
+        //}
         public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         {
+
+            student.StudentNickName = "Sghhx";
+            student.UnitId = 1;
            
             RegistationViewModel registationViewModel = new RegistationViewModel();
 
@@ -88,7 +90,8 @@ namespace FirstKitWebApp.Controllers
             {
                 HttpContext.Session.SetString("studentId", student.StudentId);
                 //מעבר לקונטרוללר אחר
-                return RedirectToAction("GetNewTest", "Student");
+                //return RedirectToAction("GetNewTest", "Student");
+                return RedirectToAction("ViewStudentCreateTest", "Student");
             }
             else
             {

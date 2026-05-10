@@ -9,12 +9,12 @@
 @* <link href="~/styles/newtest.css" rel="stylesheet" /> *@
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
-    <form asp-controller="student" asp-action="NewTestForm">
-        <label for="subject">Filter by subject</label>
-        <select name="subjectId">
-            @foreach (Subject subject in Model.Subjects)
+    <form asp-controller="student" asp-action="ViewRequestNewTestForm" method="get">
+        <label for="unit">Filter by unit</label>
+        <select name="unitId">
+            @foreach (Unit unit in Model.Units)
             {
-                <option value="@subject.SubjectId">@subject.SubjectName</option>
+                <option value="@unit.UnitId">@unit.UnitName</option>
             }
         </select>
 

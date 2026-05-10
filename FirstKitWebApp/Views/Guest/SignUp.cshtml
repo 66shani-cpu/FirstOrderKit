@@ -2,16 +2,26 @@
 @model RegistationViewModel
 @{
     ViewData["Title"] = "LogIn";
-    // Layout = "~/Views/Shared/MasterPage.cshtml";
     Layout = null;
 }
 <link href="~/styles/signup.css" rel="stylesheet" />
+<script>
+    function getFileName()
+    {
+           var fullPath = document.getElementById('readerFile').value;
+       if (fullPath) {
+        var fn = document.getElementById('readerImg');
+        fn.value = "." + fullPath.split('.').pop();
+     }
+    }
+</script>
 <div class="form-container">
     @if (ViewBag.Error !=null)
     {
         <h1 class="errortitle">There was an error. Come back later!</h1>
     }
-    <form asp-controller="guest" asp-action="Registration">
+ 
+    <form asp-controller="guest" asp-action="Registration" enctype="multipart/form-data">
         <label>First name</label>
         <input asp-for="student.StudentFirstName" type="text" id="fname" placeholder="Placeholder">
         <span asp-validation-for="student.StudentFirstName" class="error"></span>
@@ -20,18 +30,15 @@
         <input asp-for="student.StudentLastName" type="text" id="lname" placeholder="Placeholder">
         <span asp-validation-for="student.StudentLastName" class="error"></span>
 
-        <label for="subject">Filter by subject</label>
-        <label>City</label>
-        <input asp-for="student.CityId" type="text" id="lname" placeholder="Placeholder">
-        <span asp-validation-for="student.CityId" class="error"></span>
+        <label>City</label>   
         <select id="city" asp-for="student.CityId">
             <option>Select</option>
             @foreach (City city in Model.cities)
             {
                 <option value="@city.CityId">@city.CityName</option>
-            }
-         
+            }         
         </select>
+        <span asp-validation-for="student.CityId" class="error"></span>
 
         <label>Telephone</label>
         <input asp-for="student.StudentTelephone" type="text" id="lname" placeholder="Placeholder">
@@ -43,14 +50,14 @@
 
         <label for="picture">Picture</label>
         <input class="inputData" type="file"
-               id="readerFile" onchange="getFileName()" />
-        <input type="hidden" name="ReaderImage" id="readerImg" />
-        <span asp-validation-for="student.StudentImage" class="error"></span>
-      @*   <div class="picture-row">
-            <input type="file" id="picture" accept="image/*">
-            
-        </div> *@
-
+            name="formFile" id="readerFile" onchange="getFileName()" />
+        <input asp-for="student.StudentImage" type="hidden"  id="readerImg" />
+        <span  asp-validation-for="student.StudentImage" class="error"></span>
+        <input asp-for="student.StudentId" type="hidden" value="13" id="readerImg" />
+        <input asp-for="student.StudentSalt" type="hidden" value="0" id="readerImg" />
+        <input asp-for="student.Password" type="hidden" value="123456" id="readerImg" />
+        <input asp-for="student.UnitId" type="hidden" value="1" id="readerImg" />
+        <input asp-for="student.StudentNickName" type="hidden" value="Sfghjhgf" id="readerImg" />
         <div class="buttons">
             <button type="reset">Restart</button>
             <button type="submit">Post</button>

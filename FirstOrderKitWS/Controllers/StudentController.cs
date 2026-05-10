@@ -2,6 +2,7 @@
 using FirstOrderKitWS.ORM.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Reactive.Subjects;
 
 namespace FirstOrderKitWS.Controllers
@@ -142,16 +143,26 @@ namespace FirstOrderKitWS.Controllers
         }
 
         [HttpGet]
-        public RequestNewTest GetRequestNewTest()
+        public List<TestQuestionViewModel> GetRequestNewTest(string unitId, string difficulty)
           //פעולה שתפקידה ליצור ולהחזיר ViewModel מטיפוס RequestNewTest
         {
+            List<TestQuestionViewModel> testQuestionViewModel = new List<TestQuestionViewModel>();
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                RequestNewTest requestNewTest = new RequestNewTest();
-                requestNewTest.Subjects = repositoryUOF.SubjectRepository.GetAll();
-                requestNewTest.Difficultys = repositoryUOF.QuestionRepository.GetDifficultys();
-                return requestNewTest;
+                List < Question > questionList = repositoryUOF.QuestionRepository.GetQuestion(unitId, difficulty); 
+                foreach ( Question question in questionList)
+                {
+                    TestQuestionViewModel tqwm = new TestQuestionViewModel();
+                    tqwm.Question = question;
+                    tqwm.QuestionAnswer = repositoryUOF.AnswerRepository.GetAnswersByQuestion(question.QuestionId);
+                    testQuestionViewModel.Add(tqwm);
+
+                }
+
+               // לשמור מבחן בתוך מסד הנתונים
+
+                return testQuestionViewModel;
 
             }
             catch (Exception ex)
@@ -163,6 +174,13 @@ namespace FirstOrderKitWS.Controllers
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
+        }
+
+        private bool SaveNewTest(string unitId, string difficulty, List<TestQuestionViewModel> testQuestionViews )
+        {
+            Test test = new Test();
+            test.TestName = "";
+            return true;
         }
       
     }

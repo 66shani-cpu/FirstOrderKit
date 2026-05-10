@@ -9,18 +9,6 @@
     <h1>טופס מבחן</h1>
 
     <form>
-
-        <!-- שאלות -->
-      @*  // עשר פעם לולאה של זה ולהביא את השאלות מהמסד
-        <div class="question">
-            <label>שאלה 1</label>
-            <select>
-                <option>בחר</option>
-                <option>אפשרות א'</option>
-                <option>אפשרות ב'</option>
-                <option>אפשרות ג'</option>
-            </select>
-        </div> *@
         @foreach (TestQuestionViewModel testQuestionViewModel in Model)
         {
             <p>

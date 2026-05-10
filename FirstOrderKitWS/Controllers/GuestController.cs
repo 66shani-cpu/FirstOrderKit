@@ -2,6 +2,7 @@
 using FirstOrderKitWS.ORM.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reactive;
 using System.Reactive.Subjects;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Encodings;
@@ -51,7 +52,7 @@ namespace FirstOrderKitWS.Controllers
             }
         }
         [HttpGet]
-        public Unit GetUnitDetails(string unitId)
+        public FirstOrderKitModel.Unit GetUnitDetails(string unitId)
         {
 
             try
@@ -115,30 +116,37 @@ namespace FirstOrderKitWS.Controllers
         [HttpPost]
         public bool InsertStudent ()
         {
-            string json = HttpContext.Request.Form["model"];
+            //string json = HttpContext.Request.Form["model"];
+            string json = Request.Form["model"].ToString();
             Student student = JsonSerializer.Deserialize<Student>(json);
-            IFormFile file = null;
-            if(HttpContext.Request.Form.Files.Count>0)
+            IFormFile image = null;
+            if (Request.Form.Files.Count > 0)
             {
-                file=HttpContext.Request.Form.Files[0];
+                image = Request.Form.Files[0]; // לוקח את הקובץ הראשון שנשלח מהטופס
             }
             try
             {
-                repositoryUOF.DBHelperOledb.OpenTransaction();
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
+                repositoryUOF.DBHelperOledb.OpenTransaction();              
                  bool ok= this.repositoryUOF.StudentRepository.Create(student);
-                string path = $@"{Directory.GetCurrentDirectory()}\wwwroot\Images\Students\{student.StudentId}.{student.StudentImage}";
-                 using (FileStream fileStream = new FileStream(path, FileMode.Open))
+                string fileName = $"{student.StudentId}{student.StudentImage}";
+                this.repositoryUOF.StudentRepository.UpdateImageName(student.StudentId, fileName);
+                //string path = $@"{Directory.GetCurrentDirectory()}\wwwroot\Images\Students\{student.StudentId}.{student.StudentImage}";
+                string path = Path.Combine(Directory.GetCurrentDirectory(),
+                                           "wwwroot",
+                                           "Images",
+                                           "Students",
+                                           fileName);
+                using (Stream stream = new FileStream(path, FileMode.Create))
                 {
-                    fileStream.CopyTo(fileStream);
+                     image.CopyTo(stream);
                 }
-                 this.repositoryUOF.DBHelperOledb.Commit();
+                this.repositoryUOF.DBHelperOledb.Commit();
                   return true;
             }
             catch (Exception ex)
             {
                 this.repositoryUOF.DBHelperOledb.Rollback();
-                Console.WriteLine(ex.ToString());
                 return false;
             }
             finally
