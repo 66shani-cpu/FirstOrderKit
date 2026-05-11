@@ -1,12 +1,9 @@
-﻿@using FirstOrderKitModel
+﻿@* @using FirstOrderKitModel
 @model RequestNewTest
 @{
     ViewData["Title"] = "ViewRequestNewTestForm";
-    // Layout = "~/Views/Shared/MasterPage.cshtml";
     Layout = null;
 }
-
-@* <link href="~/styles/newtest.css" rel="stylesheet" /> *@
 <link href="~/styles/newtest.css" rel="stylesheet" />
 <div class="form-container">
     <form asp-controller="student" asp-action="ViewRequestNewTestForm" method="get">
@@ -82,3 +79,161 @@
         }
 </style>
 
+ *@
+@using FirstOrderKitModel
+@model RequestNewTest
+@{
+    ViewData["Title"] = "Request New Test";
+    Layout = null; // דף עצמאי ללא MasterPage
+}
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-lime: #8ecf26; /* ירוק דומיננטי לטקסט */
+            --border-lime: #adff2f; /* ירוק זוהר למסגרת */
+            --bg-light: #f8f9fa; /* רקע לבן שבור */
+            --card-white: #ffffff; /* לבן נקי לכרטיס */
+            --text-dark: #1a2f23; /* ירוק כהה מאוד לטקסט */
+            --input-border: #d1d5db; /* אפור בהיר למסגרות */
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--card-white);
+            border: 3px solid var(--border-lime); /* מסגרת ירוקה זוהרת */
+            border-radius: 24px;
+            padding: 40px 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 15px rgba(173, 255, 47, 0.2);
+            text-align: right; /* יישור לימין לעברית */
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 35px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-lime);
+            padding-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-right: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            outline: none;
+            cursor: pointer;
+            /* עיצוב חץ הבחירה */
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a2f23' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 15px;
+        }
+
+            select:focus {
+                border-color: var(--neon-lime);
+                box-shadow: 0 0 10px rgba(173, 255, 47, 0.2);
+            }
+
+        .post-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--border-lime);
+            color: var(--text-dark);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(173, 255, 47, 0.3);
+            margin-top: 10px;
+        }
+
+            .post-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(173, 255, 47, 0.4);
+                filter: brightness(1.05);
+            }
+
+        /* התאמה למובייל */
+        @@media (max-width: 600px) {
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Request New Test</h2>
+
+        <form asp-controller="student" asp-action="ViewRequestNewTestForm" method="get">
+
+            <label for="unit">Filter by unit</label>
+            <select name="unitId" id="unit">
+                @foreach (Unit unit in Model.Units)
+                {
+                    <option value="@unit.UnitId">@unit.UnitName</option>
+                }
+            </select>
+
+            <label for="difficulty">Select by difficulty</label>
+            <select name="difficulty" id="difficulty">
+                <option value="">Select Level</option>
+                @foreach (int difficulty in Model.Difficultys)
+                {
+                    <option value="@difficulty">Level @difficulty</option>
+                }
+            </select>
+
+            <button type="submit" class="post-btn">Generate Test</button>
+        </form>
+    </div>
+
+</body>
+</html>

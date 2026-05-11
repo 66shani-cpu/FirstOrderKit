@@ -1,4 +1,4 @@
-﻿
+﻿@* 
 @{
     ViewData["Title"] = "ViewLoginForm";
     // Layout = "~/Views/Shared/MasterPage.cshtml";
@@ -19,3 +19,153 @@
     </form>
 </div>
 
+ *@
+@{
+    ViewData["Title"] = "LogIn";
+    Layout = null; // דף עצמאי ללא MasterPage
+}
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-lime: #8ecf26; /* ירוק דומיננטי לטקסט */
+            --border-lime: #adff2f; /* ירוק זוהר למסגרת */
+            --bg-light: #f8f9fa; /* רקע לבן שבור */
+            --card-white: #ffffff; /* לבן נקי לכרטיס */
+            --text-dark: #1a2f23; /* ירוק כהה מאוד לטקסט */
+            --input-border: #d1d5db; /* אפור בהיר למסגרות */
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* מרכוז אנכי מושלם */
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 400px; /* צר יותר מהרשמה למראה נקי */
+            width: 100%;
+            background: var(--card-white);
+            border: 3px solid var(--border-lime); /* מסגרת ירוקה זוהרת */
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 15px rgba(173, 255, 47, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-lime);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: right; /* יישור תוויות לימין עבור עברית */
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: -12px;
+            margin-right: 5px;
+            color: var(--text-dark);
+        }
+
+        input {
+            background: #ffffff;
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
+            padding: 14px 15px;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+            /* אפקט מיקוד - הופך לירוק זוהר */
+            input:focus {
+                border-color: var(--neon-lime);
+                box-shadow: 0 0 8px rgba(142, 207, 38, 0.2);
+                background: #fdfdfd;
+            }
+
+        button {
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: none;
+            background: var(--border-lime);
+            color: var(--text-dark);
+            box-shadow: 0 4px 10px rgba(173, 255, 47, 0.3);
+            text-transform: uppercase;
+        }
+
+            button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(173, 255, 47, 0.4);
+                filter: brightness(1.05);
+            }
+
+        /* קישור להרשמה (אופציונלי - אם תרצי להוסיף בעתיד) */
+        .footer-link {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+            .footer-link a {
+                color: var(--neon-lime);
+                text-decoration: none;
+                font-weight: 700;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>LogIn</h2>
+
+        <form action="http://localhost:5108/Student/LogInStudent" method="post">
+
+            <label>Nick Name</label>
+            <input type="text" name="StudentNickName" placeholder="Enter your nickname">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="footer-link">
+            Don't have an account? <a href="http://localhost:5108/Guest/Registration">Sign Up</a>
+        </div>
+    </div>
+
+</body>
+</html>

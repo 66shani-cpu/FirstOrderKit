@@ -69,8 +69,8 @@ namespace FirstKitWebApp.Controllers
         public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         {
 
-            student.StudentNickName = "Sghhx";
-            student.UnitId = 1;
+            //student.StudentNickName = "Sghhx";
+            //student.UnitId = 1;
            
             RegistationViewModel registationViewModel = new RegistationViewModel();
 

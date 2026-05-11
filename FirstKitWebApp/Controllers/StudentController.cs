@@ -24,14 +24,37 @@ namespace FirstKitWebApp.Controllers
             return View();
         }
         [HttpPost]
+        //public async Task<IActionResult> UpDate(Student student)
+        //{
+        //    ApiClient<bool> client = new ApiClient<bool>();
+        //    client.Schema = "http";
+        //    client.Host = "localhost";
+        //    client.Port = 5239;
+        //    client.Path = "api/Guest/UpDate";
+        //    bool ok = await client.GetAsync();
+        //    return View(student);
+        //}
         public async Task<IActionResult> UpDate(Student student)
         {
-            ApiClient<bool> client = new ApiClient<bool>();
+            // 1. כאן אנחנו מגדירים את ה-Client עם סוג הנתונים Student
+            ApiClient<Student> client = new ApiClient<Student>();
+
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
-            client.Path = "api/Guest/UpDate";
-            bool ok = await client.GetAsync();
+            client.Path = "api/Student/UpDate";
+
+            // 2. עכשיו כשה-Client מבין מה זה Student, הוא יסכים לשלוח אותו ב-Post
+            // (הערה: ה-ApiClient שלך כנראה מחזיר אובייקט Student או bool, תלוי איך בנית אותו)
+            var result = await client.PostAsync(student);
+
+            // 3. בדיקה אם העדכון הצליח (בהנחה ש-ok הוא בוליאני)
+            if (result != null)
+            {
+                return RedirectToAction("ViewStudentCreateTest", "Student");
+            }
+
+            // אם נכשל, חוזרים לתצוגה עם הנתונים כדי שהמשתמש יתקן
             return View(student);
         }
 

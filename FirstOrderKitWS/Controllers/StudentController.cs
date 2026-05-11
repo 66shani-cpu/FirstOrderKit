@@ -107,17 +107,21 @@ namespace FirstOrderKitWS.Controllers
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return repositoryUOF.StudentRepository.Update(student);
-
+                repositoryUOF.DBHelperOledb.OpenTransaction();
+                bool ok=repositoryUOF.StudentRepository.Update(student);
+                this.repositoryUOF.DBHelperOledb.Commit();
+                return ok;
             }
             catch (Exception ex)
             {
+                this.repositoryUOF.DBHelperOledb.Rollback();
                 Console.WriteLine(ex.ToString());
                 return false;
             }
             finally
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
+
             }
         }
 
