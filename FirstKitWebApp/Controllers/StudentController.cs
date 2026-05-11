@@ -24,16 +24,6 @@ namespace FirstKitWebApp.Controllers
             return View();
         }
         [HttpPost]
-        //public async Task<IActionResult> UpDate(Student student)
-        //{
-        //    ApiClient<bool> client = new ApiClient<bool>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/UpDate";
-        //    bool ok = await client.GetAsync();
-        //    return View(student);
-        //}
         public async Task<IActionResult> UpDate(Student student)
         {
             // 1. כאן אנחנו מגדירים את ה-Client עם סוג הנתונים Student
