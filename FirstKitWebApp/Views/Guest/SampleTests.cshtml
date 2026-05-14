@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Sample Tests";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-lime: #8ecf26;
+            --border-lime: #adff2f;
+            --bg-white: #f8f9fa;
+            --card-white: #ffffff;
+            --text-dark: #1a2f23;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative; /* מאפשר הצמדה של כפתור החזרה לפינת המסך */
+        }
+
+        /* עיצוב כפתור החזרה בפינה השמאלית העליונה */
+        .btn-back-home {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 2px solid var(--border-lime);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .btn-back-home:hover {
+                background: var(--border-lime);
+                transform: translateX(-5px); /* אפקט תנועה קטן שמאלה ברחרוף */
+                box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+                color: var(--text-dark);
+            }
+
+            /* הוספת חץ לפני הטקסט */
+            .btn-back-home::before {
+                content: '←';
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+        .tests-container {
+            max-width: 450px;
+            width: 100%;
+            background: var(--card-white);
+            border: 3px solid var(--border-lime);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 15px rgba(173, 255, 47, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-lime);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .button-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-test {
+            text-decoration: none;
+            display: block;
+            background: #ffffff;
+            color: var(--text-dark);
+            border: 2px solid var(--border-lime);
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+            .btn-test:hover {
+                background: var(--border-lime);
+                color: var(--text-dark);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(173, 255, 47, 0.4);
+            }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <a href="http://localhost:5108/guest/ViewFirstKit" class="btn-back-home">Back to Home</a>
+
+    <div class="tests-container">
+        <h1>Sample Tests</h1>
+
+        <div class="button-stack">
+            <a href="http://localhost:5239/Images/Tests/Test1.docx" class="btn-test" download>Test 1</a>
+            <a href="http://localhost:5239/Images/Tests/Test2.docx" class="btn-test" download>Test 2</a>
+            <a href="http://localhost:5239/Images/Tests/Test3.docx" class="btn-test" download>Test 3</a>
+        </div>
+
+        <p class="footer-note">Click on a test to download the Word file.</p>
+    </div>
+
+</body>
+</html>

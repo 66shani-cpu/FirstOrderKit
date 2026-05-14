@@ -12,6 +12,11 @@ namespace FirstKitWebApp.Controllers
             return View();
         }
         [HttpGet]
+        public IActionResult SampleTests()
+        {
+            return View();
+        }
+        [HttpGet]
         //כל פעם מידע שונה פעם ראשונה מציג הכל אחרי שבחרו התז משתנה וצריך לשים פרמטק
         public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
         {

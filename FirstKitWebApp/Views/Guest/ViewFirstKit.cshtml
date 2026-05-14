@@ -2,148 +2,6 @@
 @model OrderFirstKitViewModel
 
 @{
-    ViewData["Title"] = "ViewFirstKit";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
-}
-
-<link href="~/styles/guestpage.css" rel="stylesheet" />
-
-<style>
-    :root {
-        --neon-lime: #adff2f; /* ירוק ליים בהיר מאוד */
-        --dark-bg: #1e3a2b; /* רקע ירוק כהה עמוק */
-        --card-bg: rgba(255, 255, 255, 0.05);
-        --text-white: #ffffff;
-    }
-
-    body {
-        background-color: var(--dark-bg);
-        color: var(--text-white);
-        font-family: 'Assistant', sans-serif;
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 20px;
-        position: relative;
-    }
-
-    /* עיצוב ה-Header הפנימי של העמוד */
-    header {
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px 0;
-    }
-
-    .signup {
-        text-decoration: none;
-        color: var(--neon-lime);
-        border: 2px solid var(--neon-lime);
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-    }
-
-        .signup:hover {
-            background: var(--neon-lime);
-            color: var(--dark-bg);
-            box-shadow: 0 0 15px rgba(173, 255, 47, 0.6);
-        }
-
-    hr {
-        border: 0;
-        border-top: 1px solid rgba(173, 255, 47, 0.2);
-        margin: 20px 0;
-    }
-
-    /* עיצוב כרטיסי היחידות */
-    .units {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        justify-items: center;
-        margin-top: 40px;
-    }
-
-    .unit {
-        background: var(--card-bg);
-        border: 1px solid rgba(173, 255, 47, 0.2);
-        border-radius: 20px;
-        padding: 20px;
-        text-align: center;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        width: 180px;
-        backdrop-filter: blur(5px);
-    }
-
-        .unit:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-lime);
-            box-shadow: 0 10px 25px rgba(173, 255, 47, 0.2);
-            background: rgba(173, 255, 47, 0.05);
-        }
-
-        .unit img {
-            width: 100px;
-            height: 100px;
-            border-radius: 15px; /* פינות מעוגלות לתמונות היחידה */
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 2px solid transparent;
-            transition: border-color 0.3s;
-        }
-
-        .unit:hover img {
-            border-color: var(--neon-lime);
-        }
-
-        .unit p {
-            margin: 0;
-            font-weight: 700;
-            color: var(--text-white);
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-        }
-
-    /* התאמה למובייל */
-    @@media (max-width: 600px) {
-        .units {
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .unit {
-            width: 140px;
-        }
-    }
-</style>
-
-<div class="container">
-    <header>
-        <a href="http://localhost:5108/guest/SignUp" class="signup">Sign up</a>
-    </header>
-    <hr>
-
-    <section class="units">
-        @foreach (Unit unit in Model.Units)
-        {
-            <div class="unit">
-                <a href="http://localhost:5108/guest/GetUnitDetails/?unitId=@unit.UnitId">
-                    <img src="http://localhost:5239/Images/Units/@unit.UnitPicture" alt="@unit.UnitName">
-                </a>
-                <p>@unit.UnitName</p>
-            </div>
-        }
-    </section>
-</div> *@
-@using FirstOrderKitModel
-@model OrderFirstKitViewModel
-
-@{
     ViewData["Title"] = "יחידות בצה\"ל";
     Layout = "~/Views/Shared/MasterPage.cshtml"; // ודאי שזה השם המדויק של המאסטר פייג' שלך
 }
@@ -251,6 +109,137 @@
 <div class="container">
     <div class="signup-container">
         <a href="http://localhost:5108/guest/SignUp" class="signup">Sign up</a>
+    </div>
+
+
+    <hr>
+
+    <section class="units">
+        @foreach (var unit in Model.Units)
+        {
+            <div class="unit">
+                <a href="http://localhost:5108/guest/GetUnitDetails/?unitId=@unit.UnitId">
+                    <img src="http://localhost:5239/Images/Units/@unit.UnitPicture" alt="@unit.UnitName">
+                </a>
+                <p>@unit.UnitName</p>
+            </div>
+        }
+    </section>
+</div> *@
+@using FirstOrderKitModel
+@model OrderFirstKitViewModel
+
+@{
+    ViewData["Title"] = "יחידות בצה\"ל";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+<style>
+    :root {
+        --neon-lime: #adff2f;
+        --dark-bg: #1a2f23;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --text-white: #ffffff;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    /* הקונטיינר של הכפתורים בראש הדף */
+    .top-actions-container {
+        display: flex;
+        justify-content: flex-end; /* מצמיד את הכפתורים לשמאל בגלל ה-RTL */
+        gap: 30px; /* המרחב הגדול שביקשת בין הכפתורים */
+        margin-bottom: 25px;
+        align-items: center;
+    }
+
+    /* עיצוב הכפתורים - זהה להרשמה */
+    .btn-neon {
+        text-decoration: none;
+        color: var(--neon-lime);
+        border: 2px solid var(--neon-lime);
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 800;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        display: inline-block;
+    }
+
+        .btn-neon:hover {
+            background: var(--neon-lime);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px rgba(173, 255, 47, 0.5);
+            transform: translateY(-2px);
+        }
+
+    .units {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+        justify-items: center;
+        margin-top: 30px;
+    }
+
+    .unit {
+        background: var(--card-bg);
+        border: 1px solid rgba(173, 255, 47, 0.15);
+        border-radius: 24px;
+        padding: 35px 20px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        width: 240px;
+        backdrop-filter: blur(8px);
+    }
+
+        .unit:hover {
+            transform: translateY(-12px);
+            border-color: var(--neon-lime);
+            box-shadow: 0 15px 35px rgba(173, 255, 47, 0.15);
+            background: rgba(173, 255, 47, 0.04);
+        }
+
+        .unit img {
+            width: 130px;
+            height: 130px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .unit:hover img {
+            border-color: var(--neon-lime);
+        }
+
+        .unit p {
+            margin: 0;
+            font-weight: 800;
+            color: var(--text-white);
+            font-size: 1.4rem;
+        }
+
+    hr {
+        border: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 50px;
+    }
+</style>
+
+<div class="container">
+    <div class="top-actions-container">
+        @* הכפתור החדש - ממוקם משמאל להרשמה עם מרווח גדול *@
+        <a href="http://localhost:5108/guest/SampleTests" class="btn-neon">Sample Tests</a>
+
+        @* כפתור ההרשמה *@
+         <a href="http://localhost:5108/guest/SignUp" class="btn-neon">Sign up</a>
     </div>
 
     <hr>
