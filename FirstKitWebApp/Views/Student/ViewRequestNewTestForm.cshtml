@@ -198,13 +198,6 @@
                 box-shadow: 0 6px 15px rgba(173, 255, 47, 0.4);
                 filter: brightness(1.05);
             }
-
-        /* התאמה למובייל */
-        @@media (max-width: 600px) {
-            .form-container {
-                padding: 30px 20px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -212,7 +205,7 @@
     <div class="form-container">
         <h2>Request New Test</h2>
 
-        <form asp-controller="student" asp-action="ViewRequestNewTestForm" method="get">
+        <form asp-controller="student" asp-action="NewTestForm" method="get">
 
             <label for="unit">Filter by unit</label>
             <select name="unitId" id="unit">

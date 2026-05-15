@@ -9,6 +9,6 @@ namespace FirstOrderKitModel
     public class TestQuestionViewModel
     {
          public Question Question {  get; set; }
-        public List<Answer> QuestionAnswer { get; set; }
+         public List<Answer> QuestionAnswer { get; set; }
     }
 }

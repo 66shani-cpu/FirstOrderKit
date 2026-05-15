@@ -1,4 +1,5 @@
-﻿using FirstKitWSClient;
+﻿using FirstKitWebApp.Models;
+using FirstKitWSClient;
 using FirstOrderKitModel;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
@@ -77,25 +78,31 @@ namespace FirstKitWebApp.Controllers
             return View(/*test*/);
         }
         [HttpGet]
-        public async Task<IActionResult> GetNewTestForm()
+        public async Task<IActionResult> ViewRequestNewTestForm()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> NewTestForm(string difficulty, string subjectId)
-        {
-            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
+            ApiClient<RequestNewTest> client = new ApiClient<RequestNewTest>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
-            client.Path = "api/Student/GetNewTest";
-            client.AddParameter("subjectId", subjectId);
-            client.AddParameter("difficulty", difficulty);
-            List<TestQuestionViewModel> test = await client.GetAsync();
-
-            return View(test);
+            client.Path = "api/Student/GetUD";
+            RequestNewTest requestNewTest = await client.GetAsync();
+            return View(requestNewTest);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> NewTestForm(string difficulty, string subjectId)
+        //{
+        //    ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
+        //    client.Schema = "http";
+        //    client.Host = "localhost";
+        //    client.Port = 5239;
+        //    client.Path = "api/Student/GetNewTest";
+        //    client.AddParameter("subjectId", subjectId);
+        //    client.AddParameter("difficulty", difficulty);
+        //    List<TestQuestionViewModel> test = await client.GetAsync();
+
+        //    return View(test);
+        //}
 
 
         [HttpGet]
@@ -106,20 +113,40 @@ namespace FirstKitWebApp.Controllers
         }
         //פעולה שתפקידה להציג את הטופס של מילוי פרטים  של נושא ורמת קושי למבחן חדש 
         //כדי להציג טופס זה אני צריכה אובייקט של request new test שאותו אני צריכה לקבל מWeb Service ולהעביר את זה לView
-        [HttpGet]
-       public async Task<IActionResult> ViewRequestNewTestForm (string unitId, string difficulty)
+        [HttpPost]
+        public async Task<IActionResult> SaveTest(TestAnswer testAnswer)
         {
-            ApiClient<TestQuestionViewModel> client = new ApiClient<TestQuestionViewModel>();
+            int sum = 0;
+            if (testAnswer != null)
+            {
+               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer2 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer3 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer4 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+            }
+            //ליצור מודל שאותו צריך לשלוח 
+            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
-            client.Path = "api/Student/GetRequestNewTest";
-            TestQuestionViewModel testQuestionViewModel = await client.GetAsync();
+            client.Path = "api/Student/SaveTest";
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> NewTestForm(string unitId, string difficulty)
+        {
+            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Student/GetNewTest";
+            client.AddParameter("unitId", unitId);
+            client.AddParameter("difficulty", difficulty);
+            List<TestQuestionViewModel> testQuestionViewModel = await client.GetAsync();
             return View(testQuestionViewModel);
         }
-        // הוסיפי את השורות האלו כדי שהדף באמת ייפתח
-      
-
-
     }
 }

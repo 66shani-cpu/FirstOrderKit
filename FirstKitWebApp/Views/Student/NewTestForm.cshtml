@@ -2,28 +2,32 @@
 @model List<TestQuestionViewModel>
 @{
     ViewData["Title"] = "NewTestForm";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
+    //Layout = "~/Views/Shared/MasterPage.cshtml";
+    int count = 0;
 }
 <link href="~/styles/testform.css" rel="stylesheet" />
 <div class="container">
     <h1>טופס מבחן</h1>
-
-    <form>
+    
+    <form asp-controller="Student" asp-action="SaveTest" method="post">
+        <input type="hidden" name="UnitId" value="@ViewBag.UnitId" />
+        <input type="hidden" name="Difficulty" value="@ViewBag.Difficulty" />
         @foreach (TestQuestionViewModel testQuestionViewModel in Model)
         {
+            count++;
             <p>
                 @testQuestionViewModel.Question.QuestionText
             </p>
             <ul>
-                <li>
-                    @testQuestionViewModel.QuestionAnswer[0].AnswerText
-                </li>
-                <li>
-                    @testQuestionViewModel.QuestionAnswer[1].AnswerText
-                </li>
-                <li>
-                    @testQuestionViewModel.QuestionAnswer[2].AnswerText
-                </li>
+                @foreach (Answer answer in testQuestionViewModel.QuestionAnswer)
+                {
+                    string name = "answer" + count;
+                    <li>
+                        <input type="radio" name="@name" value="@answer.TrueFalse" />
+                        @answer.AnswerText
+                    </li>
+                }
+               
             </ul>
         }
         <button type="submit" class="submit-btn">submit</button>

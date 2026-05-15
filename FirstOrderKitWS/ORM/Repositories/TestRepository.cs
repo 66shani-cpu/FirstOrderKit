@@ -1,6 +1,7 @@
 ﻿using FirstOrderKitModel;
 using FirstOrderKitModel.ViewModel;
 using System.Data;
+using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstOrderKitWS.ORM.Repositories
@@ -97,6 +98,13 @@ namespace FirstOrderKitWS.ORM.Repositories
                 }
             }
             return tests;
+        }
+        public bool AddQuestion(string testId,string questionId)
+        {
+            string sql = @"INSERT INTO QuestionTest VALUES (@TestId, @QuestionId)";
+            this.helperOledb.AddParameter("@TestId", testId);
+            this.helperOledb.AddParameter("@QuestionId", questionId);
+            return this.helperOledb.Insert(sql) > 0;
         }
     }
 }
