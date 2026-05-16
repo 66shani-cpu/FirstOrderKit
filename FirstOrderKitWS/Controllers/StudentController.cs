@@ -3,6 +3,7 @@ using FirstOrderKitWS.ORM.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Reactive;
 using System.Reactive.Subjects;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
@@ -170,48 +171,72 @@ namespace FirstOrderKitWS.Controllers
         }
 
         [HttpGet]
-        public List<TestQuestionViewModel> SaveTest(string unitId, string difficulty)
+        public bool SaveTest(Test test)
           //פעולה שתפקידה ליצור ולהחזיר ViewModel מטיפוס RequestNewTest
         {
-            List<TestQuestionViewModel> testQuestionViewModel = new List<TestQuestionViewModel>();
+           //Test test = new Test();
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                List<Question> questionList = repositoryUOF.QuestionRepository.GetQuestion(unitId, difficulty);
-                repositoryUOF.DBHelperOledb.OpenTransaction();
-
-                Test test = new Test();
-                test.TestName = $"{unitId}-{difficulty}-" + DateTime.UtcNow.ToString();
-                repositoryUOF.TestRepository.Create(test);
-                test.TestId = repositoryUOF.GetLastInsertId();
-
-                foreach (Question question in questionList)
+                bool ok =repositoryUOF.TestRepository.Create(test);
+                if (ok)
                 {
-                    TestQuestionViewModel tqwm = new TestQuestionViewModel();
-                    tqwm.Question = question;
-                    tqwm.QuestionAnswer = repositoryUOF.AnswerRepository.GetAnswersByQuestion(question.QuestionId);
-                    repositoryUOF.TestRepository.AddQuestion(test.TestId, question.QuestionId);
-                    testQuestionViewModel.Add(tqwm);
-
+                    return true;
                 }
-                this.repositoryUOF.DBHelperOledb.Commit();
-                return testQuestionViewModel;
+                return false;
             }
             catch (Exception ex)
             {
-                this.repositoryUOF.DBHelperOledb.Rollback();
                 Console.WriteLine(ex.ToString());
-                return null;
+                return false;
             }
             finally
             {
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        //public List<TestQuestionViewModel> SaveTest(Test test)
+        ////פעולה שתפקידה ליצור ולהחזיר ViewModel מטיפוס RequestNewTest
+        //{
+        //    List<TestQuestionViewModel> testQuestionViewModel = new List<TestQuestionViewModel>();
+        //    try
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
+        //        List<Question> questionList = repositoryUOF.QuestionRepository.GetQuestion(unitId, difficulty);
+        //        repositoryUOF.DBHelperOledb.OpenTransaction();
+
+        //        Test test = new Test();
+        //        test.TestName = $"{unitId}-{difficulty}-" + DateTime.UtcNow.ToString();
+        //        repositoryUOF.TestRepository.Create(test);
+        //        test.TestId = repositoryUOF.GetLastInsertId();
+
+        //        foreach (Question question in questionList)
+        //        {
+        //            TestQuestionViewModel tqwm = new TestQuestionViewModel();
+        //            tqwm.Question = question;
+        //            tqwm.QuestionAnswer = repositoryUOF.AnswerRepository.GetAnswersByQuestion(question.QuestionId);
+        //            repositoryUOF.TestRepository.AddQuestion(test.TestId, question.QuestionId);
+        //            testQuestionViewModel.Add(tqwm);
+
+        //        }
+        //        this.repositoryUOF.DBHelperOledb.Commit();
+        //        return testQuestionViewModel;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.Rollback();
+        //        Console.WriteLine(ex.ToString());
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
+        //    }
+        //}
 
         //private bool SaveNewTest(string unitId, string difficulty, List<TestQuestionViewModel> testQuestionViews )
         //{
-            
+
         //    string json = Request.Form["model"].ToString();
         //    TestQuestionViewModel testQuestionViewModel = JsonSerializer.Deserialize<TestQuestionViewModel>(json);
         //    Question question = new Question();
@@ -243,6 +268,6 @@ namespace FirstOrderKitWS.Controllers
         //    }
 
         //}
-      
+
     }
 }

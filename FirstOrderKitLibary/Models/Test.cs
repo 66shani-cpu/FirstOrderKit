@@ -11,6 +11,10 @@ namespace FirstOrderKitModel
     {
         string testId;
         string testName;
+        string unitId;
+        string levelQuestion;
+        string studentId;
+        string grade;
         public Test()
         {
 
@@ -30,5 +34,26 @@ namespace FirstOrderKitModel
                 //ValidateProperty(value, "testName");//להחזיר זה זמני
             }
         }
+        public string UnitId
+        {
+            get { return this.unitId; }
+            set {  this.unitId = value; }
+        }
+        public string LevelQuestion
+        {
+            get { return this.levelQuestion; }
+            set { this.levelQuestion = value; }
+        }
+        public string StudentId
+        {
+            get { return this.studentId; }
+            set { this.studentId = value; }
+        }
+        public string Grade
+        {
+            get { return this.grade; }
+            set { this.grade = value; }
+        }
+
     }
 }

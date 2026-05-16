@@ -73,12 +73,9 @@ namespace FirstKitWebApp.Controllers
         //}
         public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         {
-
             //student.StudentNickName = "Sghhx";
             //student.UnitId = 1;
-           
             RegistationViewModel registationViewModel = new RegistationViewModel();
-
             if (ModelState.IsValid == false)
             {
                 registationViewModel.cities = await GetCitiesAsync();
@@ -94,8 +91,7 @@ namespace FirstKitWebApp.Controllers
             if (ok == true)
             {
                 HttpContext.Session.SetString("studentId", student.StudentId);
-                //מעבר לקונטרוללר אחר
-                //return RedirectToAction("GetNewTest", "Student");
+                //מעבר לקונטרולר אחר
                 return RedirectToAction("ViewStudentCreateTest", "Student");
             }
             else

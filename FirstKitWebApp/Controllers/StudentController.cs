@@ -2,6 +2,7 @@
 using FirstKitWSClient;
 using FirstOrderKitModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace FirstKitWebApp.Controllers
@@ -119,20 +120,34 @@ namespace FirstKitWebApp.Controllers
             int sum = 0;
             if (testAnswer != null)
             {
-               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer2 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer3 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer4 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
-               sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer2 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer3 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer4 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer5 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer6 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer7 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer8 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer9 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer10 == "true" ? sum += 10 : sum;
             }
             //ליצור מודל שאותו צריך לשלוח 
-            ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
+            Test test = new Test();
+            test.UnitId = testAnswer.unitId;
+            test.LevelQuestion = testAnswer.levelQuestion;
+            test.Grade = sum.ToString();
+            ApiClient<Test> client = new ApiClient<Test>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Student/SaveTest";
+           bool ok = await client.PostAsync(test);
+            // אם השמירה הצליחה, נעביר את המשתמש לעמוד הבית או דף סיכום
+            if (ok==true)
+            {
+                return RedirectToAction("ViewStudentCreateTest", "Student");
+            }
+            return RedirectToAction("ViewAbout", "Student");
         }
 
         [HttpGet]
