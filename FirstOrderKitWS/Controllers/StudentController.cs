@@ -174,7 +174,6 @@ namespace FirstOrderKitWS.Controllers
         public bool SaveTest(Test test)
           //פעולה שתפקידה ליצור ולהחזיר ViewModel מטיפוס RequestNewTest
         {
-           //Test test = new Test();
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();

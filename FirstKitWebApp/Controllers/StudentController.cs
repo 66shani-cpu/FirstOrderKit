@@ -142,7 +142,6 @@ namespace FirstKitWebApp.Controllers
             client.Port = 5239;
             client.Path = "api/Student/SaveTest";
            bool ok = await client.PostAsync(test);
-            // אם השמירה הצליחה, נעביר את המשתמש לעמוד הבית או דף סיכום
             if (ok==true)
             {
                 return RedirectToAction("ViewStudentCreateTest", "Student");
