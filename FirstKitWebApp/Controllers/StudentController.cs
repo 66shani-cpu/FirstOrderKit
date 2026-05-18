@@ -120,20 +120,23 @@ namespace FirstKitWebApp.Controllers
             int sum = 0;
             if (testAnswer != null)
             {
-                sum = testAnswer.answer1 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer2 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer3 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer4 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer5 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer6 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer7 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer8 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer9 == "true" ? sum += 10 : sum;
-                sum = testAnswer.answer10 == "true" ? sum += 10 : sum;
+                sum = testAnswer.answer1 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer2 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer3 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer4 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer5 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer6 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer7 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer8 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer9 == "True" ? sum += 10 : sum;
+                sum = testAnswer.answer10 == "True" ? sum += 10 : sum;
             }
             //ליצור מודל שאותו צריך לשלוח 
             Test test = new Test();
+            test.TestId = "0";
+            test.TestName = "test1";
             test.UnitId = testAnswer.unitId;
+            test.StudentId = HttpContext.Session.GetString("studentId");
             test.LevelQuestion = testAnswer.levelQuestion;
             test.Grade = sum.ToString();
             ApiClient<Test> client = new ApiClient<Test>();
@@ -159,6 +162,8 @@ namespace FirstKitWebApp.Controllers
             client.Path = "api/Student/GetNewTest";
             client.AddParameter("unitId", unitId);
             client.AddParameter("difficulty", difficulty);
+            ViewBag.UnitId = unitId;
+            ViewBag.Difficulty = difficulty;
             List<TestQuestionViewModel> testQuestionViewModel = await client.GetAsync();
             return View(testQuestionViewModel);
         }

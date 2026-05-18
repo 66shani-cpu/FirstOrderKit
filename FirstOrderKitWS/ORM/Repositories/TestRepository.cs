@@ -15,13 +15,18 @@ namespace FirstOrderKitWS.ORM.Repositories
         public bool Create(Test model)
         {
             string sql = @$"Insert into Tests 
-                           (TestName,UnitId,LevelQuestion,StudentId,Grade)
-                          values(@TestName,@UnitId,@LevelQuestion,@StudentId,@Grade)";
+                           (
+                              TestName,UnitId,LevelQuestion,StudentId,Grade
+                           )
+                          values
+                            (
+                                 @TestName,@UnitId,@LevelQuestion,@StudentId,@Grade
+                            )";
             this.helperOledb.AddParameter("@TestName", model.TestName);
-            this.helperOledb.AddParameter("UnitId", model.UnitId);
-            this.helperOledb.AddParameter("LevelQuestion", model.LevelQuestion);
-            this.helperOledb.AddParameter("StudentId", model.StudentId);
-            this.helperOledb.AddParameter("Grade", model.Grade);
+            this.helperOledb.AddParameter("@UnitId", model.UnitId);
+            this.helperOledb.AddParameter("@LevelQuestion", model.LevelQuestion);
+            this.helperOledb.AddParameter("@StudentId", model.StudentId);
+            this.helperOledb.AddParameter("@Grade", model.Grade);
             return this.helperOledb.Insert(sql) > 0;
         }
 
