@@ -1,48 +1,4 @@
-﻿@* 
-@{
-    ViewData["Title"] = "ViewStudentCreateTest";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
-}
-<link href="~/styles/studentpage.css" rel="stylesheet" />
-<div class="content">
-    <div class="right-section">
-      @{
-            string img = ViewBag.StudentId + ".jpg";
-      }
-        <img src="http://localhost:5239/Images/Students/@img" />
-    </div>
-    <div class="left-section">
-        <a href="http://localhost:5108/student/ViewRequestNewTestForm" class="requestNewTest">Request New Test</a>
-        <a href="http://localhost:5108/guest/SignUp" class="signup">Profile update</a>
-    </div>
-</div>
-<style>
-    .right-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-right: 50px; /* ← תוסיפי - תדחוף שמאלה */
-        margin-top: 50px; /* ← תוסיפי - תוריד למטה */
-    }
-
-    .image-placeholder {
-        width: 400px; /* ← הגדלתי מ-300px */
-        height: 360px; /* ← הגדלתי מ-270px */
-        background-color: #e0e0e0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .placeholder-icon {
-        width: 160px; /* ← הגדלתי מ-120px */
-        height: 160px; /* ← הגדלתי מ-120px */
-    }
-</style>
-
- *@
-@{
+﻿@{
     ViewData["Title"] = "ViewStudentCreateTest";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
@@ -70,10 +26,10 @@
     .content {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         gap: 60px;
         min-height: 100vh;
-        padding-top: 80px; /* מרווח מה-Header */
+        margin-top: 50px;
     }
 
     /* עיצוב צד ימין - תמונת הסטודנט */
@@ -107,6 +63,7 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
+        margin-top: 90px;
     }
 
         .left-section a {

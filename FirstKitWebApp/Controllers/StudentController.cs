@@ -25,6 +25,11 @@ namespace FirstKitWebApp.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult ViewGradeForm()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> UpDate(Student student)
         {
@@ -147,9 +152,9 @@ namespace FirstKitWebApp.Controllers
            bool ok = await client.PostAsync(test);
             if (ok==true)
             {
-                return RedirectToAction("ViewStudentCreateTest", "Student");
+                return View("ViewGradeForm", sum);
             }
-            return RedirectToAction("ViewAbout", "Student");
+            return View("ViewGradeForm", sum);
         }
 
         [HttpGet]

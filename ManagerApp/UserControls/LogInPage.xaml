@@ -5,136 +5,121 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ManagerApp.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="900">
+             d:DesignHeight="600" d:DesignWidth="1000">
+
     <UserControl.Resources>
-        <DropShadowEffect x:Key="DropShadow"
+        <DropShadowEffect x:Key="ModernShadow"
                           Color="#000000" 
                           Direction="270" 
-                          ShadowDepth="5" 
-                          BlurRadius="20" 
-                          Opacity="0.1"/>
+                          ShadowDepth="8" 
+                          BlurRadius="25" 
+                          Opacity="0.12"/>
     </UserControl.Resources>
-    <Grid>  
-        <Canvas Background="#F0F4F8">
-            <!-- כותרת -->
-            <Border Canvas.Left="150" Canvas.Top="40" 
-            Width="400" Height="60"
-            Background="#4A90E2" 
-            CornerRadius="10"
-            Effect="{StaticResource DropShadow}">
+
+    <Grid Background="#F4F7FA">
+
+        <StackPanel HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="460">
+
+            <Border Height="70"
+                    Background="#3F51B5" 
+                    CornerRadius="16,16,0,0"
+                    Effect="{StaticResource ModernShadow}">
                 <Label x:Name="label1" 
-               Content="Login Form" 
-               FontSize="28" 
-               FontWeight="Bold"
-               Foreground="White"
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Center"/>
+                       Content="Login Form" 
+                       FontSize="26" 
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
             </Border>
 
-            <!-- קונטיינר הטופס -->
-            <Border Canvas.Left="150" Canvas.Top="120" 
-            Width="400" Height="280"
-            Background="White" 
-            CornerRadius="15"
-            Padding="40">
-                <Border.Effect>
-                    <DropShadowEffect Color="#000000" 
-                            Direction="270" 
-                            ShadowDepth="5" 
-                            BlurRadius="20" 
-                            Opacity="0.1"/>
-                </Border.Effect>
+            <Border Background="White" 
+                    CornerRadius="0,0,16,16"
+                    Padding="45,40"
+                    Effect="{StaticResource ModernShadow}">
 
-                <Canvas>
-                    <!-- User Nick -->
+                <StackPanel>
                     <Label x:Name="label" 
-                   Content="Username" 
-                   Canvas.Left="20" 
-                   Canvas.Top="20"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Foreground="#2C3E50"/>
+                           Content="Username" 
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Foreground="#334155"
+                           Margin="0,0,0,8"/>
 
-                    <Border Canvas.Left="20" Canvas.Top="50"
-                    Width="280" Height="40"
-                    BorderBrush="#E0E0E0"
-                    BorderThickness="2"
-                    CornerRadius="8"
-                    Background="White">
+                    <Border Height="46"
+                            BorderBrush="#CBD5E1"
+                            BorderThickness="1.5"
+                            CornerRadius="8"
+                            Background="White"
+                            Margin="0,0,0,24">
                         <TextBox x:Name="textBoxNickName" 
-                         TextWrapping="Wrap"
-                         BorderThickness="0"
-                         VerticalContentAlignment="Center"
-                         Padding="10,0"
-                         FontSize="14"
-                         Foreground="#2C3E50"/>
+                                 TextWrapping="Wrap"
+                                 BorderThickness="0"
+                                 VerticalContentAlignment="Center"
+                                 Padding="12,0"
+                                 FontSize="15"
+                                 Foreground="#1E293B"/>
                     </Border>
 
-                    <!-- User Password -->
                     <Label x:Name="label_Copy" 
-                   Content="Password" 
-                   Canvas.Left="20" 
-                   Canvas.Top="110"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Foreground="#2C3E50"/>
+                           Content="Password" 
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Foreground="#334155"
+                           Margin="0,0,0,8"/>
 
-                    <Border Canvas.Left="20" Canvas.Top="140"
-                    Width="280" Height="40"
-                    BorderBrush="#E0E0E0"
-                    BorderThickness="2"
-                    CornerRadius="8"
-                    Background="White">
+                    <Border Height="46"
+                            BorderBrush="#CBD5E1"
+                            BorderThickness="1.5"
+                            CornerRadius="8"
+                            Background="White"
+                            Margin="0,0,0,35">
                         <TextBox x:Name="textBoxPassword"
-                            BorderThickness="0"
-                            VerticalContentAlignment="Center"
-                            Padding="10,0"
-                            FontSize="14"
-                            Foreground="#2C3E50"/>
+                                 BorderThickness="0"
+                                 VerticalContentAlignment="Center"
+                                 Padding="12,0"
+                                 FontSize="15"
+                                 Foreground="#1E293B"/>
                     </Border>
 
-                    <!-- Login Button -->
                     <Button x:Name="buttonLoin" 
-                    Content="Login" 
-                    Canvas.Left="20" 
-                    Canvas.Top="200" 
-                    Width="280" 
-                    Height="45"
-                    Click="buttonLoin_Click"
-                    Background="#4A90E2"
-                    Foreground="White"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    BorderThickness="0"
-                    Cursor="Hand">
+                            Content="Login" 
+                            Height="50"
+                            Click="buttonLoin_Click"
+                            Foreground="White"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            BorderThickness="0"
+                            Cursor="Hand">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="#4A90E2"/>
+                                <Setter Property="Background" Value="#3F51B5"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}"
-                                            CornerRadius="8"
-                                            Padding="10">
+                                                    CornerRadius="8">
                                                 <ContentPresenter HorizontalAlignment="Center" 
-                                                        VerticalAlignment="Center"/>
+                                                                  VerticalAlignment="Center"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#357ABD"/>
+                                        <Setter Property="Background" Value="#303F9F"/>
                                     </Trigger>
                                     <Trigger Property="IsPressed" Value="True">
-                                        <Setter Property="Background" Value="#2D6DA3"/>
+                                        <Setter Property="Background" Value="#1A237E"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                     </Button>
-                </Canvas>
+                </StackPanel>
             </Border>
-        </Canvas>
+        </StackPanel>
     </Grid>
 </UserControl>

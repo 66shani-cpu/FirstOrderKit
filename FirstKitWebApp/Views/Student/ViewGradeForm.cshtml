@@ -1,0 +1,152 @@
+﻿@model int
+@{
+    ViewData["Title"] = "ViewGradeForm";
+    Layout = null;
+
+    // ניסוח הודעה משתנה בהתאם לציון שהתלמיד קיבל
+    string feedbackMessage = "כל הכבוד על המאמץ וההשקעה!";
+    string feedbackSubMessage = "המשך כך, כל מבחן מקדם אותך קרוב יותר להצלחה.";
+
+    if (Model >= 90)
+    {
+        feedbackMessage = "מצוין! כל הכבוד על הציון המדהים!";
+        feedbackSubMessage = "הפגנת שליטה מוחלטת בחומר, גאים בך מאד!";
+    }
+    else if (Model >= 70)
+    {
+        feedbackMessage = "עבודה יפה מאד! כל הכבוד!";
+        feedbackSubMessage = "הבנת היטב את הנושא, המשך לתרגל ולהשתפר!";
+    }
+}
+
+<style>
+    :root {
+        --neon-lime: #adff2f;
+        --dark-bg: #1a2f23;
+        --glass-bg: rgba(255, 255, 255, 0.9); /* רקע לבן כמעט מלא עם שקיפות עדינה */
+        --text-dark: #111111;
+    }
+
+    body {
+        /* רקע התמונה הכהה התואם למסכי הסטודנט */
+        background: linear-gradient(rgba(26, 47, 35, 0.8), rgba(26, 47, 35, 0.8)), url('https://images.unsplash.com/photo-1590402485284-2c5a7576b54b?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        font-family: 'Assistant', sans-serif;
+    }
+
+    .result-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* יישור לחלק העליון כדי לאפשר שליטה עם Margin */
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .result-card {
+        background-color: var(--glass-bg);
+        border: 2px solid var(--neon-lime); /* מסגרת ירוק זוהר */
+        box-shadow: 0 0 25px rgba(173, 255, 47, 0.4); /* אפקט זוהר עדין למסגרת */
+        padding: 40px;
+        border-radius: 25px; /* פינות מעוגלות כמו כרטיס הסטודנט */
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        margin-top: 50px; /* רווח של הטופס מהחלק העליון של המסך */
+    }
+
+    .inner-border {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .score-circle {
+        width: 120px;
+        height: 120px;
+        background-color: var(--dark-bg); /* רקע כהה לעיגול הציון בעל נוכחות */
+        color: var(--neon-lime); /* כתב ירוק זוהר בפנים */
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 25px auto;
+        border: 2px solid var(--neon-lime);
+        box-shadow: 0 0 15px rgba(173, 255, 47, 0.3);
+    }
+
+    .score-number {
+        font-size: 38px;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    .score-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 2px;
+    }
+
+    .feedback-title {
+        color: var(--text-dark); /* כתב שחור */
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .feedback-text {
+        color: #444444; /* כתב כהה קריא */
+        font-size: 16px;
+        margin-bottom: 35px;
+        line-height: 1.5;
+        font-weight: 600;
+    }
+
+    .btn-return {
+        display: inline-block;
+        background-color: var(--neon-lime); /* כפתור ירוק זוהר */
+        color: var(--dark-bg); /* טקסט כהה */
+        border: none;
+        padding: 14px 35px;
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-decoration: none;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(173, 255, 47, 0.3);
+    }
+
+        .btn-return:hover {
+            background-color: #ffffff;
+            color: var(--dark-bg);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(173, 255, 47, 0.5);
+        }
+</style>
+
+<div class="result-container">
+    <div class="result-card">
+        <div class="inner-border">
+
+            <div class="score-circle">
+                <div class="score-number">@Model</div>
+                <div class="score-label">ציון</div>
+            </div>
+
+            <h1 class="feedback-title">@feedbackMessage</h1>
+            <p class="feedback-text">@feedbackSubMessage</p>
+
+            <a asp-controller="Student" asp-action="ViewStudentCreateTest" class="btn-return">
+                חזרה לעמוד הראשי
+            </a>
+
+        </div>
+    </div>
+</div>

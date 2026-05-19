@@ -1,211 +1,114 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "MasterPage";
+
+    // בדיקת ה-Session
+    string studentId = Context.Session.GetString("studentId");
+    bool isStudentLoggedIn = !string.IsNullOrEmpty(studentId);
 }
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --nav-bg: rgba(45, 90, 65, 0.85);
+            --neon-green: #adff2f;
+            --text-white: #ffffff;
+        }
 
+        body {
+            margin: 0;
+            padding-top: 80px;
+            background-color: #1e3a2b;
+            font-family: 'Assistant', sans-serif;
+        }
 
-    <!DOCTYPE html>
-    <html>
- @*    <head>
-        <meta charset="utf-8" />
-        <title></title>
-    <link href="~/styles/guestpage.css" rel="stylesheet" />
-    </head>
-    <body>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            border-bottom: 2px solid rgba(173, 255, 47, 0.3);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
 
-        <header class="header">
-            <h1 class="meitavtest">Meitav test</h1>
-        <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
-        <a href="http://localhost:5108/Guest/GetTest" class="tests-link">Tests</a>
-        <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
+        .meitavtest {
+            color: var(--neon-green);
+            font-weight: 800;
+            font-size: 1.6rem;
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(173, 255, 47, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+            .header a:hover {
+                color: var(--neon-green);
+                background: rgba(173, 255, 47, 0.15);
+            }
+
+        .login-link {
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green) !important;
+        }
+
+            .login-link:hover {
+                background: var(--neon-green) !important;
+                color: #1e3a2b !important;
+                box-shadow: 0 0 15px rgba(173, 255, 47, 0.5);
+            }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="meitavtest">Meitav Test</h1>
+        <nav class="nav-links">
+
+            @if (isStudentLoggedIn)
+            {
+                <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
+                <a href="http://localhost:5108/Guest/GetTest" class="tests-link">Tests</a>
+            }
+            else
+            {
+                <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
+                <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
+            }
+
+        </nav>
     </header>
+
+    <main>
         @RenderBody()
-    </body> *@
-@* <style>
-    :root {
-        --nav-bg: rgba(26, 47, 35, 0.9); /* ירוק כהה שקוף */
-        --neon-green: #4ade80;
-        --text-white: #ffffff;
-    }
+    </main>
 
-    body {
-        margin: 0;
-        padding-top: 80px; /* משאיר מקום ל-Header שלא יסתיר את התוכן */
-        background-color: #1a2f23;
-    }
-
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: var(--nav-bg);
-        backdrop-filter: blur(10px); /* אפקט טשטוש יפה */
-        display: flex;
-        align-items: center;
-        padding: 0 5%;
-        border-bottom: 1px solid rgba(74, 222, 128, 0.2);
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .meitavtest {
-        color: var(--neon-green);
-        font-family: 'Assistant', sans-serif;
-        font-weight: 800;
-        font-size: 1.5rem;
-        margin: 0;
-        margin-left: auto; /* דוחף את הלוגו לימין */
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    .header a {
-        text-decoration: none;
-        color: var(--text-white);
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        padding: 8px 15px;
-        border-radius: 8px;
-    }
-
-        /* אפקט ריחוף על הקישורים */
-        .header a:hover {
-            color: var(--neon-green);
-            background: rgba(74, 222, 128, 0.1);
-        }
-
-    /* כפתור ה-Login יקבל עיצוב מיוחד */
-    .login-link {
-        border: 1px solid var(--neon-green);
-        color: var(--neon-green) !important;
-    }
-
-        .login-link:hover {
-            background: var(--neon-green) !important;
-            color: #1a2f23 !important;
-        }
-</style>
-
-<header class="header">
-    <h1 class="meitavtest">Meitav Test</h1>
-    <nav class="nav-links">
-        <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
-        <a href="http://localhost:5108/Guest/GetTest" class="tests-link">Tests</a>
-        <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
-    </nav>
-</header>
-
-<main>
-    @RenderBody()
-</main>
-</html> *@
-<style>
-    :root {
-        /* ירוק בהיר מאוד ושקוף לסרגל הניווט */
-        --nav-bg: rgba(45, 90, 65, 0.85);
-        /* ירוק ליים בהיר ובולט להדגשות ולוגו */
-        --neon-green: #adff2f;
-        /* לבן נקי לטקסט */
-        --text-white: #ffffff;
-    }
-
-    body {
-        margin: 0;
-        padding-top: 80px;
-        /* שיניתי לירוק כהה "רך" יותר כדי שהירוק הבהיר יקפוץ לעין */
-        background-color: #1e3a2b;
-    }
-
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: var(--nav-bg);
-        backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        padding: 0 5%;
-        /* גבול תחתון בירוק בהיר */
-        border-bottom: 2px solid rgba(173, 255, 47, 0.3);
-        z-index: 1000;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-
-    .meitavtest {
-        /* הלוגו עכשיו בירוק ליים בהיר מאוד */
-        color: var(--neon-green);
-        font-family: 'Assistant', sans-serif;
-        font-weight: 800;
-        font-size: 1.6rem;
-        margin: 0;
-        position: absolute; /* מוציא את הכותרת מהזרימה הרגילה */
-        left: 50%; /* מזיז אותה לאמצע המסך */
-        transform: translateX(-50%); /* מקזז את הרוחב של עצמה כדי שזה יהיה אמצע מדויק */
-        margin-left: auto;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        text-shadow: 0 0 10px rgba(173, 255, 47, 0.4);
-    }
-
-    .nav-links {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    .header a {
-        text-decoration: none;
-        color: var(--text-white);
-        font-weight: 600;
-        font-size: 1.05rem;
-        transition: all 0.3s ease;
-        padding: 8px 15px;
-        border-radius: 8px;
-    }
-
-        .header a:hover {
-            /* ריחוף בצבע ירוק בהיר */
-            color: var(--neon-green);
-            background: rgba(173, 255, 47, 0.15);
-        }
-
-    .login-link {
-        /* מסגרת בולטת בירוק בהיר */
-        border: 2px solid var(--neon-green);
-        color: var(--neon-green) !important;
-    }
-
-        .login-link:hover {
-            /* בתוך הכפתור יהיה ירוק בהיר והטקסט יהיה כהה לקריאות */
-            background: var(--neon-green) !important;
-            color: #1e3a2b !important;
-            box-shadow: 0 0 15px rgba(173, 255, 47, 0.5);
-        }
-</style>
-
-<header class="header">
-    <h1 class="meitavtest">Meitav Test</h1>
-    <nav class="nav-links">
-        <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
-        <a href="http://localhost:5108/Guest/GetTest" class="tests-link">Tests</a>
-        <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
-    </nav>
-</header>
-
-<main>
-    @RenderBody()
-</main>
-
-
-
+</body>
+</html>

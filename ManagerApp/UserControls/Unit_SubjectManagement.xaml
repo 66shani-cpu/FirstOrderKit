@@ -45,19 +45,8 @@
                Height="68"
                Canvas.Left="10"
                Canvas.Top="5"/>
-
-                            <!--<Button x:Name="btnInfo"
-                 Height="32" 
-                 Canvas.Left="540" 
-                 Canvas.Top="25"
-                 Width="32"
-                 Cursor="Hand"
-                                    
-                 Style="{StaticResource ImageButtonStyle}" Click="btnInfo_Click">
-                                <Image Source="/Images/Information.png"/>
-                            </Button>-->
                             <Button x:Name="btnEdit"
-             Canvas.Left="585"
+             Canvas.Left="720"
              Canvas.Top="25"
              Width="32"
              Cursor="Hand"
@@ -66,7 +55,7 @@
                                 <Image Source="/Images/Update.png" />
                             </Button>
                             <Button x:Name="btnDelete"
-                  Canvas.Left="630"
+                  Canvas.Left="765"
                   Canvas.Top="25"
                   Width="32"
                   Style="{StaticResource ImageButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"

@@ -47,6 +47,8 @@
   <ItemGroup>
     <ProjectReference Include="..\FirstKitWebApp\FirstKitWebApp.csproj" />
     <ProjectReference Include="..\FirstKitWSClient\FirstKitWSClient.csproj" />
+    <ProjectReference Include="..\FirstOrderKitLibary\FirstOrderKitModel.csproj" />
+    <ProjectReference Include="..\FirstOrderKitWS\FirstOrderKitWS.csproj" />
   </ItemGroup>
 
   <ItemGroup>

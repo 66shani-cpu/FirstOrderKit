@@ -75,28 +75,26 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-        
-
-        [HttpGet]
-        public Message Message(string messageId)
-        {
-            //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
-            try
-            {
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                Message message = repositoryUOF.MessageRepository.GetById(messageId);
-                return message;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
+        //[HttpGet]
+        //public Message Message(string messageId)
+        //{
+        //    //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
+        //    try
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
+        //        Message message = repositoryUOF.MessageRepository.GetById(messageId);
+        //        return message;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
+        //    }
+        //}
 
 
         [HttpGet]
@@ -119,25 +117,25 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-        [HttpPost]
-        public bool UpDate(Student student)
-        {
-            try
-            {
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return repositoryUOF.StudentRepository.Update(student);
+        //[HttpPost]
+        //public bool UpDate(Student student)
+        //{
+        //    try
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
+        //        return repositoryUOF.StudentRepository.Update(student);
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return false;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
+        //    }
+        //}
         [HttpGet]
         public double GetReportsAVG()
         {
