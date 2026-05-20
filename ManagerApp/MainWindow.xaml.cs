@@ -21,9 +21,9 @@ namespace ManagerApp
         LogInPage logInPage;
         Student student;
         Home home;
-        Reports reports;
         QuestionManagement questionManagement;
         Unit_SubjectManagement unit_SubjectManagement;
+        UnitReportUserControl unitReportUserControl;
         ExitPage exitPage;
 
         bool isLogin = false;
@@ -40,8 +40,8 @@ namespace ManagerApp
         {
             this.hyperlinkQuestion.IsEnabled = this.isLogin;
             this.hyperlinkStudent.IsEnabled = this.isLogin;
-            this.hyperlinkReports.IsEnabled = this.isLogin;
             this.hyperlinkUnit_Subject.IsEnabled = this.isLogin;
+            this.hyperlinkUnit_ReportUserControl.IsEnabled = this.isLogin;
         }
        
         public MainWindow()
@@ -75,22 +75,13 @@ namespace ManagerApp
                 
             }this.frameMain.Content = this.student;
         }
-        private void ViewHome()
+        private void ViewUnitReportUserControl()
         {
-            if (this.home == null)
+            if (this.unitReportUserControl == null)
             {
-                this.home = new Home();
+                this.unitReportUserControl = new UnitReportUserControl();
                 
-            }this.frameMain.Content = this.home;
-        }
-        private void ViewReports()
-        {
-            if (this.reports == null)
-            {
-                this.reports = new Reports();
-              
-            } 
-            this.frameMain.Content = this.reports;
+            }this.frameMain.Content = this.unitReportUserControl;
         }
         private void ViewQuestionManagement()
         {
@@ -137,11 +128,6 @@ namespace ManagerApp
         {
             frameMain.Navigate(new StartPage());
         }
-      
-        private void hyperlinkReports_Click(object sender, RoutedEventArgs e)
-        {
-            ViewReports();
-        }
         private void hyperlinkQuestion_Click(object sender, RoutedEventArgs e)
         {
             ViewQuestionManagement();
@@ -153,6 +139,11 @@ namespace ManagerApp
         private void hyperlinkUnit_Subject_Click(object sender, RoutedEventArgs e)
         {
             ViewUnit_SubjectManagement();
+        }
+
+        private void hyperlinkUnitReportUserControl(object sender, RoutedEventArgs e)
+        {
+            ViewUnitReportUserControl();
         }
         private void hyperlinkExit_Click(object sender, RoutedEventArgs e)
         {
