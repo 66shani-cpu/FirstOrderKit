@@ -8,6 +8,7 @@ namespace FirstOrderKitModel.ViewModel
 {
     public class UnitBarData
     {
+        public UnitBarData() { }
         public List<int> Pass { get; set; }
         public List<int> NotPass { get; set; }
         public List<string> Labels { get; set; }

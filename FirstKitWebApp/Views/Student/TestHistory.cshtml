@@ -1,41 +1,174 @@
-﻿@using FirstOrderKitModel
+﻿@using FirstOrderKitModel;
+@model List<Test>
 @{
-    ViewData["Title"] = "TestHistory";
-    Layout = "~/Views/Shared/MasterPage.cshtml";
+    ViewData["Title"] = "Test History";
+    Layout = null;
 }
 
-<link href="~/styles/testhistory.css" rel="stylesheet" />
-<div class="container">
-    <h1>Meitav test</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-lime: #8ecf26;
+            --border-lime: #adff2f;
+            --bg-white: #f8f9fa;
+            --card-white: #ffffff;
+            --text-dark: #1a2f23;
+        }
 
-    <div class="table-header">
-        <span>Date</span>
-        <span>Unit Name</span>
-        <span>Unit Image</span>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 20px 40px 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* עיצוב כפתור החזרה בפינה השמאלית העליונה */
+        .btn-back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 2px solid var(--border-lime);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+            .btn-back-home:hover {
+                background: var(--border-lime);
+                transform: translateX(-5px);
+                box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+                color: var(--text-dark);
+            }
+
+            .btn-back-home::before {
+                content: '←';
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+        /* קונטיינר מרכזי */
+        .history-container {
+            max-width: 500px;
+            width: 100%;
+            background: var(--card-white);
+            border: 3px solid var(--border-lime);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 15px rgba(173, 255, 47, 0.2);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-lime);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* סידור הסטאק בטור אנכי */
+        .tests-list-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* שורת מבחן מעוצבת */
+        .test-row {
+            display: flex;
+            justify-content: space-between; /* דוחף את השם לימין ואת הציון לשמאל */
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid var(--border-lime);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+        }
+
+            .test-row:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(173, 255, 47, 0.3);
+                border-color: var(--neon-lime);
+            }
+
+        /* עיצוב שם המבחן */
+        .test-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        /* עיצוב הציון */
+        .test-grade-badge {
+            background: var(--text-dark);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 1rem;
+            border: 1px solid var(--border-lime);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="http://localhost:5108/Student/ViewStudentCreateTest" class="btn-back-home">Back to Home</a>
+
+    <div class="history-container">
+        <h1>Test History</h1>
+
+        <div class="tests-list-stack">
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var test in Model)
+                {
+                    <div class="test-row">
+                        <span class="test-name">@test.TestName</span>
+                        <span class="test-grade-badge">Grade: @test.Grade</span>
+                    </div>
+                }
+            }
+            else
+            {
+                <p style="color: #6b7280; font-style: italic;">No tests found.</p>
+            }
+        </div>
     </div>
 
-    <div class="row">
-        <span>Date</span>
-        <span>Unit Name</span>
-        <div class="image-placeholder"></div>
-    </div>
+</body>
+</html>
 
-    <div class="row">
-        <span>Date</span>
-        <span>Unit Name</span>
-        <div class="image-placeholder"></div>
-    </div>
 
-    <div class="row">
-        <span>Date</span>
-        <span>Unit Name</span>
-        <div class="image-placeholder"></div>
-    </div>
-
-    <div class="row">
-        <span>Date</span>
-        <span>Unit Name</span>
-        <div class="image-placeholder"></div>
-    </div>
-</div>
 

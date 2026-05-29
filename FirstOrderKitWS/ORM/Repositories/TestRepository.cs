@@ -70,6 +70,29 @@ namespace FirstOrderKitWS.ORM.Repositories
                 //return this.modelCreaters.TestCreater.CreateModel(reader);
             }
         }
+        public List<Test> GetByStudentId(string studentId)
+        {
+            // יצירת רשימה ריקה שאליה נאסוף את המבחנים
+            List<Test> testsList = new List<Test>();
+
+            string sql = $@"SELECT Tests.Grade, Tests.TestName
+FROM Tests
+WHERE (((Tests.StudentId)=@studentId));
+";
+            this.helperOledb.AddParameter("@studentId", studentId);
+
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    // יצירת מודל מבחן בודד מתוך השורה הנוכחית
+                    Test currentTest = this.modelCreaters.TestHistoryCreator.CreateModel(reader);
+                    // הוספת המבחן לרשימה
+                    testsList.Add(currentTest);
+                }
+            }
+            return testsList;
+        }
 
         public bool Update(Test model)
         {

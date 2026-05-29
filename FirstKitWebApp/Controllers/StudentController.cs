@@ -66,6 +66,8 @@ namespace FirstKitWebApp.Controllers
             client.AddParameter("nickName", StudentNickName);
             client.AddParameter("password", password);
             string id = await client.GetAsync();
+            if (id == null)
+                return View("ViewLoginForm");
             HttpContext.Session.SetString("studentId", id);
             ViewBag.StudentId = HttpContext.Session.GetString("studentId");
             // get sdata from WS
@@ -109,11 +111,23 @@ namespace FirstKitWebApp.Controllers
 
         //    return View(test);
         //}
-
+       
 
         [HttpGet]
         public async Task<IActionResult> ViewStudentCreateTest()
         {
+            ApiClient<Student> client = new ApiClient<Student>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Student/GetStudent";
+            client.AddParameter("studentId", HttpContext.Session.GetString("studentId"));
+            Student student = await client.GetAsync();
+            if(student == null)
+            {
+                ViewBag.ImageExt = "1.jpg";
+            }
+            ViewBag.ImageExt = student.StudentImage;
             ViewBag.StudentId = HttpContext.Session.GetString("studentId");
             return View();
         }
@@ -139,7 +153,7 @@ namespace FirstKitWebApp.Controllers
             //ליצור מודל שאותו צריך לשלוח 
             Test test = new Test();
             test.TestId = "0";
-            test.TestName = "test1";
+            test.TestName = $"{testAnswer.unitId}-{testAnswer.levelQuestion}-" + DateTime.UtcNow.ToString();
             test.UnitId = testAnswer.unitId;
             test.StudentId = HttpContext.Session.GetString("studentId");
             test.LevelQuestion = testAnswer.levelQuestion;
@@ -172,5 +186,21 @@ namespace FirstKitWebApp.Controllers
             List<TestQuestionViewModel> testQuestionViewModel = await client.GetAsync();
             return View(testQuestionViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetTestHistoryById()
+        {
+            ApiClient<List<Test>> client = new ApiClient<List<Test>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Student/GetTestByStudent";
+            string studentId = HttpContext.Session.GetString("studentId");
+            client.AddParameter("studentId", studentId);
+            List<Test> testHistory = await client.GetAsync();
+            return View("TestHistory", testHistory);
+        }
+
+        
+        
     }
 }

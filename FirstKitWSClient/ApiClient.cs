@@ -232,8 +232,8 @@ namespace FirstKitWSClient
             {
                 httpRequest.Method = HttpMethod.Post;
                 httpRequest.RequestUri = this.uriBuilder.Uri;
-
-                string json = JsonSerializer.Serialize<T>(model);
+                var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+                string json = JsonSerializer.Serialize<T>(model,options);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 httpRequest.Content = content;
 

@@ -59,7 +59,11 @@ if(ViewBag["Error"]!=null)
         <button type="button">Button</button>
         <span asp-validation-for="student.StudentImage" class="errorDate"></span>
     </div>
-
+    
+    <label for="Id">משהו שלא עוד</label>
+    <input asp-for="student.StudentId" type="text" id="Id" placeholder="Placeholder">
+    
+    
     <div class="buttons">
         <button type="reset">Restart</button>
         <button type="submit">Post</button>

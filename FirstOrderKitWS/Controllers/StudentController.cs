@@ -170,12 +170,13 @@ namespace FirstOrderKitWS.Controllers
             }
         }
 
-        [HttpGet]
-        public bool SaveTest(Test test)
+        [HttpPost]
+        public bool SaveTest([FromBody] Test test)
           //פעולה שתפקידה ליצור ולהחזיר ViewModel מטיפוס RequestNewTest
         {
             try
             {
+                
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 bool ok =repositoryUOF.TestRepository.Create(test);
                 if (ok)
@@ -267,6 +268,25 @@ namespace FirstOrderKitWS.Controllers
         //    }
 
         //}
+
+        [HttpGet]
+        public List<Test> GetTestByStudent(string studentId)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return repositoryUOF.TestRepository.GetByStudentId(studentId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
 
     }
 }

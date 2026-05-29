@@ -107,9 +107,9 @@
 <div class="content">
     <div class="right-section">
         @{
-            string img = ViewBag.StudentId + ".jpg";
+            string img = ViewBag.ImageExt;
         }
-        <img src="http://localhost:5239/Images/Students/@img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" />
+        <img src="http://localhost:5239/Images/Students/@img" onclick="alert(`http://localhost:5239/Images/Students/@img`)" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" />
         @* <h2 style="color: var(--neon-lime); margin-top: 15px;">Welcome back!</h2> *@
     </div>
 

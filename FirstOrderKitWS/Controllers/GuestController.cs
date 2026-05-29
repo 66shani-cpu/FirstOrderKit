@@ -139,6 +139,7 @@ namespace FirstOrderKitWS.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 this.repositoryUOF.DBHelperOledb.Rollback();
                 return false;
             }

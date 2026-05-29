@@ -1,5 +1,6 @@
 ﻿using FirstOrderKitModel.ViewModel;
 using FirstOrderKitWS.ORM;
+using FirstOrderKitWS.ORM.CrearerModel;
 
 namespace FirstOrderKitWS
 {
@@ -14,6 +15,7 @@ namespace FirstOrderKitWS
         TestCreater testCreater;
         UnitCreater unitCreater;
         ReportsViewModelCreator reportsViewModelCreator;
+        TestHistoryCreator testHistory;
         public AnswerCreator AnswerCreator
         {
             get
@@ -96,6 +98,14 @@ namespace FirstOrderKitWS
             }
         }
 
-
+        public TestHistoryCreator TestHistoryCreator
+        {
+            get
+            {
+                if (this.testHistory == null)
+                    this.testHistory = new TestHistoryCreator();
+                return this.testHistory;
+            }
+        }
     }
 }

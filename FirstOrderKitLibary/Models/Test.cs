@@ -25,8 +25,8 @@ namespace FirstOrderKitModel
             set { this.testId = value; }
         }
         [Required(ErrorMessage = "TestName Text cannot be empty")]
-        [StringLength(10, MinimumLength = 3, ErrorMessage = "TestName")]
-        [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
+        //[StringLength(10, MinimumLength = 3, ErrorMessage = "TestName")]
+        //[FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
        public  string TestName
         {
             get { return this.testName; }
