@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Weekly Horoscope";
+    Layout = null;
+    // בדיקת ה-Session
+    string studentId = Context.Session.GetString("studentId");
+    bool isStudentLoggedIn = !string.IsNullOrEmpty(studentId);
+    // רשימת המזלות לצורך יצירת ה-Select
+    var signs = new List<string> { "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces" };
+}
+
+<style>
+    .horoscope-container {
+        background: rgba(26, 47, 35, 0.85);
+        padding: 40px;
+        border-radius: 30px;
+        border: 2px solid #adff2f;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        max-width: 600px;
+        margin: 50px auto;
+        font-family: 'Assistant', sans-serif;
+    }
+
+    .horoscope-title {
+        color: #adff2f;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* עיצוב טופס הבחירה */
+    .selection-form {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 5px;
+    }
+
+        .form-group label {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+    .selection-form select, .selection-form input {
+        background: #ffffff;
+        border: 2px solid #adff2f;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 1rem;
+        color: #1a2f23;
+        outline: none;
+        font-weight: bold;
+    }
+
+    .btn-submit-luck {
+        background: #adff2f;
+        color: #1a2f23;
+        border: none;
+        padding: 12px 25px;
+        font-weight: 800;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .btn-submit-luck:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(173, 255, 47, 0.4);
+        }
+
+    .horoscope-content {
+        font-size: 1.25rem;
+        color: #ffffff;
+        line-height: 1.8;
+        text-align: justify;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 4px solid #adff2f;
+        margin-top: 20px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 30px;
+        text-decoration: none;
+        color: #1a2f23;
+        background: #adff2f;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 800;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(173, 255, 47, 0.6);
+            background: #ffffff;
+        }
+</style>
+
+<div class="horoscope-container">
+    <div class="horoscope-title">🔮 Weekly Horoscope</div>
+
+    <form method="get" action="/Student/ViewHoroscope" class="selection-form">
+
+        <div class="form-group">
+            <label>Choose Sign:</label>
+            <select name="sign">
+                @foreach (var s in signs)
+                {
+                    // דואג להשאיר את המזל שהמשתמש בחר מסומן גם אחרי ריענון הדף
+                    if (s == ViewBag.SelectedSign)
+                    {
+                        <option value="@s" selected="selected">@s.ToUpper()</option>
+                    }
+                    else
+                    {
+                        <option value="@s">@s.ToUpper()</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Week Start:</label>
+            <input type="date" name="start" value="@ViewBag.SelectedStart" />
+        </div>
+
+        <button type="submit" class="btn-submit-luck">Check Luck</button>
+    </form>
+
+    <div class="horoscope-content">
+        @ViewBag.HoroscopeOverview
+    </div>
+    <nav class="nav-links">
+
+        @if (isStudentLoggedIn)
+        {
+            <a href="/Student/ViewStudentCreateTest" class="btn-back">Back to Dashboard</a>
+        }
+        else
+        {
+            <a href="/guest/ViewFirstKit" class="btn-back">Back to Dashboard</a>
+        }
+
+    </nav>
+</div>

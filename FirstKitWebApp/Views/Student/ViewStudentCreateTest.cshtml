@@ -53,7 +53,7 @@
             width: 300px; /* גודל תמונת הסטודנט */
             height: 300px;
             border-radius: 20px;
-            object-fit: cover;
+            object-fit: contain;
             border: 3px solid var(--neon-lime);
             box-shadow: 0 0 20px rgba(173, 255, 47, 0.3);
         }
@@ -110,7 +110,6 @@
             string img = ViewBag.ImageExt;
         }
         <img src="http://localhost:5239/Images/Students/@img" onclick="alert(`http://localhost:5239/Images/Students/@img`)" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" />
-        @* <h2 style="color: var(--neon-lime); margin-top: 15px;">Welcome back!</h2> *@
     </div>
 
     <div class="left-section">

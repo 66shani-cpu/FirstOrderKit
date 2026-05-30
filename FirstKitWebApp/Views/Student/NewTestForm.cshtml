@@ -1,41 +1,4 @@
-﻿@* @using FirstOrderKitModel
-@model List<TestQuestionViewModel>
-@{
-    ViewData["Title"] = "NewTestForm";
-    Layout = null;
-    int count = 0;
-}
-<link href="~/styles/testform.css" rel="stylesheet" />
-<div class="container">
-    <h1>טופס מבחן</h1>
-    
-    <form asp-controller="Student" asp-action="SaveTest" method="post">
-        <input type="hidden" name="UnitId" value="@ViewBag.UnitId" />
-        <input type="hidden" name="Difficulty" value="@ViewBag.Difficulty" />
-        @foreach (TestQuestionViewModel testQuestionViewModel in Model)
-        {
-            count++;
-            <p>
-                @testQuestionViewModel.Question.QuestionText
-            </p>
-            <ul>
-                @foreach (Answer answer in testQuestionViewModel.QuestionAnswer)
-                {
-                    string name = "answer" + count;
-                    <li>
-                        <input type="radio" name="@name" value="@answer.TrueFalse" />
-                        @answer.AnswerText
-                    </li>
-                }
-               
-            </ul>
-        }
-        <button type="submit" class="submit-btn">submit</button>
-
-    </form>
-</div>
- *@
-@using FirstOrderKitModel
+﻿@using FirstOrderKitModel
 @model List<TestQuestionViewModel>
 @{
     ViewData["Title"] = "NewTestForm";

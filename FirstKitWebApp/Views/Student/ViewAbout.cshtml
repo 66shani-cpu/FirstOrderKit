@@ -1,7 +1,10 @@
 ﻿@using FirstOrderKitModel;
 @{
     ViewData["Title"] = "ViewAbout";
-    Layout = null; // ביטול ה-MasterPage לגמרי
+    Layout = null;
+    // בדיקת ה-Session
+    string studentId = Context.Session.GetString("studentId");
+    bool isStudentLoggedIn = !string.IsNullOrEmpty(studentId);
 }
 
 <!DOCTYPE html>
@@ -145,8 +148,20 @@
     </style>
 </head>
 <body>
+    <nav class="nav-links">
 
-    <a href="http://localhost:5108/Guest/ViewFirstKit" class="back-to-main">חזרה לעמוד הראשי</a>
+        @if (isStudentLoggedIn)
+        {
+            <a href="http://localhost:5108/Student/ViewStudentCreateTest" class="back-to-main">חזרה לעמוד הראשי</a>
+        }
+        else
+        {
+            <a href="http://localhost:5108/Guest/ViewFirstKit" class="back-to-main">חזרה לעמוד הראשי</a>
+        }
+
+    </nav>
+
+    
 
     <div class="about-container">
         <h1>אודות אתר ההכנה לצו הראשון</h1>

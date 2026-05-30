@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Testing
 {
-    internal class Horskope
+    public class Horskope
     {
         public string week_start {  get; set; }
         public string week_end { get; set;}

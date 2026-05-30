@@ -4,6 +4,7 @@ using FirstOrderKitModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using System.Text.Json;
 
 namespace FirstKitWebApp.Controllers
 {
@@ -27,6 +28,11 @@ namespace FirstKitWebApp.Controllers
         }
         [HttpGet]
         public IActionResult ViewGradeForm()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ViewHorocope()
         {
             return View();
         }
@@ -185,7 +191,54 @@ namespace FirstKitWebApp.Controllers
             return View("TestHistory", testHistory);
         }
 
-        
-        
+        public async Task<IActionResult> ViewHoroscope(string sign, string start)
+        {
+            // בדיקה: אם המשתמש עדיין לא בחר ערכים, נביא לו את תאריך היום ומזל טלה כברירת מחדל
+            if (string.IsNullOrEmpty(sign)) { sign = "aries"; }
+            if (string.IsNullOrEmpty(start)) { start = DateTime.Now.ToString("yyyy-MM-dd"); }
+
+            // נשמור את הבחירה הנוכחית של המשתמש כדי להציג אותה חזרה בטופס
+            ViewBag.SelectedSign = sign;
+            ViewBag.SelectedStart = start;
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"https://horoscope-api-by-apirobots.p.rapidapi.com/v1/horoscopes/{sign}/weekly?week_start={start}"),
+                Headers =
+        {
+            { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
+            { "x-rapidapi-host", "horoscope-api-by-apirobots.p.rapidapi.com" },
+        },
+            };
+
+            try
+            {
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+
+                    Horskope horskopeData = JsonSerializer.Deserialize<Horskope>(body);
+
+                    ViewBag.HoroscopeOverview = horskopeData?.overview;
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.HoroscopeOverview = "Could not fetch horoscope data. Please check your connection or try a different date.";
+            }
+
+            return View();
+        }
+
+        public class Horskope
+        {
+            public string week_start { get; set; }
+            public string week_end { get; set; }
+            public string sign { get; set; }
+            public string overview { get; set; }
+        }
     }
 }
