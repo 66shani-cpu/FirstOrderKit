@@ -97,22 +97,6 @@ namespace FirstKitWebApp.Controllers
             return View(requestNewTest);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> NewTestForm(string difficulty, string subjectId)
-        //{
-        //    ApiClient<List<TestQuestionViewModel>> client = new ApiClient<List<TestQuestionViewModel>>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Student/GetNewTest";
-        //    client.AddParameter("subjectId", subjectId);
-        //    client.AddParameter("difficulty", difficulty);
-        //    List<TestQuestionViewModel> test = await client.GetAsync();
-
-        //    return View(test);
-        //}
-       
-
         [HttpGet]
         public async Task<IActionResult> ViewStudentCreateTest()
         {
@@ -153,7 +137,8 @@ namespace FirstKitWebApp.Controllers
             //ליצור מודל שאותו צריך לשלוח 
             Test test = new Test();
             test.TestId = "0";
-            test.TestName = $"{testAnswer.unitId}-{testAnswer.levelQuestion}-" + DateTime.UtcNow.ToString();
+            //test.TestName = $"{testAnswer.unitId}-{testAnswer.levelQuestion}-" + DateTime.UtcNow.ToString();
+            test.TestName = $"{testAnswer.unitId}-{testAnswer.levelQuestion}-{DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}";
             test.UnitId = testAnswer.unitId;
             test.StudentId = HttpContext.Session.GetString("studentId");
             test.LevelQuestion = testAnswer.levelQuestion;

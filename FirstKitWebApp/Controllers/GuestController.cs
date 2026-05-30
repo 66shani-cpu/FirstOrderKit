@@ -143,7 +143,6 @@ namespace FirstKitWebApp.Controllers
             return View(registationViewModel);
         }
 
-
         private async Task<List<City>> GetCitiesAsync()
         {
             ApiClient<List<City>> client = new ApiClient<List<City>>();
@@ -153,9 +152,6 @@ namespace FirstKitWebApp.Controllers
             client.Path = "api/Guest/GetCities";
             return await client.GetAsync();
         }
-        //private async Task<bool> sendData (Student student)
-
-
     }
     
 }

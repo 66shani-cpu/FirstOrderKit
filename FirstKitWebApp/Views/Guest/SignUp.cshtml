@@ -1,79 +1,4 @@
-﻿@* @using FirstOrderKitModel
-@model RegistationViewModel
-@{
-    ViewData["Title"] = "LogIn";
-    Layout = null;
-}
-<link href="~/styles/signup.css" rel="stylesheet" />
-<script>
-    function getFileName()
-    {
-           var fullPath = document.getElementById('readerFile').value;
-       if (fullPath) {
-        var fn = document.getElementById('readerImg');
-        fn.value = "." + fullPath.split('.').pop();
-     }
-    }
-</script>
-<div class="form-container">
-    @if (ViewBag.Error !=null)
-    {
-        <h1 class="errortitle">There was an error. Come back later!</h1>
-    }
- 
-    <form asp-controller="guest" asp-action="Registration" enctype="multipart/form-data">
-        <label>First name</label>
-        <input asp-for="student.StudentFirstName" type="text" id="fname" placeholder="Placeholder">
-        <span asp-validation-for="student.StudentFirstName" class="error"></span>
-
-        <label>Last name</label>
-        <input asp-for="student.StudentLastName" type="text" id="lname" placeholder="Placeholder">
-        <span asp-validation-for="student.StudentLastName" class="error"></span>
-
-        <label>City</label>   
-        <select id="city" asp-for="student.CityId">
-            <option>Select</option>
-            @foreach (City city in Model.cities)
-            {
-                <option value="@city.CityId">@city.CityName</option>
-            }         
-        </select>
-        <span asp-validation-for="student.CityId" class="error"></span>
-
-        <label>Telephone</label>
-        <input asp-for="student.StudentTelephone" type="text" id="lname" placeholder="Placeholder">
-        <span asp-validation-for="student.StudentTelephone" class="error"></span>
-
-        <label>Address</label>
-        <input asp-for="student.StudentAdrres" type="text" id="lname" placeholder="Placeholder">
-        <span asp-validation-for="student.StudentAdrres" class="error"></span>
-
-        <label for="picture">Picture</label>
-        <input class="inputData" type="file"
-            name="formFile" id="readerFile" onchange="getFileName()" />
-        <input asp-for="student.StudentImage" type="hidden"  id="readerImg" />
-        <span  asp-validation-for="student.StudentImage" class="error"></span>
-        <input asp-for="student.StudentId" type="hidden" value="13" id="readerImg" />
-        <input asp-for="student.StudentSalt" type="hidden" value="0" id="readerImg" />
-        <input asp-for="student.Password" type="hidden" value="123456" id="readerImg" />
-        <input asp-for="student.UnitId" type="hidden" value="1" id="readerImg" />
-        <input asp-for="student.StudentNickName" type="hidden" value="Sfghjhgf" id="readerImg" />
-        <div class="buttons">
-            <button type="reset">Restart</button>
-            <button type="submit">Post</button>
-        </div>
-    </form>
-</div>
-        <style>
-    .form-container{
-        margin: 0 auto;
-    }
-   
-        </style>
-
-
- *@
-@using FirstOrderKitModel
+﻿@using FirstOrderKitModel
 @model RegistationViewModel
 @{
     ViewData["Title"] = "Registration";
@@ -106,8 +31,46 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 100px 20px 40px 20px; /* הוספת מרווח עליון בשביל כפתור החזרה */
+            box-sizing: border-box;
+            position: relative;
         }
+
+        /* עיצוב כפתור החזרה בפינה השמאלית העליונה */
+        .btn-back-home {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 2px solid var(--border-lime);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+            .btn-back-home:hover {
+                background: var(--border-lime);
+                transform: translateX(5px); /* זז מעט ימינה בגלל ה-RTL והחץ */
+                box-shadow: 0 0 20px rgba(173, 255, 47, 0.4);
+                color: var(--text-dark);
+            }
+
+            .btn-back-home::before {
+                content: '←';
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
 
         .form-container {
             max-width: 500px;
@@ -228,6 +191,8 @@
 </head>
 <body>
 
+    <a href="http://localhost:5108/guest/ViewFirstKit" class="btn-back-home">Back to Home</a>
+
     <div class="form-container">
         <h1>Registration</h1>
 
@@ -237,6 +202,14 @@
         }
 
         <form asp-controller="guest" asp-action="Registration" enctype="multipart/form-data">
+
+            <label>Student ID</label>
+            <input asp-for="student.StudentId" type="text" placeholder="Enter student ID" />
+            <span asp-validation-for="student.StudentId" class="error"></span>
+
+            <label>Password</label>
+            <input asp-for="student.Password" type="password" placeholder="Enter password" />
+            <span asp-validation-for="student.Password" class="error"></span>
 
             <label>First Name</label>
             <input asp-for="student.StudentFirstName" type="text" placeholder="Enter first name">
@@ -277,10 +250,8 @@
             <input asp-for="student.StudentImage" type="hidden" id="readerImg" />
             <span asp-validation-for="student.StudentImage" class="error"></span>
 
-            @* שדות נסתרים נחוצים *@
-            <input asp-for="student.StudentId"  value="15" />
+            @* שדות נסתרים שנותרו נחוצים *@
             <input asp-for="student.StudentSalt" type="hidden" value="0" />
-            <input asp-for="student.Password"  value="123456" />
 
             <div class="buttons">
                 <button type="reset" class="btn-reset">Restart</button>
