@@ -228,6 +228,7 @@ namespace FirstKitWebApp.Controllers
             catch (Exception ex)
             {
                 ViewBag.HoroscopeOverview = "Could not fetch horoscope data. Please check your connection or try a different date.";
+                ViewBag.HoroscopeOverview = "Error Detail: " + ex.Message;
             }
 
             return View();
