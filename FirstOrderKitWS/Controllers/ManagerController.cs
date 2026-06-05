@@ -280,6 +280,27 @@ namespace FirstOrderKitWS.Controllers
             }
            
         }
+
+        [HttpGet]
+        public async Task<bool> DeleteQuestion(string questionId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                bool ok =repositoryUOF.QuestionRepository.Active(questionId);
+               return ok;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
         [HttpPost]
         public async Task<bool> AddNewUnit()
         {

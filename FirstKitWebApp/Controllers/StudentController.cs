@@ -41,7 +41,6 @@ namespace FirstKitWebApp.Controllers
         {
             // 1. כאן אנחנו מגדירים את ה-Client עם סוג הנתונים Student
             ApiClient<Student> client = new ApiClient<Student>();
-
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;

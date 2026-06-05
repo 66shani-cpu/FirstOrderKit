@@ -185,7 +185,8 @@
                                 <Button x:Name="btnDelete"
                                         Width="32"
                                         Height="32"
-                                        Style="{StaticResource ImageButtonStyle}">
+                                        Style="{StaticResource ImageButtonStyle}"
+                                        Click="btnDelete_Click">
                                     <Image Source="/Images/UpdateDelete.png" />
                                 </Button>
 

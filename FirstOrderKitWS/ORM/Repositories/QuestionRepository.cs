@@ -1,5 +1,7 @@
 ﻿using FirstOrderKitModel;
+using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Reflection;
 
 namespace FirstOrderKitWS.ORM.Repositories
 {
@@ -87,7 +89,16 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
 
 
         }
+       
+        public bool Active(string questionId)
+        {
+            string sql = $@"UPDATE Question 
+                   SET QuestionActive = False 
+                   WHERE QuestionID = @QuestionID";
+            this.helperOledb.AddParameter("@QuestionID", questionId);
+            return this.helperOledb.Update(sql) > 0;
 
+        }
         public List<Question> GetQuestion(string unitId, string difficulty)
         {
             string sql = @$"SELECT

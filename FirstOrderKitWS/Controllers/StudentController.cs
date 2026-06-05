@@ -127,7 +127,28 @@ namespace FirstOrderKitWS.Controllers
 
             }
         }
-
+        [HttpGet]
+        public RegistationViewModel GetRegistationViewModel(string studentId=null)
+        {
+            try
+            {
+                RegistationViewModel registationViewModel = new RegistationViewModel();
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                registationViewModel.student = (studentId == null) ?  new Student() : repositoryUOF.StudentRepository.GetById(studentId);
+                registationViewModel.cities= repositoryUOF.CityRepository.GetAll();
+                registationViewModel.units=repositoryUOF.UnitRepository.GetAll();               
+               return registationViewModel;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
         [HttpGet]
         [Produces("application/json")]
         public Student GetStudent(string studentId)

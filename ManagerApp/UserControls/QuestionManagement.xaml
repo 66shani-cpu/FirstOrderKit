@@ -73,21 +73,14 @@
                             </Label>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,0">
-                                <Button x:Name="btnEdit"
-                                        Width="32"
-                                        Height="32"
-                                        Margin="0,0,10,0"
-                                        Cursor="Hand"
-                                        Style="{StaticResource ImageButtonStyle}" 
-                                        Click="btnEdit_Click">
-                                    <Image Source="/Images/UpdateQuestion.png"/>
-                                </Button>
-
                                 <Button x:Name="btnDelete"
                                         Width="32"
                                         Height="32"
-                                        Style="{StaticResource ImageButtonStyle}">
+                                        Style="{StaticResource ImageButtonStyle}"
+                                        Click="btnDelete_Click">
+                                        
                                     <Image Source="/Images/UpdateDelete.png" />
+                                    
                                 </Button>
                             </StackPanel>
                         </Grid>

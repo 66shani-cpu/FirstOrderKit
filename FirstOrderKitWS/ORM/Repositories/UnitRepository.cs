@@ -31,7 +31,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         //מעביר את הטבלה למודל
         public List<Unit> GetAll()
         {
-            string sql = " Select * from Units where UnitActive=true";
+            string sql = " Select * from Units";
 
             List<Unit> units = new List<Unit>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -45,6 +45,8 @@ namespace FirstOrderKitWS.ORM.Repositories
 
             return units;
         }
+        //" Select * from Units where UnitActive=true";
+
 
         public Unit GetById(string id)
         {

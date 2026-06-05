@@ -74,5 +74,41 @@ namespace ManagerApp.UserControls
         {
 
         }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            FrameworkElement btnDelete = sender as FrameworkElement;
+            if(btnDelete!=null)
+            {
+                FirstOrderKitModel.Question selectedQuestion = (FirstOrderKitModel.Question)clickedButton.DataContext;
+                string questionId = selectedQuestion.QuestionId;
+                try
+                {
+                    ApiClient<bool> apiClient = new ApiClient<bool>();
+                    apiClient.Schema = "http";
+                    apiClient.Host = "localhost";
+                    apiClient.Port = 5239;
+                    apiClient.Path = "api/Manager/DeleteQuestion";
+                    apiClient.AddParameter("questionId", questionId);
+                    bool isSuccess = await apiClient.GetAsync();
+                    if (isSuccess)
+                    {
+                        MessageBox.Show("השאלה עודכנה כלא פעילה בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        // למשל: await RefreshQuestionsList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("הפעולה נכשלה בשרת.", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("שגיאה בתקשורת עם השרת: " + ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+         
+        }
     }
+    
 }

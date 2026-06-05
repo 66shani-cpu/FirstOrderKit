@@ -51,5 +51,10 @@ namespace ManagerApp.UserControls
             StudentInfo question = new StudentInfo(studentId);
             bool? ok = question.ShowDialog();
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

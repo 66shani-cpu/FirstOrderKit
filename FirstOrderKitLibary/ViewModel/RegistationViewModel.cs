@@ -10,6 +10,7 @@ namespace FirstOrderKitModel
     {
         public Student student { get; set; }
         public List<City> cities { get; set; }
+        public List<Unit> units { get; set; }
 
     }
 }

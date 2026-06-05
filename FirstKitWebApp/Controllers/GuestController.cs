@@ -114,32 +114,15 @@ namespace FirstKitWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> SignUp()
         {
-            RegistationViewModel registationViewModel = new RegistationViewModel();
-            registationViewModel.cities = await GetCitiesAsync();
             string studentId = HttpContext.Session.GetString("studentId");
-            if (studentId==null)
-            {
-                registationViewModel.student = new Student();
-            }
-            else
-            {
-                ApiClient<Student> clientStudent =  new ApiClient<Student>();
-                clientStudent.Schema = "http";
-                clientStudent.Host = "localhost";
-                clientStudent.Port = 5239;
-                clientStudent.Path = "api/Student/GetStudent";
+            ApiClient<RegistationViewModel> clientStudent = new ApiClient<RegistationViewModel>();
+            clientStudent.Schema = "http";
+            clientStudent.Host = "localhost";
+            clientStudent.Port = 5239;
+            clientStudent.Path = "api/Student/GetRegistationViewModel";
+            if(studentId!=null)
                 clientStudent.AddParameter("studentId", studentId);
-                //להוסיף פעולה 
-                registationViewModel.student = await clientStudent.GetAsync();
-            }
-
-            ApiClient<List<City>> client = new ApiClient<List<City>>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetCities";
-            //להוסיף פעולה 
-            registationViewModel.cities = await client.GetAsync();
+            RegistationViewModel registationViewModel = await clientStudent.GetAsync();
             return View(registationViewModel);
         }
 
@@ -150,6 +133,15 @@ namespace FirstKitWebApp.Controllers
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/GetCities";
+            return await client.GetAsync();
+        }
+        private async Task<List<Unit>> GetUnitsAsync()
+        {
+            ApiClient<List<Unit>> client = new ApiClient<List<Unit>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Guest/GetUnits";
             return await client.GetAsync();
         }
     }

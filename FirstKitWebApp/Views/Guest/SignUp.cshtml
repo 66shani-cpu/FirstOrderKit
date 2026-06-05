@@ -243,13 +243,34 @@
                 <option value="">Select City</option>
                 @foreach (City city in Model.cities)
                 {
-                    <option value="@city.CityId">@city.CityName</option>
+                    if (Model.student.CityId.ToString() == city.CityId)
+                    {
+                        <option value="@city.CityId" selected>@city.CityName</option>
+                    }
+                    else
+                    {
+                        <option value="@city.CityId">@city.CityName</option>
+                    }
                 }
             </select>
             <span asp-validation-for="student.CityId" class="error"></span>
 
             <label>Unit</label>
-            <input asp-for="student.UnitId" type="text" placeholder="Enter Target Unit Name/ID">
+            <select asp-for="student.UnitId">
+                <option value="">Select Unit</option>
+                @foreach (Unit unit in Model.units)
+                {
+                    if (Model.student.UnitId.ToString() == unit.UnitId)
+                    {
+                        <option value="@unit.UnitId" selected>@unit.UnitName</option>
+                    }
+                    else
+                    {
+                        <option value="@unit.UnitId">@unit.UnitName</option>
+                    }
+                    
+                }
+            </select>
             <span asp-validation-for="student.UnitId" class="error"></span>
 
             <label>Telephone</label>
