@@ -17,14 +17,14 @@ namespace FirstOrderKitWS
                            (
                              StudentId,StudentNickName, [Password], StudentLastName, 
                              UnitId,StudentFirstName,CityId,StudentTelephone,
-                             StudentAdrres,StudentImage
+                             StudentAdrres,StudentImage,StudentActive
                            )
                            values
                              (
                                   '{model.StudentId}','{model.StudentNickName}','{model.Password}',
                                   '{model.StudentLastName}',{model.UnitId},
                                   '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
-                                  '{model.StudentAdrres}','{model.StudentImage}'
+                                  '{model.StudentAdrres}','{model.StudentImage}',True
                               )
                                                      ";
             //string sql = @$"Insert into Student 

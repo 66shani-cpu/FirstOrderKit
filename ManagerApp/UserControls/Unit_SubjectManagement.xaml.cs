@@ -79,7 +79,7 @@ namespace ManagerApp.UserControls
                     if (isSuccess)
                     {
                         MessageBox.Show("היחידה עודכנה כלא פעילה בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
-                        // למשל: await RefreshQuestionsList();
+                        await GetUnitList();
                     }
                     else
                     {

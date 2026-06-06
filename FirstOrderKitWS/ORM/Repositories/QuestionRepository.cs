@@ -14,8 +14,8 @@ namespace FirstOrderKitWS.ORM.Repositories
         public bool Create(Question model)
         {
             string sql = @$"Insert into Question
-                           (LevelQuestions,Question)
-                          values(@LevelQuestions,@QuestionText)";
+                           (LevelQuestions,Question,QuestionActive)
+                          values(@LevelQuestions,@QuestionText,True)";
             this.helperOledb.AddParameter("@LevelQuestions",  model.LevelQuestions);
             this.helperOledb.AddParameter("@QuestionText",model.QuestionText);
             return this.helperOledb.Insert(sql) > 0;

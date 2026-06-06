@@ -163,12 +163,6 @@ namespace FirstOrderKitWS.Controllers
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 return this.repositoryUOF.TestRepository.TestPast();
-                //List<Test> tests = repositoryUOF.TestRepository.GetAll();
-                //for (int i = 0; i < tests.Count; i++)
-                //{
-                //    int count+= tests[i].
-                //}
-                //return count;
             }
             catch (Exception ex)
             {

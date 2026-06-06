@@ -15,8 +15,8 @@ namespace FirstOrderKitWS.ORM.Repositories
         public bool Create(Unit model)
         {
             string sql = @$"Insert into Units 
-                           (UnitName,UnitPicture)
-                          values(@UnitName,@UnitPicture)";
+                           (UnitName,UnitPicture,UnitActive)
+                          values(@UnitName,@UnitPicture,True)";
             this.helperOledb.AddParameter("@UnitName", model.UnitName);
             this.helperOledb.AddParameter("@UnitPicture", model.UnitPicture);
             return this.helperOledb.Insert(sql) > 0;

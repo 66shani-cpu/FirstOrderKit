@@ -72,7 +72,7 @@ namespace ManagerApp.UserControls
                     if (isSuccess)
                     {
                         MessageBox.Show("התלמיד עודכן כלא פעיל בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
-                        // למשל: await RefreshQuestionsList();
+                        await GetStudentList();
                     }
                     else
                     {

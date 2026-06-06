@@ -95,7 +95,7 @@ namespace ManagerApp.UserControls
                     if (isSuccess)
                     {
                         MessageBox.Show("השאלה עודכנה כלא פעילה בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
-                        // למשל: await RefreshQuestionsList();
+                        await GetQuestionList();
                     }
                     else
                     {
