@@ -43,10 +43,10 @@ namespace ManagerApp.UserControls
             this.DataContext= this.units;
         }
 
-        private void btnInfo_Click(object sender, RoutedEventArgs e)
-        {
+        //private void btnInfo_Click(object sender, RoutedEventArgs e)
+        //{
 
-        }
+        //}
 
         private async void buttonAddNewUnit_Click(object sender, RoutedEventArgs e)
         {
@@ -59,9 +59,39 @@ namespace ManagerApp.UserControls
             }
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // לקחת תעודת זהות של יחידה ולהפוך את זה לFAKSE בטבלה של יחידות
+            Button clickedButton = sender as Button;
+            FrameworkElement btnDelete = sender as FrameworkElement;
+            if (btnDelete != null)
+            {
+                FirstOrderKitModel.Unit selectedQuestion = (FirstOrderKitModel.Unit)clickedButton.DataContext;
+                string unitId = selectedQuestion.UnitId;
+                try
+                {
+                    ApiClient<bool> apiClient = new ApiClient<bool>();
+                    apiClient.Schema = "http";
+                    apiClient.Host = "localhost";
+                    apiClient.Port = 5239;
+                    apiClient.Path = "api/Manager/DeleteUnit";
+                    apiClient.AddParameter("unitId", unitId);
+                    bool isSuccess = await apiClient.GetAsync();
+                    if (isSuccess)
+                    {
+                        MessageBox.Show("היחידה עודכנה כלא פעילה בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        // למשל: await RefreshQuestionsList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("הפעולה נכשלה בשרת.", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("שגיאה בתקשורת עם השרת: " + ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
     }
 }

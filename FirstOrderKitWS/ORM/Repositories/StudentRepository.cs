@@ -83,7 +83,7 @@ namespace FirstOrderKitWS
         //מעביר את הטבלה למודל
         public List<Student> GetAll()
         {
-            string sql = " Select * from Student";
+            string sql = " Select * from Student where StudentActive=true";
           
             List<Student> students = new List<Student>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -131,6 +131,15 @@ namespace FirstOrderKitWS
             this.helperOledb.AddParameter("@StudentId", model.StudentId);
 
             return this.helperOledb.Update(sql) > 0;
+        }
+        public bool Active(string studentId)
+        {
+            string sql = $@"UPDATE Student 
+                SET StudentActive = False 
+                WHERE StudentId = @StudentId";
+            this.helperOledb.AddParameter("@StudentId", studentId);
+            return this.helperOledb.Update(sql) > 0;
+
         }
         //הזדהות במערכת
         public string LogIn (string nickName, string password)

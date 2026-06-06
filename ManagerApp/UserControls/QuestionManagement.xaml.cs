@@ -70,10 +70,10 @@ namespace ManagerApp.UserControls
             this.DataContext = this.questions;
         }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
+        //private void btnEdit_Click(object sender, RoutedEventArgs e)
+        //{
 
-        }
+        //}
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {

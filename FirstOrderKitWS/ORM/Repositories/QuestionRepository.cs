@@ -30,7 +30,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         //מעביר את הטבלה למודל
         public List<Question> GetAll()
         {
-            string sql = " Select * from Question";
+            string sql = " Select * from Question where QuestionActive=true";
 
             List<Question> questions = new List<Question>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל

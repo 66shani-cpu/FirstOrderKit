@@ -52,8 +52,38 @@ namespace ManagerApp.UserControls
             bool? ok = question.ShowDialog();
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            Button clickedButton = sender as Button;
+            FrameworkElement btnDelete = sender as FrameworkElement;
+            if (btnDelete != null)
+            {
+                FirstOrderKitModel.Student selectedQuestion = (FirstOrderKitModel.Student)clickedButton.DataContext;
+                string studentId = selectedQuestion.StudentId;
+                try
+                {
+                    ApiClient<bool> apiClient = new ApiClient<bool>();
+                    apiClient.Schema = "http";
+                    apiClient.Host = "localhost";
+                    apiClient.Port = 5239;
+                    apiClient.Path = "api/Manager/DeleteStudent";
+                    apiClient.AddParameter("studentId", studentId);
+                    bool isSuccess = await apiClient.GetAsync();
+                    if (isSuccess)
+                    {
+                        MessageBox.Show("התלמיד עודכן כלא פעיל בהצלחה!", "הצלחה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        // למשל: await RefreshQuestionsList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("הפעולה נכשלה בשרת.", "שגיאה", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("שגיאה בתקשורת עם השרת: " + ex.Message, "שגיאה", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
 
         }
     }

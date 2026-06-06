@@ -31,7 +31,7 @@ namespace FirstOrderKitWS.ORM.Repositories
         //מעביר את הטבלה למודל
         public List<Unit> GetAll()
         {
-            string sql = " Select * from Units";
+            string sql = " Select * from Units where UnitActive=true";
 
             List<Unit> units = new List<Unit>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
@@ -65,6 +65,15 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@UnitName", model.UnitName);
             this.helperOledb.AddParameter("@UnitPicture", model.UnitPicture);
             return this.helperOledb.Update(sql) > 0;
+        }
+        public bool Active(string unitId)
+        {
+            string sql = $@"UPDATE Units 
+                SET UnitActive = False 
+                WHERE UnitId = @UnitId";
+            this.helperOledb.AddParameter("@UnitId", unitId);
+            return this.helperOledb.Update(sql) > 0;
+
         }
         public List<Unit> FilterBySubject(string subjectId)
         {

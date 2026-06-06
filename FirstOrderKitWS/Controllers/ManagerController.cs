@@ -301,6 +301,46 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
+        public async Task<bool> DeleteUnit(string unitId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                bool ok = repositoryUOF.UnitRepository.Active(unitId);
+                return ok;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public async Task<bool> DeleteStudent(string studentId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                bool ok = repositoryUOF.StudentRepository.Active(studentId);
+                return ok;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
         [HttpPost]
         public async Task<bool> AddNewUnit()
         {
