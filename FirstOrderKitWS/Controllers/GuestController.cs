@@ -108,7 +108,6 @@ namespace FirstOrderKitWS.Controllers
 
         }
         [HttpGet]
-        [Route("api/Guest/GetUnits")]
         public List<FirstOrderKitModel.Unit> GetUnits()
         {
             try

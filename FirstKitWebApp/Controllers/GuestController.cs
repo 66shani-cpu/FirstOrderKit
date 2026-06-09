@@ -126,7 +126,7 @@ namespace FirstKitWebApp.Controllers
             RegistationViewModel registationViewModel = await clientStudent.GetAsync();
             return View(registationViewModel);
         }
-
+        [HttpGet]
         private async Task<List<City>> GetCitiesAsync()
         {
             ApiClient<List<City>> client = new ApiClient<List<City>>();

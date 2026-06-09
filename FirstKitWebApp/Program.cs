@@ -30,7 +30,7 @@ namespace FirstKitWebApp
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Guest}/{action=ViewFirstKit}/{id?}");
+                pattern: "{controller=Guest}/{action=ShowUnitsPage}/{id?}");
 
             app.Run();
         }
