@@ -43,7 +43,6 @@ namespace FirstOrderKitWS.ORM.Repositories
             this.helperOledb.AddParameter("@AnswerText", model.AnswerText ?? "");
             return this.helperOledb.Insert(sql) > 0;
         }
-
         public bool Delete(string id)
         {
             string sql = @"Delete from Answer where AnswerId=@AnswerId";
@@ -54,7 +53,6 @@ namespace FirstOrderKitWS.ORM.Repositories
         public List<Answer> GetAll()
         {
             string sql = " Select * from Answer";
-
             List<Answer> answers = new List<Answer>();
             //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
             using (IDataReader reader = this.helperOledb.Select(sql))
@@ -64,10 +62,8 @@ namespace FirstOrderKitWS.ORM.Repositories
                     answers.Add(this.modelCreaters.AnswerCreator.CreateModel(reader));
                 }
             }
-
             return answers;
         }
-
         public Answer GetById(string id)
         {
             string sql = " Select * from Answer  where AnswerId=@AnswerId";

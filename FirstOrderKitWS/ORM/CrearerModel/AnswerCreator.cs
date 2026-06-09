@@ -13,13 +13,6 @@ namespace FirstOrderKitWS
             answer.TrueFalse = Convert.ToString(dataReader["TrueFalse"]);
             answer.QuestionId= Convert.ToString(dataReader["OuestionId"]);
             return answer;
-            //Answer answer = new Answer();
-            //{
-            //    answer.AnswerText = Convert.ToString(dataReader["AnswerText"]),
-            //    answer.Answerid = Convert.ToString(dataReader["Answerid"]),
-
-            //};
-            //return answer;
         }
     }
 }

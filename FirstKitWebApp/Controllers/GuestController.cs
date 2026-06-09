@@ -18,24 +18,25 @@ namespace FirstKitWebApp.Controllers
         }
         [HttpGet]
         //כל פעם מידע שונה פעם ראשונה מציג הכל אחרי שבחרו התז משתנה וצריך לשים פרמטק
-        public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
-        {
-            ApiClient<OrderFirstKitViewModel> client = new ApiClient<OrderFirstKitViewModel>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetFirstKit";
-            if (subjectId != null)
-            {
-                client.AddParameter("subjectId", subjectId);
-            }
-            if (unitId != null)
-            {
-                client.AddParameter("unitId", unitId);
-            }
-            OrderFirstKitViewModel orderFirstKitViewModel = await client.GetAsync();
-            return View(orderFirstKitViewModel);
-        }
+        //public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
+        //{
+        //    ApiClient<OrderFirstKitViewModel> client = new ApiClient<OrderFirstKitViewModel>();
+        //    client.Schema = "http";
+        //    client.Host = "localhost";
+        //    client.Port = 5239;
+        //    client.Path = "api/Guest/GetFirstKit";
+        //    if (subjectId != null)
+        //    {
+        //        client.AddParameter("subjectId", subjectId);
+        //    }
+        //    if (unitId != null)
+        //    {
+        //        client.AddParameter("unitId", unitId);
+        //    }
+        //    OrderFirstKitViewModel orderFirstKitViewModel = await client.GetAsync();
+        //    return View(orderFirstKitViewModel);
+        //}
+
         [HttpGet]
         public async Task<IActionResult> GetUnitDetails(string unitId)
         {
@@ -135,14 +136,32 @@ namespace FirstKitWebApp.Controllers
             client.Path = "api/Guest/GetCities";
             return await client.GetAsync();
         }
-        private async Task<List<Unit>> GetUnitsAsync()
+        public async Task<List<Unit>> ViewFirstKit()
         {
             ApiClient<List<Unit>> client = new ApiClient<List<Unit>>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Guest/GetUnits";
+            //// קריאה לפעולה שמביאה את הנתונים מה-API
+            //List<Unit> unitsList = await ViewFirstKit();
+
+            
             return await client.GetAsync();
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowUnitsPage() // השם של ה-Action שקורא ל-View
+        {
+            // קוראים לפעולה הראשונה ומחכים לרשימה
+            List<Unit> unitsList = await ViewFirstKit();
+            if (unitsList == null)
+            {
+                Console.WriteLine("--- האזהרה שלי: הרשימה חזרה ריקה מה-API! ---");
+                unitsList = new List<Unit>(); // יוצר רשימה ריקה כדי שלא תהיה שגיאת Null
+            }
+
+            // מחזירים את ה-View ומעבירים לו את הרשימה
+            return View("ViewFirstKit", unitsList);
         }
     }
     

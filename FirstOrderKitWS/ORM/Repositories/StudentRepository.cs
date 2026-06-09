@@ -62,16 +62,16 @@ namespace FirstOrderKitWS
                 return Convert.ToBase64String(hash);
             }
         }
-        private int GetRandom()
-        {
-            Random rnd = new Random();
-            return rnd.Next(8,16);
-        }
         private string GetSalt(int lenght)
         {
             byte[] bytes= new byte[lenght];
             RandomNumberGenerator.Fill(bytes);
             return Convert.ToBase64String(bytes);
+        }
+        private int GetRandom()
+        {
+            Random rnd = new Random();
+            return rnd.Next(8, 16);
         }
 
         public bool Delete(string id)

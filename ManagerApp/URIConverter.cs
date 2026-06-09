@@ -9,7 +9,7 @@ using System.Windows.Data;
 namespace ManagerApp
 {
     public class URIConverter : IValueConverter
-    {
+    {//לורח את הערך הקצר מהמסד וממיר אותו לקובץ של תמונה פיזית
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string url = $"http://localhost:5239/Images/students/{value.ToString()}";

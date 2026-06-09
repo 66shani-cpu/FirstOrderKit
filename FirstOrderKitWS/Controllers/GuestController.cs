@@ -23,7 +23,7 @@ namespace FirstOrderKitWS.Controllers
 
         [HttpGet]
         //ברירת מחדל null
-        public OrderFirstKitViewModel GetFirstKit()
+        public OrderFirstKitViewModel GetFirstKit(string? subjectId = null, string? unitId = null)
         {
             OrderFirstKitViewModel orderFirstKitViewModel = new OrderFirstKitViewModel();
             //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
@@ -44,6 +44,7 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+
         [HttpGet]
         public FirstOrderKitModel.Unit GetUnitDetails(string unitId)
         {
@@ -107,6 +108,7 @@ namespace FirstOrderKitWS.Controllers
 
         }
         [HttpGet]
+        [Route("api/Guest/GetUnits")]
         public List<FirstOrderKitModel.Unit> GetUnits()
         {
             try

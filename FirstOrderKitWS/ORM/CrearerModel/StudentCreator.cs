@@ -20,9 +20,6 @@ namespace FirstOrderKitWS
             student.Password = Convert.ToString(dataReader["Password"]);
             student.StudentSalt = Convert.ToString(dataReader["StudentSalt"]);
             return student;
-        }
-
-
-       
+        } 
     }
 }

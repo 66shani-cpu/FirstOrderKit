@@ -1,5 +1,6 @@
 ﻿@using FirstOrderKitModel
-@model OrderFirstKitViewModel
+@* @model OrderFirstKitViewModel *@
+@model List<FirstOrderKitModel.Unit>
 
 @{
     ViewData["Title"] = "יחידות בצה\"ל";
@@ -117,7 +118,8 @@
     <hr>
 
     <section class="units">
-        @foreach (var unit in Model.Units)
+      @*   @foreach (var unit in Model.Units) *@
+        @foreach (var unit in Model)
         {
             <div class="unit">            
                     <img src="http://localhost:5239/Images/Units/@unit.UnitPicture" alt="@unit.UnitName">
