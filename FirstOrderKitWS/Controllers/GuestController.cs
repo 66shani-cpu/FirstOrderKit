@@ -21,50 +21,50 @@ namespace FirstOrderKitWS.Controllers
             this.repositoryUOF = new RepositoryUOF();
         }
 
-        [HttpGet]
-        //ברירת מחדל null
-        public OrderFirstKitViewModel GetFirstKit(string? subjectId = null, string? unitId = null)
-        {
-            OrderFirstKitViewModel orderFirstKitViewModel = new OrderFirstKitViewModel();
-            //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
-            try
-            {
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                orderFirstKitViewModel.Subject = this.repositoryUOF.SubjectRepository.GetAll();
-                orderFirstKitViewModel.Units = this.repositoryUOF.UnitRepository.GetAll();
-                return orderFirstKitViewModel;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
+        //[HttpGet]
+        ////ברירת מחדל null
+        //public OrderFirstKitViewModel GetFirstKit(string? subjectId = null, string? unitId = null)
+        //{
+        //    OrderFirstKitViewModel orderFirstKitViewModel = new OrderFirstKitViewModel();
+        //    //אם והמערכת קורסת הוא סוגק קשר ומחזיר null
+        //    try
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
+        //        orderFirstKitViewModel.Subject = this.repositoryUOF.SubjectRepository.GetAll();
+        //        orderFirstKitViewModel.Units = this.repositoryUOF.UnitRepository.GetAll();
+        //        return orderFirstKitViewModel;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
+        //    }
+        //}
 
-        [HttpGet]
-        public FirstOrderKitModel.Unit GetUnitDetails(string unitId)
-        {
+        //[HttpGet]
+        //public FirstOrderKitModel.Unit GetUnitDetails(string unitId)
+        //{
 
-            try
-            {
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.UnitRepository.GetById(unitId);
+        //    try
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.OpenConnection();
+        //        return this.repositoryUOF.UnitRepository.GetById(unitId);
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        this.repositoryUOF.DBHelperOledb.CloseConnection();
+        //    }
+        //}
         [HttpGet]
         public Test GetTest(string testId)
         {

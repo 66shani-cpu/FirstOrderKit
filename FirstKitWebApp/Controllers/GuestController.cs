@@ -16,7 +16,7 @@ namespace FirstKitWebApp.Controllers
         {
             return View();
         }
-        [HttpGet]
+        //[HttpGet]
         //כל פעם מידע שונה פעם ראשונה מציג הכל אחרי שבחרו התז משתנה וצריך לשים פרמטק
         //public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
         //{
@@ -37,18 +37,18 @@ namespace FirstKitWebApp.Controllers
         //    return View(orderFirstKitViewModel);
         //}
 
-        [HttpGet]
-        public async Task<IActionResult> GetUnitDetails(string unitId)
-        {
-            ApiClient<Unit> client = new ApiClient<Unit>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetUnitDetails";
-            client.AddParameter("unitId", unitId);
-            Unit unit = await client.GetAsync();
-            return View(unit);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetUnitDetails(string unitId)
+        //{
+        //    ApiClient<Unit> client = new ApiClient<Unit>();
+        //    client.Schema = "http";
+        //    client.Host = "localhost";
+        //    client.Port = 5239;
+        //    client.Path = "api/Guest/GetUnitDetails";
+        //    client.AddParameter("unitId", unitId);
+        //    Unit unit = await client.GetAsync();
+        //    return View(unit);
+        //}
         [HttpGet]
         public  IActionResult GetTest(/*string testId*/)
         {
@@ -99,18 +99,15 @@ namespace FirstKitWebApp.Controllers
                 return View("ViewRegistarion", registationViewModel);
             }
 
-                registationViewModel.student = student;
-            ApiClient<List<City>> client = new ApiClient<List<City>>();
-            client.Schema = "http";
-            client.Host = "localhost";
-            client.Port = 5239;
-            client.Path = "api/Guest/GetCities";
-            registationViewModel.cities = await client.GetAsync();
-            ViewBag.Error = true;
-            return View("ViewRegistarion", registationViewModel);
-
-
-
+            //    registationViewModel.student = student;
+            //ApiClient<List<City>> client = new ApiClient<List<City>>();
+            //client.Schema = "http";
+            //client.Host = "localhost";
+            //client.Port = 5239;
+            //client.Path = "api/Guest/GetCities";
+            //registationViewModel.cities = await client.GetAsync();
+            //ViewBag.Error = true;
+            //return View("ViewRegistarion", registationViewModel);
         }
         [HttpGet]
         public async Task<IActionResult> SignUp()

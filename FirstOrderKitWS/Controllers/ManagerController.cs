@@ -46,11 +46,6 @@ namespace FirstOrderKitWS.Controllers
         [HttpPost]
         public async Task<bool> AddNewQuestion([FromBody] AddQuestionViewModel addQuestionViewModel)
         {
-            //string json = Request.Form["model"].ToString();
-            //AddQuestionViewModel addQuestionViewModel =
-            //               JsonSerializer.Deserialize<AddQuestionViewModel>(json);
-            ////אם תמונה
-            //IFormFile image = Request.Form.Files["file"];
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
@@ -85,44 +80,6 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
                 return repositoryUOF.StudentRepository.LogIn(nickName, password);
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
-        [HttpGet]
-        public double GetReportsAVG()
-        {
-            try
-            {
-
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.TestRepository.TestsAvg();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return 0;
-            }
-            finally
-            {
-                this.repositoryUOF.DBHelperOledb.CloseConnection();
-            }
-        }
-
-        [HttpGet]
-        public List<ReportsViewModel> GetReportsPast(int min)
-        {
-            try
-            {
-                this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.TestRepository.TestPast();
             }
             catch (Exception ex)
             {
