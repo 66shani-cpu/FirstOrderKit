@@ -78,7 +78,7 @@ namespace FirstOrderKitWS.Controllers
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return repositoryUOF.StudentRepository.LogIn(nickName, password);
+                return repositoryUOF.StudentRepository.LogInManager(nickName, password);
 
             }
             catch (Exception ex)

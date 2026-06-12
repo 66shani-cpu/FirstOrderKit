@@ -130,7 +130,6 @@ namespace FirstOrderKitWS.Controllers
         [HttpPost]
         public bool InsertStudent ()
         {
-            //string json = HttpContext.Request.Form["model"];
             string json = Request.Form["model"].ToString();
             Student student = JsonSerializer.Deserialize<Student>(json);
             IFormFile image = null;
@@ -141,8 +140,9 @@ namespace FirstOrderKitWS.Controllers
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                repositoryUOF.DBHelperOledb.OpenTransaction();              
-                 bool ok= this.repositoryUOF.StudentRepository.Create(student);
+                repositoryUOF.DBHelperOledb.OpenTransaction();
+       
+                bool ok= this.repositoryUOF.StudentRepository.Create(student);
                 string fileName = $"{student.StudentId}{student.StudentImage}";
                 this.repositoryUOF.StudentRepository.UpdateImageName(student.StudentId, fileName);
                 //string path = $@"{Directory.GetCurrentDirectory()}\wwwroot\Images\Students\{student.StudentId}.{student.StudentImage}";

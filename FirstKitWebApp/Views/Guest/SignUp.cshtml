@@ -7,7 +7,6 @@
     string studentId = Context.Session.GetString("studentId");
     bool isStudentLoggedIn = !string.IsNullOrEmpty(studentId);
 }
-
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -194,20 +193,15 @@
 </head>
 <body>
     <nav class="nav-links">
-
         @if (isStudentLoggedIn)
         {
             <a href="http://localhost:5108/Student/ViewStudentCreateTest" class="btn-back-home">Back to Home</a>
         }
         else
         {
-            <a href="http://localhost:5108/guest/ViewFirstKit" class="btn-back-home">Back to Home</a>
+            <a href="http://localhost:5108/guest/ShowUnitsPage" class="btn-back-home">Back to Home</a>
         }
-
     </nav>
-
- 
-
     <div class="form-container">
         <h1>Registration</h1>
 
@@ -215,7 +209,6 @@
         {
             <p class="error" style="text-align:center;">There was an error. Come back later!</p>
         }
-
         <form asp-controller="guest" asp-action="Registration" enctype="multipart/form-data">
 
             <label>Student ID</label>
@@ -295,7 +288,6 @@
             </div>
         </form>
     </div>
-
     <script>
         function getFileName() {
             var fullPath = document.getElementById('readerFile').value;
@@ -305,6 +297,5 @@
             }
         }
     </script>
-
 </body>
 </html>

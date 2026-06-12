@@ -56,9 +56,14 @@ namespace ManagerApp.UserControls
                 MessageBox.Show("The log in was not successful", "The log in was not successful", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-           // string id = "1234";
-           
-                MessageBox.Show("The log in was successful", "The log in was successful", MessageBoxButton.OK,MessageBoxImage.Information);
+            if (string.IsNullOrEmpty(id))
+            {
+                MessageBox.Show("The log in was not successful - User not found or incorrect credentials", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // עוצרים כאן ולא נותנים לו להיכנס!
+            }
+
+
+            MessageBox.Show("The log in was successful", "The log in was successful", MessageBoxButton.OK,MessageBoxImage.Information);
                 MainWindow mw = Application.Current.MainWindow as MainWindow;
                 mw.SetAdmin(true);
         }

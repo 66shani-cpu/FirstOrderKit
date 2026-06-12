@@ -1,5 +1,4 @@
 ﻿@using FirstOrderKitModel
-@* @model OrderFirstKitViewModel *@
 @model List<FirstOrderKitModel.Unit>
 
 @{
@@ -118,7 +117,6 @@
     <hr>
 
     <section class="units">
-      @*   @foreach (var unit in Model.Units) *@
         @foreach (var unit in Model)
         {
             <div class="unit">            

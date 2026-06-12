@@ -16,39 +16,6 @@ namespace FirstKitWebApp.Controllers
         {
             return View();
         }
-        //[HttpGet]
-        //כל פעם מידע שונה פעם ראשונה מציג הכל אחרי שבחרו התז משתנה וצריך לשים פרמטק
-        //public async Task<IActionResult> ViewFirstKit(string? subjectId = null, string? unitId = null)
-        //{
-        //    ApiClient<OrderFirstKitViewModel> client = new ApiClient<OrderFirstKitViewModel>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/GetFirstKit";
-        //    if (subjectId != null)
-        //    {
-        //        client.AddParameter("subjectId", subjectId);
-        //    }
-        //    if (unitId != null)
-        //    {
-        //        client.AddParameter("unitId", unitId);
-        //    }
-        //    OrderFirstKitViewModel orderFirstKitViewModel = await client.GetAsync();
-        //    return View(orderFirstKitViewModel);
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetUnitDetails(string unitId)
-        //{
-        //    ApiClient<Unit> client = new ApiClient<Unit>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/GetUnitDetails";
-        //    client.AddParameter("unitId", unitId);
-        //    Unit unit = await client.GetAsync();
-        //    return View(unit);
-        //}
         [HttpGet]
         public  IActionResult GetTest(/*string testId*/)
         {
@@ -62,16 +29,6 @@ namespace FirstKitWebApp.Controllers
             return View(/*test*/);
         }
         [HttpPost]
-        //public async Task<IActionResult> InsertStudent(Student student)
-        //{
-        //    ApiClient<Student> client = new ApiClient<Student>();
-        //    client.Schema = "http";
-        //    client.Host = "localhost";
-        //    client.Port = 5239;
-        //    client.Path = "api/Guest/InsertStudent";
-        //    bool ok = await client.PostAsync(student);
-        //    return RedirectToAction("HomePage");
-        //}
         public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         {
             RegistationViewModel registationViewModel = new RegistationViewModel();
@@ -98,16 +55,6 @@ namespace FirstKitWebApp.Controllers
                 ViewBag.Error = true;
                 return View("ViewRegistarion", registationViewModel);
             }
-
-            //    registationViewModel.student = student;
-            //ApiClient<List<City>> client = new ApiClient<List<City>>();
-            //client.Schema = "http";
-            //client.Host = "localhost";
-            //client.Port = 5239;
-            //client.Path = "api/Guest/GetCities";
-            //registationViewModel.cities = await client.GetAsync();
-            //ViewBag.Error = true;
-            //return View("ViewRegistarion", registationViewModel);
         }
         [HttpGet]
         public async Task<IActionResult> SignUp()
@@ -147,7 +94,7 @@ namespace FirstKitWebApp.Controllers
             return await client.GetAsync();
         }
         [HttpGet]
-        public async Task<IActionResult> ShowUnitsPage() // השם של ה-Action שקורא ל-View
+        public async Task<IActionResult> ShowUnitsPage()
         {
             // קוראים לפעולה הראשונה ומחכים לרשימה
             List<Unit> unitsList = await ViewFirstKit();

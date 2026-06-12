@@ -17,29 +17,31 @@ namespace FirstOrderKitWS
                            (
                              StudentId,StudentNickName, [Password], StudentLastName, 
                              UnitId,StudentFirstName,CityId,StudentTelephone,
-                             StudentAdrres,StudentImage,StudentActive
+                             StudentAdrres,StudentImage,StudentActive,StudentIsManager
                            )
                            values
                              (
                                   '{model.StudentId}','{model.StudentNickName}','{model.Password}',
                                   '{model.StudentLastName}',{model.UnitId},
                                   '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
-                                  '{model.StudentAdrres}','{model.StudentImage}',True
+                                  '{model.StudentAdrres}','{model.StudentImage}',True,False
                               )
                                                      ";
+            string salt = GetSalt(GetRandom());
             //string sql = @$"Insert into Student 
             //               (
             //                 StudentId,StudentNickName, [Password], StudentLastName, 
             //                 UnitId,StudentFirstName,CityId,StudentTelephone,
-            //                 StudentAdrres,StudentImage,StudentSalt
+            //                 StudentAdrres,StudentImage,StudentSalt,StudentActive,StudentIsManager
             //               )
             //               values
             //                 (
-            //                     @StudentNickName,@Password,
+            //                     @StudentId,@StudentNickName,@Password,
             //                     @StudentLastName,@UnitId,@StudentFirstName,
-            //                     @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt)";
-            //this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
+            //                     @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt,True,False)";
             //this.helperOledb.AddParameter("@StudentId", model.StudentId);
+            //this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
+            this.helperOledb.AddParameter("@Password", GetHash(model.Password, salt));
             //this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
             //this.helperOledb.AddParameter("@UnitId", model.UnitId);
             //this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
@@ -47,14 +49,21 @@ namespace FirstOrderKitWS
             //this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
             //this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
             //this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
-            string salt = GetSalt(GetRandom());
-            //this.helperOledb.AddParameter("@Password", GetHash(model.Password, salt));
+            
+
+            // 2. מחשבים את ההאש של הסיסמה יחד עם המלח
+            string hashedPassword = GetHash(model.Password, salt);
+
+           
+            model.Password = hashedPassword; 
+            model.StudentSalt = salt;
+       
             this.helperOledb.AddParameter("@StudentSalt", salt);
             return this.helperOledb.Insert(sql) > 0;
         }
-        private string GetHash(string passwoed, string salt)
+        private string GetHash(string password, string salt)
         {
-            string combine = passwoed + salt;
+            string combine = password + salt;
             byte[] bytes = System.Text.UTF8Encoding.UTF8.GetBytes(combine);
             using (SHA256  sha256 = SHA256.Create())
             {
@@ -162,8 +171,28 @@ namespace FirstOrderKitWS
                     
                 return null;
             }
+        }
+        public string LogInManager(string nickName, string password)
+        {
+            string sql = @$"Select StudentSalt,StudentId,[password] from Student 
+                            where StudentNickName='{nickName}' AND 
+                            StudentIsManager=true";
 
+            this.helperOledb.AddParameter("@StudentNickName", nickName);
 
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                if (reader.Read() == true)
+                {
+                    string salt = reader["StudentSalt"].ToString();
+                    string hash = reader["Password"].ToString();
+                    string calculateHash = GetHash(password, salt);
+                    if (hash == calculateHash)
+                        return reader["StudentId"].ToString();
+                }
+
+                return null;
+            }
         }
         public bool UpdateImageName(string studentId, string fileName)
         {
