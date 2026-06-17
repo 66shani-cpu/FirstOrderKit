@@ -13,52 +13,49 @@ namespace FirstOrderKitWS
         }
         public bool Create(Student model)
         {
+            //    string sql = @$"Insert into Student 
+            //                   (
+            //                     StudentId,StudentNickName, [Password], StudentLastName, 
+            //                     UnitId,StudentFirstName,CityId,StudentTelephone,
+            //                     StudentAdrres,StudentImage,StudentActive,StudentIsManager
+            //                   )
+            //                   values
+            //                     (
+            //                          '{model.StudentId}','{model.StudentNickName}','{model.Password}',
+            //                          '{model.StudentLastName}',{model.UnitId},
+            //                          '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
+            //                          '{model.StudentAdrres}','{model.StudentImage}',True,False
+            //                      )
+            //                                             ";
+           
             string sql = @$"Insert into Student 
                            (
                              StudentId,StudentNickName, [Password], StudentLastName, 
                              UnitId,StudentFirstName,CityId,StudentTelephone,
-                             StudentAdrres,StudentImage,StudentActive,StudentIsManager
+                             StudentAdrres,StudentImage,StudentSalt,StudentActive,StudentIsManager
                            )
                            values
                              (
-                                  '{model.StudentId}','{model.StudentNickName}','{model.Password}',
-                                  '{model.StudentLastName}',{model.UnitId},
-                                  '{model.StudentFirstName}',{model.CityId},'{model.StudentTelephone}',
-                                  '{model.StudentAdrres}','{model.StudentImage}',True,False
-                              )
-                                                     ";
+                                 @StudentId,@StudentNickName,@Password,
+                                 @StudentLastName,@UnitId,@StudentFirstName,
+                                 @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt,True,False)";
             string salt = GetSalt(GetRandom());
-            //string sql = @$"Insert into Student 
-            //               (
-            //                 StudentId,StudentNickName, [Password], StudentLastName, 
-            //                 UnitId,StudentFirstName,CityId,StudentTelephone,
-            //                 StudentAdrres,StudentImage,StudentSalt,StudentActive,StudentIsManager
-            //               )
-            //               values
-            //                 (
-            //                     @StudentId,@StudentNickName,@Password,
-            //                     @StudentLastName,@UnitId,@StudentFirstName,
-            //                     @CityId,@StudentTelephone,@StudentAdrres,@StudentImage,@StudentSalt,True,False)";
-            //this.helperOledb.AddParameter("@StudentId", model.StudentId);
-            //this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
-            this.helperOledb.AddParameter("@Password", GetHash(model.Password, salt));
-            //this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
-            //this.helperOledb.AddParameter("@UnitId", model.UnitId);
-            //this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
-            //this.helperOledb.AddParameter("@CityId", model.CityId);
-            //this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
-            //this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
-            //this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
-            
-
-            // 2. מחשבים את ההאש של הסיסמה יחד עם המלח
             string hashedPassword = GetHash(model.Password, salt);
-
-           
-            model.Password = hashedPassword; 
+            model.Password = hashedPassword;
             model.StudentSalt = salt;
-       
-            this.helperOledb.AddParameter("@StudentSalt", salt);
+            this.helperOledb.AddParameter("@StudentId", model.StudentId);
+            this.helperOledb.AddParameter("@StudentNickName", model.StudentNickName);
+            this.helperOledb.AddParameter("@Password",model.Password);
+            this.helperOledb.AddParameter("@StudentLastName", model.StudentLastName);
+            this.helperOledb.AddParameter("@UnitId", model.UnitId);
+            this.helperOledb.AddParameter("@StudentFirstName", model.StudentFirstName);
+            this.helperOledb.AddParameter("@CityId", model.CityId);
+            this.helperOledb.AddParameter("@StudentTelephone", model.StudentTelephone);
+            this.helperOledb.AddParameter("@StudentAdrres", model.StudentAdrres);
+            this.helperOledb.AddParameter("@StudentImage", model.StudentImage);
+            this.helperOledb.AddParameter("@StudentSalt", model.StudentSalt);
+            this.helperOledb.AddParameter("@StudentActive", true);
+            this.helperOledb.AddParameter("@StudentIsManager", false);
             return this.helperOledb.Insert(sql) > 0;
         }
         private string GetHash(string password, string salt)
