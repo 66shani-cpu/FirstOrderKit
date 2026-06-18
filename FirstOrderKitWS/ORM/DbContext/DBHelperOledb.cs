@@ -91,7 +91,7 @@ namespace FirstOrderKitWS
         //פעולה שמוסיפה פרמטר כדי למנוע התקפות 
         public void AddParameter(string name, object
             value)
-        {
+        {  
             this.dbCommand.Parameters.Add(new OleDbParameter(name, value));
         }
         public string GetLastInsertId()
