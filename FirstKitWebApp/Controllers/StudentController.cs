@@ -63,6 +63,16 @@ namespace FirstKitWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LogInStudent(string StudentNickName, string password)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("ViewLoginForm", student);
+            //}
+            if (string.IsNullOrEmpty(StudentNickName) || StudentNickName.Length < 2 ||
+        string.IsNullOrEmpty(password) || password.Length < 2)
+            {
+                ViewBag.ErrorMessage = "Please enter a valid Nickname and Password (at least 2 characters).";
+                return View("ViewLoginForm");
+            }
             ApiClient<string> client = new ApiClient<string>();
             client.Schema = "http";
             client.Host = "localhost";

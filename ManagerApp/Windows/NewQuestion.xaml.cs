@@ -45,6 +45,9 @@ namespace ManagerApp.Windows
             bool ok = false;
             AddQuestionViewModel newQuestion = new AddQuestionViewModel();
             newQuestion.Question = new Question();
+            newQuestion.QuestionId = "0";
+            newQuestion.LevelQuestions = (ComboBoxLevel.SelectedIndex + 1).ToString();
+            newQuestion.QuestionText = TextBoxQuestionText.Text;
             newQuestion.Question.QuestionId = "0";
             newQuestion.Question.LevelQuestions = (ComboBoxLevel.SelectedIndex+1).ToString();
             newQuestion.Question.QuestionText = TextBoxQuestionText.Text;            

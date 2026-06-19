@@ -26,6 +26,8 @@ namespace FirstOrderKitModel
 
         }
         public string StudentSalt { get; set; }
+        [Required(ErrorMessage = "answer Text cannot be empty")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "StudentId between 2-10")]
         public string StudentId
         {
             get { return this.studentId; }
@@ -49,7 +51,7 @@ namespace FirstOrderKitModel
             }
         }
         [Required(ErrorMessage = "password Text cannot be empty")]
-        [StringLength(10, MinimumLength = 2, ErrorMessage = "password")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "Password between 2-10")]
         public string Password
         {
             get { return this.password; }
@@ -60,7 +62,7 @@ namespace FirstOrderKitModel
             }
         }
         [Required(ErrorMessage = "studentFirstName Text cannot be empty")]
-        [StringLength(10, MinimumLength = 2, ErrorMessage = "studentFirstName")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "studentFirstName between 2-10")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string StudentFirstName
         {
@@ -72,7 +74,7 @@ namespace FirstOrderKitModel
             }
         }
         [Required(ErrorMessage = "studentLastName Text cannot be empty")]
-        [StringLength(10, MinimumLength = 2, ErrorMessage = "studentLastName")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "studentLastName between 2-10")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string StudentLastName
         {
@@ -89,7 +91,7 @@ namespace FirstOrderKitModel
             set { this.cityId = value; }
         }
         [Required(ErrorMessage = "studentTelephone Text cannot be empty")]
-        [StringLength(10, MinimumLength = 2, ErrorMessage = "StudentTelephone")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "StudentTelephone between 2-10")]
         public string StudentTelephone
         {
             get { return this.studentTelephone; }
@@ -100,7 +102,7 @@ namespace FirstOrderKitModel
             }
         }
         [Required(ErrorMessage = "studentAdrres Text cannot be empty")]
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "studentAdrres")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "studentAdrres between 2-10")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string StudentAdrres
         {

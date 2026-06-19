@@ -35,6 +35,7 @@ namespace FirstKitWebApp.Controllers
             if (ModelState.IsValid == false)
             {
                 registationViewModel.cities = await GetCitiesAsync();
+                registationViewModel.units = await GetUnitsAsync();
                 registationViewModel.student = student;
                 return View("SignUp", registationViewModel);
             }
@@ -70,6 +71,18 @@ namespace FirstKitWebApp.Controllers
             RegistationViewModel registationViewModel = await clientStudent.GetAsync();
             return View(registationViewModel);
         }
+
+        [HttpGet]
+        private async Task<List<Unit>> GetUnitsAsync()
+        {
+            ApiClient<List<Unit>> client = new ApiClient<List<Unit>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Guest/GetUnits";
+            return await client.GetAsync();
+        }
+
         [HttpGet]
         private async Task<List<City>> GetCitiesAsync()
         {
