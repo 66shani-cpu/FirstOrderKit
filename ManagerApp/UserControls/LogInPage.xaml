@@ -76,7 +76,7 @@
                             CornerRadius="8"
                             Background="White"
                             Margin="0,0,0,35">
-                        <TextBox x:Name="textBoxPassword"
+                        <PasswordBox x:Name="textBoxPassword"
                                  BorderThickness="0"
                                  VerticalContentAlignment="Center"
                                  Padding="12,0"

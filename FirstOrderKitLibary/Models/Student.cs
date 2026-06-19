@@ -26,7 +26,7 @@ namespace FirstOrderKitModel
 
         }
         public string StudentSalt { get; set; }
-        [Required(ErrorMessage = "answer Text cannot be empty")]
+        [Required(ErrorMessage = "StudentId cannot be empty")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "StudentId between 2-10")]
         public string StudentId
         {
@@ -38,7 +38,7 @@ namespace FirstOrderKitModel
             get { return this.unitId; }
             set { this.unitId = value; }
         }
-        [Required(ErrorMessage = "answer Text cannot be empty")]
+        [Required(ErrorMessage = "StudentNickName cannot be empty")]
         [StringLength(20, MinimumLength = 2, ErrorMessage = "studentNickName")]
         [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string StudentNickName

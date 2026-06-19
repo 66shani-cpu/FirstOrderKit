@@ -32,7 +32,7 @@ namespace ManagerApp.UserControls
         private async void buttonLoin_Click(object sender, RoutedEventArgs e)
         {
             string nickName=this.textBoxNickName.Text;
-            string password = this.textBoxPassword.Text;
+            string password = this.textBoxPassword.Password;
             if(String.IsNullOrEmpty(nickName) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("מילוי נתונים", "כותרת", MessageBoxButton.OK, MessageBoxImage.Error);

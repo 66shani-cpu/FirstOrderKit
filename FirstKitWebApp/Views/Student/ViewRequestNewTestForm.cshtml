@@ -127,6 +127,7 @@
 
             <label for="unit">Filter by unit</label>
             <select name="unitId" id="unit">
+                <option value="">Select Unit</option>
                 @foreach (Unit unit in Model.Units)
                 {
                     <option value="@unit.UnitId">@unit.UnitName</option>

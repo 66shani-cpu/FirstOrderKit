@@ -177,6 +177,12 @@
         <h2>LogIn</h2>
         <a href="http://localhost:5108/guest/ShowUnitsPage" class="btn-back-home">Back to Home</a>
 
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="error" style="text-align: center; margin-bottom: 15px; font-size: 1rem;">
+                @ViewBag.ErrorMessage
+            </div>
+        }
         <form action="http://localhost:5108/Student/LogInStudent" method="post">
 
 @*             <label>Nick Name</label>

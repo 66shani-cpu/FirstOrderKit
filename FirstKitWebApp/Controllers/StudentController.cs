@@ -61,25 +61,25 @@ namespace FirstKitWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogInStudent(string StudentNickName, string password)
+        public async Task<IActionResult> LogInStudent(/*string StudentNickName, string password*/ Student student)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("ViewLoginForm", student);
-            //}
-            if (string.IsNullOrEmpty(StudentNickName) || StudentNickName.Length < 2 ||
-        string.IsNullOrEmpty(password) || password.Length < 2)
+            if (!ModelState.IsValid)
             {
-                ViewBag.ErrorMessage = "Please enter a valid Nickname and Password (at least 2 characters).";
-                return View("ViewLoginForm");
+                return View("ViewLoginForm", student);
             }
+        //    if (string.IsNullOrEmpty(StudentNickName) || StudentNickName.Length < 2 ||
+        //string.IsNullOrEmpty(password) || password.Length < 2)
+        //    {
+        //        ViewBag.ErrorMessage = "Please enter a valid Nickname and Password (at least 2 characters).";
+        //        return View("ViewLoginForm");
+        //    }
             ApiClient<string> client = new ApiClient<string>();
             client.Schema = "http";
             client.Host = "localhost";
             client.Port = 5239;
             client.Path = "api/Student/LogInStudent";
-            client.AddParameter("nickName", StudentNickName);
-            client.AddParameter("password", password);
+            client.AddParameter("nickName", student.StudentNickName);
+            client.AddParameter("password", student.Password/*password*/);
             string id = await client.GetAsync();
             if (id == null)
                 return View("ViewLoginForm");
