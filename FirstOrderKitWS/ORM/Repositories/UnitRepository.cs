@@ -100,47 +100,19 @@ namespace FirstOrderKitWS.ORM.Repositories
             return units;
         }
 
-        public UnitBarData GetBarData()
-        {
-            string sql = @"SELECT Units.UnitName,
-                    Sum(IIf(StudentTest.Grade > 60, 1, 0)) AS Passed,
-                    Sum(IIf(StudentTest.Grade <= 60, 1, 0)) AS Failed
-                FROM
-                    (
-                        Units
-                        INNER JOIN UnitTests ON Units.UnitId = UnitTests.UnitId
-                    )
-                    INNER JOIN StudentTest ON UnitTests.TestId = StudentTest.TestId
-                GROUP BY
-                    Units.UnitName;";
-            IDataReader reader = this.helperOledb.Select(sql);
-
-            UnitBarData data = new UnitBarData();
-            data.NotPass = new List<int>();
-            data.Pass = new List<int>();
-            data.Labels = new List<string>();
-
-            while (reader.Read())
-            {
-                data.Labels.Add(reader["UnitName"].ToString());
-                data.NotPass.Add(Convert.ToInt32(reader["Failed"]));
-                data.Pass.Add(Convert.ToInt32(reader["Passed"]));
-            }
-            return data;
-        }
         //public UnitBarData GetBarData()
         //{
-        //    // השאילתה המעודכנת מחברת את טבלת Units ישירות לטבלת Tests על בסיס unitId
-        //    // והציון נלקח ישירות מעמודת Grade שבטבלת Tests
         //    string sql = @"SELECT Units.UnitName,
-        //            Sum(IIf(Tests.Grade > 60, 1, 0)) AS Passed,
-        //            Sum(IIf(Tests.Grade <= 60, 1, 0)) AS Failed
+        //            Sum(IIf(StudentTest.Grade > 60, 1, 0)) AS Passed,
+        //            Sum(IIf(StudentTest.Grade <= 60, 1, 0)) AS Failed
         //        FROM
-        //            Units
-        //            INNER JOIN Tests ON Units.UnitId = Tests.unitId
+        //            (
+        //                Units
+        //                INNER JOIN UnitTests ON Units.UnitId = UnitTests.UnitId
+        //            )
+        //            INNER JOIN StudentTest ON UnitTests.TestId = StudentTest.TestId
         //        GROUP BY
         //            Units.UnitName;";
-
         //    IDataReader reader = this.helperOledb.Select(sql);
 
         //    UnitBarData data = new UnitBarData();
@@ -156,6 +128,36 @@ namespace FirstOrderKitWS.ORM.Repositories
         //    }
         //    return data;
         //}
+        public UnitBarData GetBarDataDRAFT()
+        {
+            string sql = @"SELECT 
+                        Tests.StudentId,
+                        Student.StudentFirstName,
+                        Student.StudentLastName,
+                        Sum(IIf(Val(Tests.Grade) > 60, 1, 0)) AS Passed,
+                        Sum(IIf(Val(Tests.Grade) <= 60, 1, 0)) AS Failed
+                    FROM 
+                        Tests
+                        INNER JOIN Student ON Tests.StudentId = Student.StudentId
+                    WHERE 
+                        Tests.StudentId Is Not Null
+                    GROUP BY 
+                        Tests.StudentId, Student.StudentFirstName, Student.StudentLastName;";
+            IDataReader reader = this.helperOledb.Select(sql);
+            UnitBarData data = new UnitBarData();
+            data.NotPass = new List<int>();
+            data.Pass = new List<int>();
+            data.Labels = new List<string>();
+            while (reader.Read())
+            {
+                //data.Labels.Add(reader["StudentFirstName"].ToString());
+                string fullName = $"{reader["StudentFirstName"]} {reader["StudentLastName"]}";
+                data.Labels.Add(fullName);
+                data.NotPass.Add(Convert.ToInt32(reader["Failed"]));
+                data.Pass.Add(Convert.ToInt32(reader["Passed"]));
+            }
+            return data;
+        }
         public bool UpdateImageName(string unitId, string fileName)
         {
             string sql = $@"Update Units set

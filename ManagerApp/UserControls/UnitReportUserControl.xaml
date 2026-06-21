@@ -22,7 +22,7 @@
             <lvc:AxesCollection>
                 <lvc:XamlAxis
                     Labels="{Binding Labels}"
-                    AxisName="units dgfdfdv  drdf"
+                    AxisName="A graph showing for each student how many tests he passed and how many he failed."
                     LabelsAlignment="Start"
                    LabelsRotation="45"
                     LabelsDensity="0"
@@ -36,7 +36,15 @@
                     />
             </lvc:AxesCollection>
         </lvc:CartesianChart.XAxes>
-
+        <!-- חדש: מבטיח שציר ה-Y יציג רק מספרים שלמים -->
+        <lvc:CartesianChart.YAxes>
+            <lvc:AxesCollection>
+                <lvc:XamlAxis
+                    MinStep="1"
+                    ForceStepToMin="True"
+                    />
+            </lvc:AxesCollection>
+        </lvc:CartesianChart.YAxes>
     </lvc:CartesianChart>
 </UserControl>
 

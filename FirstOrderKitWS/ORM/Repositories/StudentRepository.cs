@@ -144,7 +144,24 @@ namespace FirstOrderKitWS
              return this.modelCreaters.StudentCreator.CreateModel(reader);
             }
         }
+        public string GetUnitNameByStudentId(string studentId)
+        {
+            string sql = @"SELECT Units.UnitName 
+                    FROM Student 
+                    INNER JOIN Units ON Student.UnitId = Units.UnitId
+                    WHERE Student.StudentId = ?";
 
+            this.helperOledb.AddParameter("StudentId", studentId);
+
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                if (reader.Read())
+                {
+                    return reader["UnitName"].ToString();
+                }
+                return "";
+            }
+        }
         public bool Update(Student model)
         {
             string sql = @"Update Student set StudentNickName=@StudentNickName,

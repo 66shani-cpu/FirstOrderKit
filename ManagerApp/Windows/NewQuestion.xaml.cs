@@ -49,13 +49,13 @@ namespace ManagerApp.Windows
             newQuestion.LevelQuestions = (ComboBoxLevel.SelectedIndex + 1).ToString();
             newQuestion.QuestionText = TextBoxQuestionText.Text;
             newQuestion.Question.QuestionId = "0";
-            newQuestion.Question.LevelQuestions = (ComboBoxLevel.SelectedIndex+1).ToString();
-            newQuestion.Question.QuestionText = TextBoxQuestionText.Text;            
+            newQuestion.Question.LevelQuestions = (ComboBoxLevel.SelectedIndex + 1).ToString();
+            newQuestion.Question.QuestionText = TextBoxQuestionText.Text;
             newQuestion.Answers = new List<Answer>();
             Answer answer1 = new Answer();
-            answer1.QuestionId = "0";   
+            answer1.QuestionId = "0";
             answer1.Answerid = "0";
-            answer1.AnswerText=TextBoxAnswerFirst.Text;
+            answer1.AnswerText = TextBoxAnswerFirst.Text;
             answer1.TrueFalse = RadioButtonFirst.IsChecked.ToString();
             newQuestion.Answers.Add(answer1);
             Answer answer2 = new Answer();
@@ -73,27 +73,64 @@ namespace ManagerApp.Windows
             newQuestion.Question.Validate();
             Dictionary<string, List<string>> errors = newQuestion.Question.AllError();
             StringBuilder sb = new StringBuilder();
-            foreach(var errorEntry  in errors)
+            // בדיקה - האם נבחרה תשובה נכונה - מצטרפת לאותו StringBuilder
+            if (RadioButtonFirst.IsChecked != true &&
+                RadioButtonSecond.IsChecked != true &&
+                RadioButtonThird.IsChecked != true)
+            {
+                sb.Append("CorrectAnswer:\n\n");
+                sb.Append("You must select the correct answer");
+                sb.Append("\n\n");
+            }
+            foreach (var errorEntry in errors)
             {
                 string propertyName = errorEntry.Key;
                 sb.Append($"{propertyName}:\n\n");
-                foreach(var error  in errorEntry.Value)
+                foreach (var error in errorEntry.Value)
                 {
-                    sb.Append($"{error}, ");
-                    string errorMessage = string.Join(error, "\n");
-                    sb.Append($"{propertyName} : {errorMessage}");
+                    //sb.Append($"{error}, ");
+                    //string errorMessage = string.Join(error, "\n");
+                    //sb.Append($"{propertyName} : {errorMessage}");
+                    sb.Append($"{propertyName} : {error}\n");
                 }
                 sb.Append($"\n\n");
-                //מחבר את כל השגיאות ברשימה למחרוזת אחת מופרדת בפסיקים 
-
+            }
+            // ✅ חדש - Validation על כל Answer בנפרד
+            bool allAnswersValid = true;
+            int answerNumber = 1;
+            foreach (Answer answer in newQuestion.Answers)
+            {
+                answer.Validate();
+                Dictionary<string, List<string>> answerErrors = answer.AllError();
+                if (answer.HasErrors)
+                {
+                    allAnswersValid = false;
+                    sb.Append($"Answer {answerNumber}:\n\n");
+                    foreach (var errorEntry in answerErrors)
+                    {
+                        foreach (var error in errorEntry.Value)
+                        {
+                            sb.Append($"{errorEntry.Key} : {error}\n");
+                        }
+                    }
+                    sb.Append("\n\n");
+                }
+                answerNumber++;
+            }
+            //מחבר את כל השגיאות ברשימה למחרוזת אחת מופרדת בפסיקים 
+            if (sb.Length > 0)
+            {
                 //הדפסה בפורמט המבוקש
                 MessageBox.Show(sb.ToString(),
                 "Please correct the following errors:",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
-
             }
-            if (newQuestion.Question.HasErrors == false)
+
+               
+
+           
+            if (newQuestion.Question.HasErrors == false && allAnswersValid)
             {
                 ApiClient<AddQuestionViewModel> apiClient = new ApiClient<AddQuestionViewModel>();
                 apiClient.Schema = "http";

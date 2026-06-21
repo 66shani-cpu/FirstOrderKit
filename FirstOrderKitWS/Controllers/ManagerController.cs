@@ -170,7 +170,24 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
-
+        [HttpGet]
+        public string GetUnitNameByStudentId(string studentId)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.StudentRepository.GetUnitNameByStudentId(studentId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return "";
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
         [HttpGet]
         public UnitBarData GetUnitBarData()
         {
@@ -178,7 +195,7 @@ namespace FirstOrderKitWS.Controllers
             try
             {
                 this.repositoryUOF.DBHelperOledb.OpenConnection();
-                return this.repositoryUOF.UnitRepository.GetBarData();
+                return this.repositoryUOF.UnitRepository.GetBarDataDRAFT();
 
             }
             catch (Exception ex) 

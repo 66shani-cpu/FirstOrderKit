@@ -22,6 +22,7 @@ namespace FirstOrderKitModel
             set { this.questionId = value; }
         }
         [Required(ErrorMessage = "LevelQuestions cannot be empty")]
+        [Range(1, 3, ErrorMessage = "You must select a question level")]
         public string LevelQuestions
         {
             get { return this.levelQuestions; }

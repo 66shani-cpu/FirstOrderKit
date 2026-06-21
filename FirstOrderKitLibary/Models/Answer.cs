@@ -23,11 +23,12 @@ namespace FirstOrderKitModel
             get { return this. answerid; }
             set { this.answerid= value; } 
         }
-
+        [Required(ErrorMessage = "TrueFalse cannot be empty")]
         public string TrueFalse
         {
             get { return this.trueFalse; }
             set { this.trueFalse = value; }
+
         }
         public string QuestionId
         {
