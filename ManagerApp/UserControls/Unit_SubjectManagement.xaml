@@ -18,7 +18,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <conv:URIConverter x:Key="urlConvertor"></conv:URIConverter>
+        <conv:URIConvertor x:Key="urlConvertor"></conv:URIConvertor>
     </UserControl.Resources>
     <Canvas>
 
