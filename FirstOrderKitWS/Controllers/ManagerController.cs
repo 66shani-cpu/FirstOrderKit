@@ -269,6 +269,25 @@ namespace FirstOrderKitWS.Controllers
                 this.repositoryUOF.DBHelperOledb.CloseConnection();
             }
         }
+        [HttpGet]
+        public IActionResult GetAverageGradeByStudentId(string studentId)
+        {
+            try
+            {
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                double average = this.repositoryUOF.StudentRepository.GetAverageGradeByStudentId(studentId);
+                return Ok(average);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return Ok(0);
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
         [HttpPost]
         public async Task<bool> AddNewUnit()
         {

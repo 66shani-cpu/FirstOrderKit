@@ -55,7 +55,7 @@
                    VerticalAlignment="Center" 
                    Padding="5,0,0,0"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" 
+        <!--<TextBlock Grid.Row="2" Grid.Column="0" 
                    Text="Unit:" 
                    FontSize="18" 
                    FontFamily="{StaticResource SpecialElite}"
@@ -67,8 +67,19 @@
                    FontSize="18" 
                    FontFamily="{StaticResource SpecialElite}"
                    VerticalAlignment="Center" 
-                   Padding="5,0,0,0"/>
-
+                   Padding="5,0,0,0"/>-->
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+           Text="Average Grade:" 
+           FontSize="18" 
+           FontFamily="{StaticResource SpecialElite}"
+           VerticalAlignment="Center" 
+           Foreground="#FF333333"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" 
+           x:Name="textBlockAverageGrade"
+           FontSize="18" 
+           FontFamily="{StaticResource SpecialElite}"
+           VerticalAlignment="Center" 
+           Padding="5,0,0,0"/>
         <TextBlock Grid.Row="3" Grid.Column="0" 
                    Text="Telephone:" 
                    FontSize="18" 

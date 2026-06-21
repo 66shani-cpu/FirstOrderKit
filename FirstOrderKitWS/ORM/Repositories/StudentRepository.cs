@@ -131,8 +131,24 @@ namespace FirstOrderKitWS
           
             return students;
         }
-        
 
+        public double GetAverageGradeByStudentId(string studentId)
+        {
+            string sql = @"SELECT AVG(Val(Tests.Grade)) AS AverageGrade
+                    FROM Tests
+                    WHERE Tests.StudentId = ?";
+
+            this.helperOledb.AddParameter("StudentId", studentId);
+
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                if (reader.Read() && reader["AverageGrade"] != DBNull.Value)
+                {
+                    return Convert.ToDouble(reader["AverageGrade"]);
+                }
+                return 0;
+            }
+        }
 
         public Student GetById(string id)
         {

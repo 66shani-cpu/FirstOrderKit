@@ -278,6 +278,10 @@
             <input type="file" name="formFile" id="readerFile" onchange="getFileName()" />
             <input asp-for="student.StudentImage" type="hidden" id="readerImg" />
             <span asp-validation-for="student.StudentImage" class="error"></span>
+            @if (ViewBag.Error != null || !ViewContext.ViewData.ModelState.IsValid)
+            {
+                <span class="error">⚠️ If there was an error in the form, you must select the image again to protect your private details</span>
+            }
 
             @* שדות נסתרים שנותרו נחוצים *@
             <input asp-for="student.StudentSalt" type="hidden" value="0" />

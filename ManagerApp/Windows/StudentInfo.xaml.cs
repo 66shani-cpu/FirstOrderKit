@@ -24,19 +24,29 @@ namespace ManagerApp.Windows
     {
         Student student;
         string unitName;
+        double averageGrade;
         public StudentInfo(string studentId)
         {
             
             InitializeComponent();
-            //_ = LoadAllData(studentId);
-            GetStudentInfo(studentId);
+            _ = LoadAllData(studentId);
+            //GetStudentInfo(studentId);
 
         }
-        //private async Task LoadAllData(string studentId)
-        //{
-        //    await GetStudentInfo(studentId);
-        //    await GetUnitName(studentId);
-        //}
+        private async Task LoadAllData(string studentId)
+        {
+            //await GetStudentInfo(studentId);
+            //await GetUnitName(studentId);
+            try
+            {
+                await GetStudentInfo(studentId);
+                await GetAverageGrade(studentId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "שגיאה");
+            }
+        }
 
         private async Task GetStudentInfo(string studentId)
         {
@@ -70,6 +80,17 @@ namespace ManagerApp.Windows
         //    this.unitName = await unitApiClient.GetAsync();
         //    this.textBlockUnitName.Text = this.unitName;
         //}
+        private async Task GetAverageGrade(string studentId)
+        {
+            ApiClient<double> averageApiClient = new ApiClient<double>();
+            averageApiClient.Schema = "http";
+            averageApiClient.Host = "localhost";
+            averageApiClient.Port = 5239;
+            averageApiClient.Path = "api/Manager/GetAverageGradeByStudentId";
+            averageApiClient.AddParameter("studentId", studentId);
+            this.averageGrade = await averageApiClient.GetAsync();
+            this.textBlockAverageGrade.Text = this.averageGrade.ToString("0.00");
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
