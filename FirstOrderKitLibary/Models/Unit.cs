@@ -21,9 +21,9 @@ namespace FirstOrderKitModel
             get { return this.unitId; }
             set { this.unitId = value; }
         }
-        //[Required(ErrorMessage = "UnitName Text cannot be empty")]
-        //[StringLength(20, MinimumLength = 2, ErrorMessage = "unitName")]
-        //[FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
+        [Required(ErrorMessage = "UnitName Text cannot be empty")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "unitName")]
+        [FirstLetterCapitalAttribute(ErrorMessage = "The first letter must be capitaliezed")]
         public string UnitName
         {
             get { return this.unitName; }

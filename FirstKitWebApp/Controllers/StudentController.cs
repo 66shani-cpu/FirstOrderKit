@@ -63,6 +63,17 @@ namespace FirstKitWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> LogInStudent(/*string StudentNickName, string password*/ Student student)
         {
+            // אומרים לשרת להתעלם מכל שאר שדות החובה של הסטודנט שלא נמצאים בטופס ההתחברות
+            ModelState.Remove(nameof(student.StudentId));
+            ModelState.Remove(nameof(student.UnitId));
+            ModelState.Remove(nameof(student.StudentFirstName));
+            ModelState.Remove(nameof(student.StudentLastName));
+            ModelState.Remove(nameof(student.CityId));
+            ModelState.Remove(nameof(student.StudentTelephone));
+            ModelState.Remove(nameof(student.StudentAdrres));
+            ModelState.Remove(nameof(student.StudentImage));
+            ModelState.Remove(nameof(student.StudentSalt));
+            ModelState.Remove(nameof(student.CityName));
             if (!ModelState.IsValid)
             {
                 return View("ViewLoginForm", student);
@@ -217,7 +228,7 @@ namespace FirstKitWebApp.Controllers
                 RequestUri = new Uri($"https://horoscope-api-by-apirobots.p.rapidapi.com/v1/horoscopes/{sign}/weekly?week_start={start}"),
                 Headers =
         {
-            { "x-rapidapi-key", "5c7fb314b8msh555f6b6e488e2fbp1880f2jsnf6c5176b4258" },
+            { "x-rapidapi-key", "e2cae94d3fmsh9e56b39a12d6725p117355jsn2d4f39a51cde" },
             { "x-rapidapi-host", "horoscope-api-by-apirobots.p.rapidapi.com" },
         },
             };

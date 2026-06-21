@@ -42,7 +42,7 @@
 
                 <StackPanel>
                     <Label x:Name="label" 
-                           Content="Username" 
+                           Content="NickName" 
                            FontSize="15"
                            FontWeight="SemiBold"
                            Foreground="#334155"

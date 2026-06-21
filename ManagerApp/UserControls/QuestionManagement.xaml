@@ -61,16 +61,26 @@
                                    Grid.Column="0"
                                    VerticalAlignment="Center"/>
 
-                            <Label x:Name="QuestionText"
+                            <!--<Label x:Name="QuestionText"
                                    Margin="5"
                                    Grid.Column="1"
                                    VerticalAlignment="Center"
                                    FontSize="17" 
                                    FontFamily="{StaticResource SpecialElite}">
-                                <Label.Content>
+                                --><!--<Label.Content>
                                     <AccessText TextWrapping="Wrap" Text="{Binding QuestionText}"/>
-                                </Label.Content>
-                            </Label>
+                                </Label.Content>--><!--
+                                <TextBlock TextWrapping="Wrap" Text="{Binding QuestionText}"/>
+                            </Label>-->
+                            <TextBlock x:Name="QuestionText"
+           Grid.Column="1"
+           Text="{Binding QuestionText}"
+           TextWrapping="Wrap"
+           Margin="5"
+           VerticalAlignment="Center"
+           FontSize="17" 
+           FontFamily="{StaticResource SpecialElite}"
+                                       Validation.ErrorTemplate="{x:Null}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,0">
                                 <Button x:Name="btnDelete"
