@@ -44,6 +44,22 @@ namespace FirstOrderKitWS.ORM.Repositories
 
             return questions;
         }
+        public List<Question> GetAllNotActive()
+        {
+            string sql = " Select * from Question where QuestionActive=false";
+
+            List<Question> questions = new List<Question>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    questions.Add(this.modelCreaters.QuestionCreater.CreateModel(reader));
+                }
+            }
+
+            return questions;
+        }
 
         public Question GetById(string id)
         {
@@ -94,6 +110,15 @@ this.helperOledb.AddParameter("@levelQuestion", levelQuestion);
         {
             string sql = $@"UPDATE Question 
                    SET QuestionActive = False 
+                   WHERE QuestionID = @QuestionID";
+            this.helperOledb.AddParameter("@QuestionID", questionId);
+            return this.helperOledb.Update(sql) > 0;
+
+        }
+        public bool RestoreQuestion(string questionId)
+        {
+            string sql = $@"UPDATE Question 
+                   SET QuestionActive = True 
                    WHERE QuestionID = @QuestionID";
             this.helperOledb.AddParameter("@QuestionID", questionId);
             return this.helperOledb.Update(sql) > 0;

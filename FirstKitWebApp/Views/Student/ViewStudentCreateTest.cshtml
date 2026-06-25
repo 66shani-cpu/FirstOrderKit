@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "ViewStudentCreateTest";
     Layout = "~/Views/Shared/MasterPage.cshtml";
 }
@@ -113,6 +113,137 @@
     </div>
 
     <div class="left-section">
+        <a href="http://localhost:5108/student/ViewRequestNewTestForm" class="requestNewTest">Request New Test</a>
+        <a href="http://localhost:5108/guest/SignUp" class="signup">Update Profile</a>
+    </div>
+</div> *@
+@{
+    ViewData["Title"] = "ViewStudentCreateTest";
+    Layout = "~/Views/Shared/MasterPage.cshtml";
+}
+
+<style>
+    :root {
+        --neon-lime: #adff2f;
+        --dark-bg: #1a2f23;
+        --glass-bg: rgba(26, 47, 35, 0.85); /* רקע זכוכית כהה */
+        --text-white: #ffffff;
+    }
+
+    body {
+        /* תמונת רקע של חיילים מגובשים */
+        background: linear-gradient(rgba(26, 47, 35, 0.8), rgba(26, 47, 35, 0.8)), url('https://images.unsplash.com/photo-1590402485284-2c5a7576b54b?q=80&w=2070&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        font-family: 'Assistant', sans-serif;
+        color: var(--text-white);
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 60px;
+        min-height: 100vh;
+        margin-top: 50px;
+    }
+
+    /* עיצוב צד ימין - תמונת הסטודנט */
+    .right-section {
+        background: var(--glass-bg);
+        padding: 30px;
+        border-radius: 30px;
+        border: 2px solid rgba(173, 255, 47, 0.3);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+        .right-section:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-lime);
+        }
+
+        .right-section img {
+            width: 300px; /* גודל תמונת הסטודנט */
+            height: 300px;
+            border-radius: 20px;
+            object-fit: contain;
+            border: 3px solid var(--neon-lime);
+            box-shadow: 0 0 20px rgba(173, 255, 47, 0.3);
+        }
+
+    /* עיצוב צד שמאל - כפתורים */
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin-top: 90px;
+    }
+
+        .left-section a {
+            text-decoration: none;
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+    /* עיצוב כפתור צפייה ביחידות החדש */
+    .viewUnits {
+        background-color: transparent;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+    }
+
+        .viewUnits:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+    .requestNewTest {
+        background-color: var(--neon-lime);
+        color: #1a2f23;
+        box-shadow: 0 5px 15px rgba(173, 255, 47, 0.3);
+    }
+
+        .requestNewTest:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(173, 255, 47, 0.5);
+        }
+
+    .signup {
+        background-color: transparent;
+        color: var(--neon-lime);
+        border: 2px solid var(--neon-lime);
+    }
+
+        .signup:hover {
+            background-color: rgba(173, 255, 47, 0.1);
+            transform: scale(1.05);
+        }
+</style>
+
+<div class="content">
+    <div class="right-section">
+        @{
+            string img = ViewBag.ImageExt;
+        }
+        <img src="http://localhost:5239/Images/Students/@img" onclick="alert(`http://localhost:5239/Images/Students/@img`)" onerror="this.src='https://via.placeholder.com/300?text=No+Image'" />
+    </div>
+
+    <div class="left-section">
+        <a href="http://localhost:5108/student/ViewUnits" class="viewUnits">View Units</a>
+
         <a href="http://localhost:5108/student/ViewRequestNewTestForm" class="requestNewTest">Request New Test</a>
         <a href="http://localhost:5108/guest/SignUp" class="signup">Update Profile</a>
     </div>

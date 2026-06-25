@@ -109,6 +109,18 @@ namespace ManagerApp.UserControls
             }
          
         }
+        private async void btnViewInactive_Click(object sender, RoutedEventArgs e)
+        {
+            // פתיחת חלון הארכיון החדש
+            ManagerApp.Windows.InactiveQuestionsWindow inactiveWindow = new ManagerApp.Windows.InactiveQuestionsWindow();
+            inactiveWindow.Owner = Window.GetWindow(this);
+
+            // במידה ובוצע שחזור של שאלה בתוך החלון, נרענן את הרשימה הראשית כשהוא נסגר
+            inactiveWindow.ShowDialog();
+
+            ListViewQuestion.ItemsSource = null;
+            await GetQuestionList();
+        }
     }
     
 }

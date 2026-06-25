@@ -261,5 +261,27 @@ namespace FirstKitWebApp.Controllers
             public string sign { get; set; }
             public string overview { get; set; }
         }
+        [HttpGet]
+        public async Task<IActionResult> ViewUnits()
+        {
+            // 1. הגדרת ה-API Client כדי למשוך את היחידות (בדיוק כמו שעשית באורח)
+            ApiClient<List<Unit>> client = new ApiClient<List<Unit>>();
+            client.Schema = "http";
+            client.Host = "localhost";
+            client.Port = 5239;
+            client.Path = "api/Guest/GetUnits"; // פונים לאותו ה-API שמביא את היחידות והתמונות
+
+            // 2. משיכת הנתונים מהשרת
+            List<Unit> unitsList = await client.GetAsync();
+
+            if (unitsList == null)
+            {
+                Console.WriteLine("--- אזהרה: רשימת היחידות חזרה ריקה בסטודנט! ---");
+                unitsList = new List<Unit>(); // מניעת קריסה
+            }
+
+            // 3. מחזירים את ה-View המעוצב של הסטודנט (זה עם כפתור ה-Back Home) ומעבירים לו את הרשימה
+            return View("ViewUnits", unitsList);
+        }
     }
 }

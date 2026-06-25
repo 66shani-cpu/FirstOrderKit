@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "MasterPage";
 
     // בדיקת ה-Session
@@ -109,8 +109,159 @@
             {
                 <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
                 <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
-                @* <a href="http://localhost:5108/Student/ViewHoroscope" class="horoscope-link">Check Horoscope</a> *@
+               
             }
+
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+</body>
+</html> *@
+@{
+    ViewData["Title"] = "MasterPage";
+
+    // בדיקת ה-Session
+    string studentId = Context.Session.GetString("studentId");
+    bool isStudentLoggedIn = !string.IsNullOrEmpty(studentId);
+}
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --nav-bg: rgba(45, 90, 65, 0.85);
+            --neon-green: #adff2f;
+            --text-white: #ffffff;
+            --logout-red: #ff4d4d; /* צבע אדום לכפתור ההתנתקות */
+        }
+
+        body {
+            margin: 0;
+            padding-top: 80px;
+            background-color: #1e3a2b;
+            font-family: 'Assistant', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            border-bottom: 2px solid rgba(173, 255, 47, 0.3);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            justify-content: space-between;
+        }
+
+        .meitavtest {
+            color: var(--neon-green);
+            font-weight: 800;
+            font-size: 1.6rem;
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(173, 255, 47, 0.4);
+            pointer-events: none; /* מונע מהלוגו להפריע ללחיצות ברקע */
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        .nav-group-left {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-group-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+            .header a:hover {
+                color: var(--neon-green);
+                background: rgba(173, 255, 47, 0.15);
+            }
+
+        .login-link {
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green) !important;
+        }
+
+            .login-link:hover {
+                background: var(--neon-green) !important;
+                color: #1e3a2b !important;
+                box-shadow: 0 0 15px rgba(173, 255, 47, 0.5);
+            }
+
+        /* עיצוב כפתור התנתקות באדום */
+        .logout-link {
+            border: 2px solid var(--logout-red);
+            color: var(--logout-red) !important;
+        }
+
+            .logout-link:hover {
+                background: var(--logout-red) !important;
+                color: var(--text-white) !important;
+                box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+            }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="meitavtest">Meitav Test</h1>
+
+        <nav class="nav-links">
+
+            <div class="nav-group-left">
+                <a href="http://localhost:5108/Student/ViewAbout" class="about">About</a>
+                @if (isStudentLoggedIn)
+                {
+                    <a href="http://localhost:5108/Student/GetTestHistoryById" class="tests-link">Tests</a>
+                    <a href="http://localhost:5108/Student/ViewHoroscope" class="horoscope-link">Check Horoscope</a>
+                }
+            </div>
+
+            <div class="nav-group-right">
+                @if (isStudentLoggedIn)
+                {
+                    <a href="http://localhost:5108/guest/Logout" class="logout-link">Log out</a>
+                }
+                else
+                {
+                    <a href="http://localhost:5108/Student/ViewLoginForm" class="login-link">Log in</a>
+                }
+            </div>
 
         </nav>
     </header>

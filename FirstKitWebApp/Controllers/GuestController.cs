@@ -28,6 +28,16 @@ namespace FirstKitWebApp.Controllers
             //Test test = await client.GetAsync();
             return View(/*test*/);
         }
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            // 1. מחיקת המידע מה-Session כדי שהמערכת תדע שהסטודנט התנתק
+            HttpContext.Session.Remove("studentId");
+            HttpContext.Session.Clear(); // לביטחון נוסף, מנקה הכל
+
+            // 2. הפניה מסודרת לפעולת דף הבית של האורח
+            return RedirectToAction("ShowUnitsPage");
+        }
         [HttpPost]
         public async Task<IActionResult> Registration(Student student, IFormFile formFile)
         {

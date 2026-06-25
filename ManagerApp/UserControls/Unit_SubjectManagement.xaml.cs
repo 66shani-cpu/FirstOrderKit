@@ -58,7 +58,15 @@ namespace ManagerApp.UserControls
                 await GetUnitList();
             }
         }
+        private async void btnViewInactiveUnits_Click(object sender, RoutedEventArgs e)
+        {
+            InactiveUnitsWindow archiveWindow = new InactiveUnitsWindow();
+            archiveWindow.Owner = Window.GetWindow(this);
+            archiveWindow.ShowDialog();
 
+            // רענון הרשימה הראשית לאחר סגירת הארכיון
+            await GetUnitList();
+        }
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;

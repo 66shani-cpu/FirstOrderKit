@@ -131,6 +131,22 @@ namespace FirstOrderKitWS
           
             return students;
         }
+        public List<Student> GetAllNotActive()
+        {
+            string sql = " Select * from Student where StudentActive=false";
+
+            List<Student> students = new List<Student>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    students.Add(this.modelCreaters.StudentCreator.CreateModel(reader));
+                }
+            }
+
+            return students;
+        }
 
         public double GetAverageGradeByStudentId(string studentId)
         {
@@ -203,6 +219,15 @@ namespace FirstOrderKitWS
         {
             string sql = $@"UPDATE Student 
                 SET StudentActive = False 
+                WHERE StudentId = @StudentId";
+            this.helperOledb.AddParameter("@StudentId", studentId);
+            return this.helperOledb.Update(sql) > 0;
+
+        }
+        public bool RestoreStudent(string studentId)
+        {
+            string sql = $@"UPDATE Student 
+                SET StudentActive = True 
                 WHERE StudentId = @StudentId";
             this.helperOledb.AddParameter("@StudentId", studentId);
             return this.helperOledb.Update(sql) > 0;

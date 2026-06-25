@@ -1,0 +1,67 @@
+﻿<Window x:Class="ManagerApp.Windows.InactiveStudentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:ManagerApp"
+        Title="Inactive Students Archive" Height="550" Width="700"
+        WindowStartupLocation="CenterOwner" Background="#F5F5F5">
+    <Window.Resources>
+        <FontFamily x:Key="SpecialElite">/Fonts/#Special Elite</FontFamily>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <conv:URIConverter x:Key="urlConverter"></conv:URIConverter>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListViewInactiveStudents" Grid.Row="0" Margin="15,20,15,10">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0,0,0,10"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="DarkRed" BorderThickness="1.5" Height="95" CornerRadius="4" Background="#FFF0F0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding StudentImage, Converter={StaticResource urlConverter}}"
+                                   Width="55" Height="68" Margin="20,0,15,0" Grid.Column="0" VerticalAlignment="Center"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0">
+                                <Label Content="{Binding StudentFirstName}" FontSize="30" FontFamily="{StaticResource SpecialElite}" Padding="0,0,20,0" Validation.ErrorTemplate="{x:Null}"/>
+                                <Label Content="{Binding StudentLastName}" FontSize="30" FontFamily="{StaticResource SpecialElite}" Padding="0" Validation.ErrorTemplate="{x:Null}"/>
+                            </StackPanel>
+
+                            <Button x:Name="btnRestore" Grid.Column="2" Width="35" Height="35" Margin="0,0,20,0"
+                                    Style="{StaticResource ImageButtonStyle}" Click="btnRestore_Click">
+                                <Image Source="/Images/Update1.png" ToolTip="Restore Student" />
+                            </Button>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Content="Close Archive" Grid.Row="1" Width="150" Height="35" Margin="0,10,0,15"
+                Background="Gray" Foreground="White" FontSize="16" FontFamily="{StaticResource SpecialElite}" Click="btnClose_Click"/>
+    </Grid>
+</Window>

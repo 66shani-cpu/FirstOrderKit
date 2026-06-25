@@ -1,4 +1,129 @@
 ﻿
+<!--<UserControl x:Class="ManagerApp.UserControls.QuestionManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ManagerApp.UserControls"
+             xmlns:conv="clr-namespace:ManagerApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+        <FontFamily x:Key="SpecialElite">/Fonts/#Special Elite</FontFamily>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListViewQuestion" 
+                  Grid.Row="0"
+                  Height="460" 
+                  HorizontalAlignment="Stretch"
+                  Margin="15,20,15,10">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0,0,0,8"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black"
+                            BorderThickness="1" 
+                            Height="85"
+                            CornerRadius="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Images/QuestionImage.png"
+                                   x:Name="imageBook"
+                                   Width="50"
+                                   Height="68"
+                                   Margin="15,0,15,0"
+                                   Grid.Column="0"
+                                   VerticalAlignment="Center"/>
+
+                            --><!--<Label x:Name="QuestionText"
+                                   Margin="5"
+                                   Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   FontSize="17" 
+                                   FontFamily="{StaticResource SpecialElite}">
+                                --><!--<Label.Content>
+                                    <AccessText TextWrapping="Wrap" Text="{Binding QuestionText}"/>
+                                </Label.Content>--><!--
+                                <TextBlock TextWrapping="Wrap" Text="{Binding QuestionText}"/>
+                            </Label>--><!--
+                            <TextBlock x:Name="QuestionText"
+           Grid.Column="1"
+           Text="{Binding QuestionText}"
+           TextWrapping="Wrap"
+           Margin="5"
+           VerticalAlignment="Center"
+           FontSize="17" 
+           FontFamily="{StaticResource SpecialElite}"
+                                       Validation.ErrorTemplate="{x:Null}"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,0">
+                                <Button x:Name="btnDelete"
+                                        Width="32"
+                                        Height="32"
+                                        Style="{StaticResource ImageButtonStyle}"
+                                        Click="btnDelete_Click">
+                                        
+                                    <Image Source="/Images/UpdateDelete.png" />
+                                    
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button x:Name="buttonAddNewBook"
+                Grid.Row="1"
+                HorizontalAlignment="Center" 
+                Margin="0,10,0,20" 
+                Width="254" 
+                Height="47"
+                FontSize="20"
+                FontFamily="{StaticResource SpecialElite}"
+                Foreground="White"
+                Background="Navy"
+                Click="buttonAddNewQuestion_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="32" Source="/Images/AddQuestion.png"></Image>
+                    <Label Foreground="White"
+                           Padding="15,7,0,0"
+                           Content="Add new Question"
+                           FontSize="20"></Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
+    </Grid>
+    
+</UserControl>-->
 <UserControl x:Class="ManagerApp.UserControls.QuestionManagement"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -61,25 +186,14 @@
                                    Grid.Column="0"
                                    VerticalAlignment="Center"/>
 
-                            <!--<Label x:Name="QuestionText"
-                                   Margin="5"
-                                   Grid.Column="1"
-                                   VerticalAlignment="Center"
-                                   FontSize="17" 
-                                   FontFamily="{StaticResource SpecialElite}">
-                                --><!--<Label.Content>
-                                    <AccessText TextWrapping="Wrap" Text="{Binding QuestionText}"/>
-                                </Label.Content>--><!--
-                                <TextBlock TextWrapping="Wrap" Text="{Binding QuestionText}"/>
-                            </Label>-->
                             <TextBlock x:Name="QuestionText"
-           Grid.Column="1"
-           Text="{Binding QuestionText}"
-           TextWrapping="Wrap"
-           Margin="5"
-           VerticalAlignment="Center"
-           FontSize="17" 
-           FontFamily="{StaticResource SpecialElite}"
+                                       Grid.Column="1"
+                                       Text="{Binding QuestionText}"
+                                       TextWrapping="Wrap"
+                                       Margin="5"
+                                       VerticalAlignment="Center"
+                                       FontSize="17" 
+                                       FontFamily="{StaticResource SpecialElite}"
                                        Validation.ErrorTemplate="{x:Null}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,15,0">
@@ -88,9 +202,7 @@
                                         Height="32"
                                         Style="{StaticResource ImageButtonStyle}"
                                         Click="btnDelete_Click">
-                                        
                                     <Image Source="/Images/UpdateDelete.png" />
-                                    
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -99,27 +211,52 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button x:Name="buttonAddNewBook"
-                Grid.Row="1"
-                HorizontalAlignment="Center" 
-                Margin="0,10,0,20" 
-                Width="254" 
-                Height="47"
-                FontSize="20"
-                FontFamily="{StaticResource SpecialElite}"
-                Foreground="White"
-                Background="Navy"
-                Click="buttonAddNewQuestion_Click">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="32" Source="/Images/AddQuestion.png"></Image>
-                    <Label Foreground="White"
-                           Padding="15,7,0,0"
-                           Content="Add new Question"
-                           FontSize="20"></Label>
-                </StackPanel>
-            </Button.Content>
-        </Button>
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,20" Width="528">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="254"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="254"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="buttonAddNewBook"
+                    Grid.Column="0"
+                    Height="47"
+                    FontSize="20"
+                    FontFamily="{StaticResource ResourceKey=SpecialElite}"
+                    Foreground="White"
+                    Background="Navy"
+                    Click="buttonAddNewQuestion_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Source="/Images/AddQuestion.png"></Image>
+                        <Label Foreground="White"
+                               Padding="15,4,0,0"
+                               Content="Add new Question"
+                               FontSize="20"></Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="btnViewInactive"
+                    Grid.Column="2"
+                    Height="47"
+                    FontSize="18"
+                    FontFamily="{StaticResource ResourceKey=SpecialElite}"
+                    Foreground="White"
+                    Background="DarkSlateGray"
+                    Click="btnViewInactive_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Source="/Images/Update1.png"></Image>
+                        <Label Foreground="White"
+                               Padding="15,4,0,0"
+                               Content="View Inactive Questions"
+                               FontSize="18"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
 

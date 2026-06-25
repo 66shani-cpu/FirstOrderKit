@@ -45,6 +45,22 @@ namespace FirstOrderKitWS.ORM.Repositories
 
             return units;
         }
+        public List<Unit> GetAllNotActive()
+        {
+            string sql = " Select * from Units where UnitActive=false";
+
+            List<Unit> units = new List<Unit>();
+            //אחרי שימוש ברידר למחוק אותו בזיכרון במחשב כדי שלא יהיה הרבה זבל
+            using (IDataReader reader = this.helperOledb.Select(sql))
+            {
+                while (reader.Read())
+                {
+                    units.Add(this.modelCreaters.UnitCreater.CreateModel(reader));
+                }
+            }
+
+            return units;
+        }
         //" Select * from Units where UnitActive=true";
 
 
@@ -70,6 +86,15 @@ namespace FirstOrderKitWS.ORM.Repositories
         {
             string sql = $@"UPDATE Units 
                 SET UnitActive = False 
+                WHERE UnitId = @UnitId";
+            this.helperOledb.AddParameter("@UnitId", unitId);
+            return this.helperOledb.Update(sql) > 0;
+
+        }
+        public bool RestoreUnit(string unitId)
+        {
+            string sql = $@"UPDATE Units 
+                SET UnitActive = True 
                 WHERE UnitId = @UnitId";
             this.helperOledb.AddParameter("@UnitId", unitId);
             return this.helperOledb.Update(sql) > 0;

@@ -51,7 +51,16 @@ namespace ManagerApp.UserControls
             StudentInfo question = new StudentInfo(studentId);
             bool? ok = question.ShowDialog();
         }
+        private void btnViewInactiveStudents_Click(object sender, RoutedEventArgs e)
+        {
+            // יצירה ופתיחה של חלון הארכיון החדש של הסטודנטים
+            InactiveStudentsWindow inactiveWin = new InactiveStudentsWindow();
+            inactiveWin.Owner = Window.GetWindow(this);
+            inactiveWin.ShowDialog();
 
+            // רענון הרשימה הראשית לאחר סגירת הארכיון (למקרה ששוחזר סטודנט)
+             _ = GetStudentList(); 
+        }
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;

@@ -111,6 +111,120 @@ namespace FirstOrderKitWS.Controllers
             }
         }
         [HttpGet]
+        public bool RestoreStudent(string studentId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.StudentRepository.RestoreStudent(studentId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public bool RestoreQuestion(string questionId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.QuestionRepository.RestoreQuestion(questionId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public List<Question> GetListInactiveQuestion()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.QuestionRepository.GetAllNotActive();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public List<Unit> GetListInactiveUnit()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.UnitRepository.GetAllNotActive();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public List<Student> GetListInactiveStudent()
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.StudentRepository.GetAllNotActive();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
+        public bool RestoreUnit(string unitId)
+        {
+            try
+            {
+
+                this.repositoryUOF.DBHelperOledb.OpenConnection();
+                return this.repositoryUOF.UnitRepository.RestoreUnit(unitId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+            finally
+            {
+                this.repositoryUOF.DBHelperOledb.CloseConnection();
+            }
+        }
+        [HttpGet]
         public List<Student> GetListStudent()
         {
             try
